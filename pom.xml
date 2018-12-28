@@ -26,6 +26,12 @@
 			<artifactId>solr-solrj</artifactId>
 			<version>6.4.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>	<!-- 16.2 comes with odbc7.jar so switch was made from ojdbc6.jar -->
+			<artifactId>ojdbc</artifactId>
+			<version>7</version>
+		</dependency>
+		
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.slf4j</groupId> -->
 <!-- 			<artifactId>slf4j-api</artifactId> -->
