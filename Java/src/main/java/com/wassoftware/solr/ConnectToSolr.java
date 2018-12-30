@@ -10,7 +10,7 @@ import org.apache.solr.common.SolrInputDocument;
 public class ConnectToSolr
 {
 
-	public void makeConnection() throws SolrServerException, IOException
+	public HttpSolrClient makeConnection() throws SolrServerException, IOException
 	{
 		System.out.println(" * 1 *");
 		String urlString = "http://localhost:8983/solr/bigboxstore";
@@ -20,11 +20,18 @@ public class ConnectToSolr
 		solr.setParser(new XMLResponseParser());
 		System.out.println(" * 4 *");
 		
-		SolrInputDocument document = new SolrInputDocument();
-		document.addField("id", "123456");
-		document.addField("name", "Kenmore Dishwasher");
-		document.addField("price", "599.99");
-		solr.add(document);
-		solr.commit();
+		return solr;
+		
+//		SolrInputDocument document = new SolrInputDocument();
+//		document.addField("id", "123456");
+//		document.addField("name", "Kenmore Dishwasher");
+//		document.addField("price", "599.99");
+//		solr.add(document);
+//		solr.commit();
+	}
+	
+	public void closeConnection(HttpSolrClient solr) throws IOException
+	{
+		solr.close();
 	}
 }
