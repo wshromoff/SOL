@@ -1,0 +1,14 @@
+
+Created a symbolic link for SOLR command in folder: /Users/wadeshromoff/Documents/WAS_Software/SOLR/solr-7.6.0/bin
+to home directory: In home directorty do this command: ln -s /Users/wadeshromoff/Documents/WAS_Software/SOLR/solr-7.6.0/bin/solr solr
+
+Now from terminal can do:
+
+./solr status
+./solr start
+./solr stop
+./solr -c 'CORENAME'
+
+
+
+
