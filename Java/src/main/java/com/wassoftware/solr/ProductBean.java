@@ -12,6 +12,7 @@ public class ProductBean
 	private String name;
 	private String price;
 	private List<String> keywords = new ArrayList<String>();
+	private List<SubBean> subBeans = new ArrayList<SubBean>();
 	
 	public ProductBean(String id, String name, String price)
 	{
@@ -65,4 +66,19 @@ public class ProductBean
 		keywords.add(keyword);
 	}
 
+	public List<SubBean> getSubBeans()
+	{
+		return subBeans;
+	}
+	@Field("subBeans")
+	public void setSubBeans(List<SubBean> subBeans)
+	{
+		this.subBeans = subBeans;
+	}
+	public void addSubBean(SubBean subBean)
+	{
+		subBeans.add(subBean);
+	}
+
+	
 }
