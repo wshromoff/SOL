@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
-import org.apache.solr.common.SolrInputDocument;
 
 public class ConnectToSolr
 {
