@@ -8,6 +8,7 @@ public class SubBean
 	private String id;
 	private String itemName;
 	private int cost;
+	private String contentType = "subBean";
 
 	public SubBean(String id, String name, int cost)
 	{
@@ -15,7 +16,17 @@ public class SubBean
 		itemName = name;
 		this.cost = cost;
 	}
-	
+
+	public String getContentType()
+	{
+		return contentType;
+	}
+	@Field("contentType")
+	public void setContentType(String contentType)
+	{
+		this.contentType = contentType;
+	}
+
 	@Field("id")
 	protected void setId(String id)
 	{

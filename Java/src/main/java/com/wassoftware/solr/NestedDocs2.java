@@ -239,12 +239,12 @@ public static void main ( String[] args ) throws Exception {
                 + " OR (content_type:bike AND make_t:Peugeot)" );
     // Use second form of doQuery to pass more arguments:
     // doQuery( solr, description, queryStr, optFilter, optFields, extraParamsMap )
-    doQuery(solr,
-            "People who own a Honda car and Peugeot bike, and include the *matching* vehicles in results",
-            "*:*",                                                             // query
-            "{!parent which=$parent_filter v=$child_filter}",                  // filter
-            "*,[child parentFilter=$parent_filter childFilter=$child_filter]", // fields
-            params );                                                          // extra params
+//    doQuery(solr,
+//            "People who own a Honda car and Peugeot bike, and include the *matching* vehicles in results",
+//            "*:*",                                                             // query
+//            "{!parent which=$parent_filter v=$child_filter}",                  // filter
+//            "*,[child parentFilter=$parent_filter childFilter=$child_filter]", // fields
+//            params );                                                          // extra params
 
     // Also, try some fancy queries with eDismax
     // -----------------------------------------
@@ -284,7 +284,7 @@ public static void main ( String[] args ) throws Exception {
             "eDismax3: Drivers matching accidents and/or California, and all of their vehicles, boost on State",
             "California accident report",
             "{!parent which=$parent_filter}",
-            "*,[child parentFilter=$parent_filter]",
+            "*:[child parentFilter=$parent_filter]",
             params );
 
 }
