@@ -4,12 +4,13 @@ import org.apache.solr.client.solrj.beans.Field;
 
 public abstract class SOLRBase implements SOLRNeeded
 {
-	private String id = null;
+//	private String id = null;
 	private String databaseID = null;
+//	private String contentType = null;
 	
 	public String getId()
 	{
-		return getContentAbbrev() + "_" + getDatabaseID();
+		return getContentTypeAbbrev() + "_" + getDatabaseID();
 	}
 	@Field
 	public void setId(String id)
@@ -17,6 +18,17 @@ public abstract class SOLRBase implements SOLRNeeded
 		int i = id.indexOf("_");
 		setDatabaseID(Integer.parseInt(id.substring(i+1)));
 	}
+
+	public String getContentType()
+	{
+		return getContentTypeFull();
+	}
+	@Field
+	public void setContentType(String contentType)
+	{
+//		this.contentType = contentType;
+	}
+	
 	public String getDatabaseID()
 	{
 		return databaseID;
@@ -30,7 +42,9 @@ public abstract class SOLRBase implements SOLRNeeded
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("Database ID: " + databaseID + "\n");
+		sb.append("ID: " + getId() + "\n");
+		sb.append("Database ID: " + getDatabaseID() + "\n");
+		sb.append("Content Type: " + getContentType() + "\n");
 		return sb.toString();
 	}
 }

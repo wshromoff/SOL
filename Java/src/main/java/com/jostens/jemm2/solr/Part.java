@@ -27,12 +27,11 @@ public class Part extends SOLRBase
 		this.designID = designID;
 	}
 
-	public String getContentType()
+	public String getContentTypeFull()
 	{
 		return "Part";
 	}
-
-	public String getContentAbbrev()
+	public String getContentTypeAbbrev()
 	{
 		return "PR";
 	}
@@ -41,8 +40,8 @@ public class Part extends SOLRBase
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(super.toString());
-		sb.append("Name: " + name + "\n");
-		sb.append("Design ID: " + designID + "\n");
+		sb.append("Name: " + getName() + "\n");
+		sb.append("Design ID: " + getDesignID() + "\n");
 		
 		return sb.toString();
 	}

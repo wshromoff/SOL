@@ -68,11 +68,11 @@ public class Design extends SOLRBase
 		this.view = view;
 	}
 	
-	public String getContentType()
+	public String getContentTypeFull()
 	{
 		return "Design";
 	}
-	public String getContentAbbrev()
+	public String getContentTypeAbbrev()
 	{
 		return "DS";
 	}

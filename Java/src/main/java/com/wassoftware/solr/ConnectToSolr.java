@@ -11,7 +11,7 @@ public class ConnectToSolr
 
 	public HttpSolrClient makeConnection() throws SolrServerException, IOException
 	{
-		String urlString = "http://localhost:8983/solr/bigboxstore";
+		String urlString = "http://localhost:8983/solr/jemm2";
 		HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
 		solr.setParser(new XMLResponseParser());
 		
