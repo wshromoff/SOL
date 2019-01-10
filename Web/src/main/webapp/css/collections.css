@@ -66,14 +66,14 @@ limitations under the License.
 
 #content #collections .actions form .directory-note
 {
-  background-image: url( ../../img/ico/information-white.png );
+  background-image: url( ../img/ico/information-white.png );
   background-position: 22% 1px;
   color: #4D4D4D;
 }
 
 #content #collections .actions form .error
 {
-  background-image: url( ../../img/ico/cross-button.png );
+  background-image: url( ../img/ico/cross-button.png );
   background-position: 22% 1px;
   color: #c00;
   font-weight: bold;
@@ -121,12 +121,12 @@ limitations under the License.
 
 #content #collections .actions form button.submit span
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #collections .actions form button.reset span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 
 #content #collections .actions #add
@@ -137,7 +137,7 @@ limitations under the License.
 
 #content #collections .actions #add span
 {
-  background-image: url( ../../img/ico/plus-button.png );
+  background-image: url( ../img/ico/plus-button.png );
 }
 
 #content #collections .actions #delete
@@ -147,27 +147,27 @@ limitations under the License.
 
 #content #collections .actions #delete span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 
 #content #collections .actions #reload span
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
 }
 
 #content #collections .actions #rename span
 {
-  background-image: url( ../../img/ico/ui-text-field-select.png );
+  background-image: url( ../img/ico/ui-text-field-select.png );
 }
 
 #content #collections .actions #create-alias span
 {
-  background-image: url( ../../img/ico/arrow-switch.png );
+  background-image: url( ../img/ico/arrow-switch.png );
 }
 
 #content #collections .actions #delete-alias span
 {
-  background-image: url( ../../img/ico/cross-button.png );
+  background-image: url( ../img/ico/cross-button.png );
 }
 
 
@@ -186,7 +186,7 @@ limitations under the License.
 
 #content #collections .actions #add-replica span
 {
-  background-image: url( ../../img/ico/plus-button.png );
+  background-image: url( ../img/ico/plus-button.png );
 }
 
 #content #collections div.action.add-replica {
@@ -206,18 +206,18 @@ limitations under the License.
 }
 
 #content #collections div.action.add-replica .buttons .submit span {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
   background-position: 0% 50%;
 }
 
 #content #collections div.action.add-replica .buttons .reset span {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
   background-position: 0% 50%;
 }
 
-#content #collections #data #collection-data h2 { background-image: url( ../../img/ico/box.png ); }
-#content #collections #data #shard-data h2 { background-image: url( ../../img/ico/sitemap.png ); }
-#content #collections #data #shard-data .replica h2 { background-image: url( ../../img/ico/node-slave.png ); }
+#content #collections #data #collection-data h2 { background-image: url( ../img/ico/box.png ); }
+#content #collections #data #shard-data h2 { background-image: url( ../img/ico/sitemap.png ); }
+#content #collections #data #shard-data .replica h2 { background-image: url( ../img/ico/node-slave.png ); }
 
 #content #collections #data #index-data
 {
@@ -249,13 +249,13 @@ limitations under the License.
 
 #content #collections #data li dd.ico
 {
-  background-image: url( ../../img/ico/slash.png );
+  background-image: url( ../img/ico/slash.png );
   height: 20px;
 }
 
 #content #collections #data li dd.ico.ico-1
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #collections #data li dd.ico span
@@ -263,14 +263,14 @@ limitations under the License.
 }
 
 #content #collections #add_advanced {
-  background-image: url( ../../img/ico/chevron-small-expand.png );
+  background-image: url( ../img/ico/chevron-small-expand.png );
   background-position: 100% 50%;
   cursor: pointer;
   padding-right: 21px;
 }
 
 #content #collections #add_advanced.open {
-    background-image: url( ../../img/ico/chevron-small.png );
+    background-image: url( ../img/ico/chevron-small.png );
 }
 
 #content #collections .shard {
@@ -282,25 +282,25 @@ limitations under the License.
 }
 
 #content #collections .shard h2 span.openReplica {
-  background-image: url( ../../img/ico/chevron-small-expand.png );
+  background-image: url( ../img/ico/chevron-small-expand.png );
   background-position: 100% 50%;
   cursor: pointer;
   padding-right: 21px;
 }
 
 #content #collections .shard h2 span.openReplica .open {
-  background-image: url( ../../img/ico/chevron-small.png );
+  background-image: url( ../img/ico/chevron-small.png );
 }
 
 #content #collections .replica h2 span {
-  background-image: url( ../../img/ico/chevron-small-expand.png );
+  background-image: url( ../img/ico/chevron-small-expand.png );
   background-position: 100% 50%;
   cursor: pointer;
   padding-right: 21px;
 }
 
 #content #collections .replica h2 span.rem {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
   background-position: 100% 50%;
   cursor: pointer;
   padding-right: 21px;
@@ -308,7 +308,7 @@ limitations under the License.
 }
 
 #content #collections .shard h2 span.rem {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
   background-position: 100% 50%;
   cursor: pointer;
   padding-right: 21px;
@@ -316,7 +316,7 @@ limitations under the License.
 }
 
 #content #collections .replica h2 span .open {
-  background-image: url( ../../img/ico/chevron-small.png );
+  background-image: url( ../img/ico/chevron-small.png );
 }
 
 #content #collections #add-replica {
@@ -334,20 +334,20 @@ limitations under the License.
 
 #content #collections .delete-replica span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 #content #collections .delete-replica button.submit span
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #collections .delete-shard span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 #content #collections .delete-shard button.submit span
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #collections #node-name .chosen-container
