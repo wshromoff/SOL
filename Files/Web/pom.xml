@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.jostens.dam</groupId>
+		<artifactId>dam-parent</artifactId>
+		<version>5-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>brand-web</artifactId>
+	<version>2.3.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>brand-web</name>
+
+	<scm>
+		<connection>scm:svn:http://svn.jostens.com/svn/DAM/Brand/web/branches/upgrade_16_2</connection>
+		<developerConnection>scm:svn:http://svn.jostens.com/svn/DAM/Brand/web/branches/upgrade_16_2</developerConnection>
+		<url>http://svn.jostens.com/websvn/listing.php/branches/upgrade_16_2?repname=DAM&amp;path=%2FBrand%2Fweb%2Ftrunk%2F&amp;#aa7afadfa5cab477ab4634a7c61a5e070</url>
+	</scm>
+
+	<build>
+		<finalName>brand##${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.jostens.dam</groupId>
+			<artifactId>brand-java</artifactId>
+			<version>2.3.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

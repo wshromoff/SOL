@@ -1,0 +1,92 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	font-family: helvetica, verdana;
+}
+th {
+	background: #656565;
+	color: white; 
+	text-align: center; 
+}
+tr:nth-of-type(odd) { 
+	background: #eee; 
+}
+.workflow {
+	background: #656565;
+	color: white;
+	text-align: center; 
+}
+h2 {
+	font size: 16px;
+}
+table {
+	table-layout: fixed;
+	width: 100%;
+	white-space: nowrap;
+}
+pre {  
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.emptyBucketTable {
+	padding: 2px; 
+}
+
+.assetBucketTable {
+	padding: 2px; 
+}
+
+/* .assetBucketTable td { */
+/* 	padding: 2px;  */
+/* 	text-align: center;  */
+/* } */
+
+#assetName { 
+	font-size: 13px;
+}
+	
+#assetDetails { 
+	font-size: 16px;
+}	
+	
+#twoHoursLate { 
+	color: white;
+	background: red;  
+	text-align: center; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 2px; 
+    border: 2px solid black;
+}
+
+#bucketLate { 
+	color: white;
+	background: DodgerBlue;  
+	text-align: center; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 2px; 
+    border: 2px solid black;
+}
+
+#changed { 
+	color: black;
+	background: LightBlue;  
+	text-align: center; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 2px; 
+    border: 2px solid black;
+}
+
+#noChanges { 
+	color: black;
+	background: LightYellow;  
+	text-align: center; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 2px; 
+    border: 2px solid black;
+}
+ 
