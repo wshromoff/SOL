@@ -7,18 +7,22 @@ Now from terminal can do:
 ./solr status
 ./solr start
 ./solr stop
-./solr -c 'CORENAME'
+./solr create -c 'CORENAME'
+./solr delete -c 'CORENAME'
 
 SOLR Admin: http://localhost:8983/solr/#/
 
 If a field in a document is effectively a foreign key reference to another document, the type of that field MUST be a String and not a text field.
 Here is a link about different types and why it's a String: https://lucene.apache.org/solr/guide/6_6/field-types-included-with-solr.html, 
-					https://stackoverflow.com/questions/7175619/apache-solr-string-field-or-text-field
+					https://stackoverflow.com/questions/7175619/apache-solr-string-field-or-text-field, http://www.solrtutorial.com/schema-xml.html
 
 
 Query Parameters:https://lucene.apache.org/solr/guide/6_6/common-query-parameters.html
 
 Making and Restoring Backups: https://lucene.apache.org/solr/guide/6_6/making-and-restoring-backups.html
+	-> Backup browser command: http://localhost:8983/solr/bigboxstore/replication?command=backup&location=backups
+			+ location defines a folder relative to the core where file is stored
+	->Restore browser command: 
 
 Full text search: https://www.baeldung.com/full-text-search-with-solr
 
