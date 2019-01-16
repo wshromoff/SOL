@@ -19,7 +19,7 @@ limitations under the License.
 
 #content #replication
 {
-  background-image: url( ../../img/div.gif );
+  background-image: url( ../img/div.gif );
   background-position: 21% 0;
   background-repeat: repeat-y;
 }
@@ -40,7 +40,7 @@ limitations under the License.
 #content #replication #error
 {
   background-color: #f00;
-  background-image: url( ../../img/ico/construction.png );
+  background-image: url( ../img/ico/construction.png );
   background-position: 10px 50%;
   color: #fff;
   font-weight: bold;
@@ -212,7 +212,7 @@ limitations under the License.
 
 #content #replication #iterations .label span
 {
-  background-image: url( ../../img/ico/node-design.png );
+  background-image: url( ../img/ico/node-design.png );
 }
 
 #content #replication #iterations .iterations li
@@ -244,7 +244,7 @@ limitations under the License.
 
 #content #replication #iterations .iterations .replicated.latest
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #replication #iterations .iterations .failed
@@ -260,7 +260,7 @@ limitations under the License.
 
 #content #replication #iterations .iterations .failed.latest
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 
 #content #replication #iterations .iterations a
@@ -279,13 +279,13 @@ limitations under the License.
 
 #content #replication #iterations .iterations a span.expand
 {
-  background-image: url( ../../img/ico/chevron-small-expand.png );
+  background-image: url( ../img/ico/chevron-small-expand.png );
   display: block;
 }
 
 #content #replication #iterations .iterations a span.collapse
 {
-  background-image: url( ../../img/ico/chevron-small.png );
+  background-image: url( ../img/ico/chevron-small.png );
   display: block;
 }
 
@@ -338,7 +338,7 @@ limitations under the License.
 
 #content #replication #details table thead td span
 {
-  background-image: url( ../../img/ico/clipboard-list.png );
+  background-image: url( ../img/ico/clipboard-list.png );
   background-position: 0 50%;
   display: block;
   padding-left: 21px;
@@ -371,7 +371,7 @@ limitations under the License.
 
 #content #replication .settings .label span
 {
-  background-image: url( ../../img/ico/hammer-screwdriver.png );
+  background-image: url( ../img/ico/hammer-screwdriver.png );
 }
 
 #content #replication .settings ul,
@@ -409,12 +409,12 @@ limitations under the License.
 
 #content #replication .settings dl .ico.ico-0
 {
-  background-image: url( ../../img/ico/slash.png );
+  background-image: url( ../img/ico/slash.png );
 }
 
 #content #replication .settings dl .ico.ico-1
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #replication .timer
@@ -434,7 +434,7 @@ limitations under the License.
 
 #content #replication .timer p
 {
-  background-image: url( ../../img/ico/clock-select-remain.png );
+  background-image: url( ../img/ico/clock-select-remain.png );
   background-position: 0 50%;
 }
 
@@ -466,35 +466,35 @@ limitations under the License.
 
 #content #replication #navigation .replicate-now span
 {
-  background-image: url( ../../img/ico/document-convert.png );
+  background-image: url( ../img/ico/document-convert.png );
 }
 
 #content #replication #navigation .abort-replication span
 {
-  background-image: url( ../../img/ico/hand.png );
+  background-image: url( ../img/ico/hand.png );
 }
 
 #content #replication #navigation .disable-polling span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 
 #content #replication #navigation .enable-polling span
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #replication #navigation .disable-replication span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 
 #content #replication #navigation .enable-replication span
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #replication #navigation .refresh-status span
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
 }

@@ -19,7 +19,7 @@ limitations under the License.
 
 #content #query
 {
-  background-image: url( ../../img/div.gif );
+  background-image: url( ../img/div.gif );
   background-position: 22% 0;
   background-repeat: repeat-y;
 }
@@ -74,13 +74,13 @@ limitations under the License.
 
 #content #query #form .multiple a.add
 {
-  background-image: url( ../../img/ico/plus-button.png );
+  background-image: url( ../img/ico/plus-button.png );
   float: right;
 }
 
 #content #query #form .multiple a.rem
 {
-  background-image: url( ../../img/ico/minus-button.png );
+  background-image: url( ../img/ico/minus-button.png );
   float: left;
 }
 

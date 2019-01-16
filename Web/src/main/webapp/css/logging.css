@@ -25,7 +25,7 @@ limitations under the License.
 
 #content #logging .block h2
 {
-  background-image: url( ../../img/ico/document-text.png );
+  background-image: url( ../img/ico/document-text.png );
   margin-bottom: 10px;
 }
 
@@ -66,7 +66,7 @@ limitations under the License.
 
 #content #logging #viewer #date-format a
 {
-  background-image: url( ../../img/ico/ui-check-box-uncheck.png );
+  background-image: url( ../img/ico/ui-check-box-uncheck.png );
   background-position: 0 50%;
   color: #4D4D4D;
   display: block;
@@ -80,7 +80,7 @@ limitations under the License.
 
 #content #logging #viewer #date-format a.on
 {
-  background-image: url( ../../img/ico/ui-check-box.png );
+  background-image: url( ../img/ico/ui-check-box.png );
   color: #333;
 }
 
@@ -91,11 +91,11 @@ limitations under the License.
 }
 
 #content #logging #viewer #refresh-toggle.active {
-  background-image: url( ../../img/ico/cross-button.png );
+  background-image: url( ../img/ico/cross-button.png );
 }
 
 #content #logging #viewer #refresh-toggle.stopped {
-  background-image: url( ../../img/ico/arrow-circle.png ) ;
+  background-image: url( ../img/ico/arrow-circle.png ) ;
 }
 
 #content #logging #viewer table
@@ -172,7 +172,7 @@ limitations under the License.
 
 #content #logging #viewer tbody .has-trace .message a
 {
-  background-image: url( ../../img/ico/information.png );
+  background-image: url( ../img/ico/information.png );
   background-position: 100% 50%;
   display: block;
   padding-right: 21px;
@@ -180,7 +180,7 @@ limitations under the License.
 
 #content #logging #viewer tbody .has-trace.open .message a
 {
-  background-image: url( ../../img/ico/information-white.png );
+  background-image: url( ../img/ico/information-white.png );
 }
 
 #content #logging #viewer tbody .trace td
@@ -265,7 +265,7 @@ limitations under the License.
 
 #content #logging .jstree a:hover span.name
 {
-  background-image: url( ../../img/ico/pencil-small.png );
+  background-image: url( ../img/ico/pencil-small.png );
 }
 
 #content #logging .jstree .selector-holder
@@ -314,7 +314,7 @@ limitations under the License.
 
 #content #logging .jstree .open .selector .close
 {
-  background-image: url( ../../img/ico/cross-0.png );
+  background-image: url( ../img/ico/cross-0.png );
   background-position: 50% 50%;
   display: block;
   position: absolute;
@@ -325,7 +325,7 @@ limitations under the License.
 
 #content #logging .jstree .open .selector .close:hover
 {
-  background-image: url( ../../img/ico/cross-1.png );
+  background-image: url( ../img/ico/cross-1.png );
 }
 
 #content #logging .jstree .open .selector .close span
@@ -351,7 +351,7 @@ limitations under the License.
 
 #content #logging .jstree .selector ul li a
 {
-  background-image: url( ../../img/ico/ui-radio-button-uncheck.png );
+  background-image: url( ../img/ico/ui-radio-button-uncheck.png );
   background-position: 2px 50%;
   padding-left: 21px;
 }
@@ -363,7 +363,7 @@ limitations under the License.
 
 #content #logging .jstree .selector ul li a:hover
 {
-  background-image: url( ../../img/ico/ui-radio-button.png );
+  background-image: url( ../img/ico/ui-radio-button.png );
 }
 
 #content #logging .jstree .selector li.unset
@@ -373,12 +373,12 @@ limitations under the License.
 
 #content #logging .jstree .selector li.unset a
 {
-  background-image: url( ../../img/ico/cross-0.png );
+  background-image: url( ../img/ico/cross-0.png );
   background-position: 4px 50%;
 }
 
 #content #logging .jstree .selector li.unset a:hover
 {
-  background-image: url( ../../img/ico/cross-1.png );
+  background-image: url( ../img/ico/cross-1.png );
   color: #800;
 }

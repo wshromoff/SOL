@@ -55,13 +55,13 @@ limitations under the License.
 
 #content #dashboard .fieldlist .ico
 {
-  background-image: url( ../../img/ico/slash.png );
+  background-image: url( ../img/ico/slash.png );
   height: 20px;
 }
 
 #content #dashboard .fieldlist .ico.ico-1
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #dashboard .fieldlist .ico span
@@ -77,7 +77,7 @@ limitations under the License.
 #content #dashboard #statistics .index_optimized.value.ico-0 a
 {
   background-color: #f0f0f0;
-  background-image: url( ../../img/ico/hammer-screwdriver.png );
+  background-image: url( ../img/ico/hammer-screwdriver.png );
   background-position: 5px 50%;
   border: 1px solid #c0c0c0;
   display: block;
@@ -94,7 +94,7 @@ limitations under the License.
 
 #content #dashboard #statistics .index_has-deletions.value.ico-0
 {
-  background-image: url( ../../img/ico/tick-red.png );
+  background-image: url( ../img/ico/tick-red.png );
 }
 
 #content #dashboard #replication
@@ -130,7 +130,7 @@ limitations under the License.
 
 #content #dashboard #healthcheck .ico
 {
-  background-image: url( ../../img/ico/slash.png );
+  background-image: url( ../img/ico/slash.png );
   height: 20px;
   padding-left: 20px;
   width: 60%;
@@ -138,17 +138,17 @@ limitations under the License.
 
 #content #dashboard #healthcheck .ico.ico-1
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
-#content #dashboard #system h2 { background-image: url( ../../img/ico/server.png ); }
-#content #dashboard #statistics h2 { background-image: url( ../../img/ico/chart.png ); }
-#content #dashboard #replication h2 { background-image: url( ../../img/ico/node.png ); }
-#content #dashboard #replication.master h2 { background-image: url( ../../img/ico/node-master.png ); }
-#content #dashboard #replication.slave h2 { background-image: url( ../../img/ico/node-slave.png ); }
-#content #dashboard #instance h2 { background-image: url( ../../img/ico/server.png ); }
-#content #dashboard #collection h2 { background-image: url( ../../img/ico/book-open-text.png ); }
-#content #dashboard #shards h2 { background-image: url( ../../img/ico/documents-stack.png ); }
+#content #dashboard #system h2 { background-image: url( ../img/ico/server.png ); }
+#content #dashboard #statistics h2 { background-image: url( ../img/ico/chart.png ); }
+#content #dashboard #replication h2 { background-image: url( ../img/ico/node.png ); }
+#content #dashboard #replication.master h2 { background-image: url( ../img/ico/node-master.png ); }
+#content #dashboard #replication.slave h2 { background-image: url( ../img/ico/node-slave.png ); }
+#content #dashboard #instance h2 { background-image: url( ../img/ico/server.png ); }
+#content #dashboard #collection h2 { background-image: url( ../img/ico/book-open-text.png ); }
+#content #dashboard #shards h2 { background-image: url( ../img/ico/documents-stack.png ); }
 
 #content #dashboard #shards { margin-left: 20px;}
 
@@ -160,7 +160,7 @@ limitations under the License.
     padding-left: 30px;
     margin-left: 20px;
     margin-top: 20px;
-    background-image: url( ../../img/ico/document-text.png );
+    background-image: url( ../img/ico/document-text.png );
     background-position-x: 10px;
     background-position-y: 3px;
 }

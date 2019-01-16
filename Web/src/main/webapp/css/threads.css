@@ -67,19 +67,19 @@ limitations under the License.
 
 #content #threads #thread-dump tbody .RUNNABLE a
 {
-  background-image: url( ../../img/ico/tick-circle.png );
+  background-image: url( ../img/ico/tick-circle.png );
 }
 
 #content #threads #thread-dump tbody .WAITING a,
 #content #threads #thread-dump tbody .TIMED_WAITING a
 {
-  background-image: url( ../../img/ico/hourglass.png );
+  background-image: url( ../img/ico/hourglass.png );
 }
 
 #content #threads #thread-dump tbody .WAITING.lock a,
 #content #threads #thread-dump tbody .TIMED_WAITING.lock a
 {
-  background-image: url( ../../img/ico/hourglass--exclamation.png );
+  background-image: url( ../img/ico/hourglass--exclamation.png );
 }
 
 #content #threads #thread-dump tbody .name a
@@ -97,19 +97,19 @@ limitations under the License.
 
 #content #threads #thread-dump tbody .stacktrace .name a span
 {
-  background-image: url( ../../img/ico/chevron-small-expand.png );
+  background-image: url( ../img/ico/chevron-small-expand.png );
   background-position: 100% 50%;
   padding-right: 21px;
 }
 
 #content #threads #thread-dump tbody .stacktrace.open .name a span
 {
-  background-image: url( ../../img/ico/chevron-small.png );
+  background-image: url( ../img/ico/chevron-small.png );
 }
 
 #content #threads #thread-dump tbody .name p
 {
-  background-image: url( ../../img/ico/arrow-000-small.png );
+  background-image: url( ../img/ico/arrow-000-small.png );
   background-position: 0 50%;
   color: #4D4D4D;
   font-size: 11px;
@@ -150,11 +150,11 @@ limitations under the License.
 
 #content #threads .controls a
 {
-  background-image: url( ../../img/ico/chevron-small-expand.png );
+  background-image: url( ../img/ico/chevron-small-expand.png );
   padding-left: 21px;
 }
 
 #content #threads.expanded .controls a
 {
-  background-image: url( ../../img/ico/chevron-small.png );
+  background-image: url( ../img/ico/chevron-small.png );
 }

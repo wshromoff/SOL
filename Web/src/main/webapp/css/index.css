@@ -154,19 +154,19 @@ limitations under the License.
   padding-left: 22px;
 }
 
-#content #index #instance h2 { background-image: url( ../../img/ico/server.png ); }
-#content #index #instance .start_time dt span { background-image: url( ../../img/ico/clock-select.png ); }
+#content #index #instance h2 { background-image: url( ../img/ico/server.png ); }
+#content #index #instance .start_time dt span { background-image: url( ../img/ico/clock-select.png ); }
 
-#content #index #versions h2 { background-image: url( ../../img/ico/property.png ); }
-#content #index #versions .solr span { background-image: url( ../../img/solr-ico.png ); }
-#content #index #versions .lucene span { background-image: url( ../../img/lucene-ico.png ); }
+#content #index #versions h2 { background-image: url( ../img/ico/property.png ); }
+#content #index #versions .solr span { background-image: url( ../img/solr-ico.png ); }
+#content #index #versions .lucene span { background-image: url( ../img/lucene-ico.png ); }
 
-#content #index #jvm h2 { background-image: url( ../../img/ico/jar.png ); }
-#content #index #jvm .jvm_version dt span { background-image: url( ../../img/ico/jar.png ); }
-#content #index #jvm .processors dt span { background-image: url( ../../img/ico/processor.png ); }
-#content #index #jvm .command_line_args dt span { background-image: url( ../../img/ico/terminal.png ); }
+#content #index #jvm h2 { background-image: url( ../img/ico/jar.png ); }
+#content #index #jvm .jvm_version dt span { background-image: url( ../img/ico/jar.png ); }
+#content #index #jvm .processors dt span { background-image: url( ../img/ico/processor.png ); }
+#content #index #jvm .command_line_args dt span { background-image: url( ../img/ico/terminal.png ); }
 
-#content #index #system h2 { background-image: url( ../../img/ico/system-monitor.png ); }
+#content #index #system h2 { background-image: url( ../img/ico/system-monitor.png ); }
 
 #content #index #system
 {
@@ -175,7 +175,7 @@ limitations under the License.
 
 #content #index #system .reload
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
   background-position: 50% 50%;
   display: block;
   height: 30px;
@@ -208,7 +208,7 @@ limitations under the License.
   font-style: italic;
 }
 
-#content #index #jvm-memory h2 { background-image: url( ../../img/ico/memory.png ); }
+#content #index #jvm-memory h2 { background-image: url( ../img/ico/memory.png ); }
 
 #content #index #jvm-memory-bar
 {

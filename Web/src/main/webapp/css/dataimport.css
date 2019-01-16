@@ -19,7 +19,7 @@ limitations under the License.
 
 #content #dataimport
 {
-  background-image: url( ../../img/div.gif );
+  background-image: url( ../img/div.gif );
   background-position: 21% 0;
   background-repeat: repeat-y;
 }
@@ -43,12 +43,12 @@ limitations under the License.
 
 #content #dataimport #form #navigation a
 {
-  background-image: url( ../../img/ico/status-offline.png );
+  background-image: url( ../img/ico/status-offline.png );
 }
 
 #content #dataimport #form #navigation .current a
 {
-  background-image: url( ../../img/ico/status.png );
+  background-image: url( ../img/ico/status.png );
 }
 
 #content #dataimport #form form
@@ -85,17 +85,17 @@ limitations under the License.
 
 #content #dataimport #form .execute span
 {
-  background-image: url( ../../img/ico/document-import.png );
+  background-image: url( ../img/ico/document-import.png );
 }
 
 #content #dataimport #form .refresh-status span
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
 }
 
 #content #dataimport #form .refresh-status span.success
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #dataimport #form #start
@@ -123,7 +123,7 @@ limitations under the License.
 
 #content #dataimport #form #auto-refresh-status a
 {
-  background-image: url( ../../img/ico/ui-check-box-uncheck.png );
+  background-image: url( ../img/ico/ui-check-box-uncheck.png );
   background-position: 0 50%;
   color: #4D4D4D;
   display: block;
@@ -138,7 +138,7 @@ limitations under the License.
 
 #content #dataimport #form #auto-refresh-status a.on
 {
-  background-image: url( ../../img/ico/ui-check-box.png );
+  background-image: url( ../img/ico/ui-check-box.png );
 }
 
 #content #dataimport #current_state
@@ -180,12 +180,12 @@ limitations under the License.
 
 #content #dataimport #current_state .info .abort-import span
 {
-  background-image: url( ../../img/ico/cross.png );
+  background-image: url( ../img/ico/cross.png );
 }
 
 #content #dataimport #current_state .info .abort-import.success span
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #dataimport #current_state.indexing
@@ -195,7 +195,7 @@ limitations under the License.
 
 #content #dataimport #current_state.indexing .info
 {
-  background-image: url( ../../img/ico/hourglass.png );
+  background-image: url( ../img/ico/hourglass.png );
 }
 
 #content #dataimport #current_state.indexing .info .abort-import
@@ -210,7 +210,7 @@ limitations under the License.
 
 #content #dataimport #current_state.success .info
 {
-  background-image: url( ../../img/ico/tick-circle.png );
+  background-image: url( ../img/ico/tick-circle.png );
 }
 
 #content #dataimport #current_state.success .info strong
@@ -225,7 +225,7 @@ limitations under the License.
 
 #content #dataimport #current_state.aborted .info
 {
-  background-image: url( ../../img/ico/slash.png );
+  background-image: url( ../img/ico/slash.png );
 }
 
 #content #dataimport #current_state.aborted .info strong
@@ -240,7 +240,7 @@ limitations under the License.
 
 #content #dataimport #current_state.failure .info
 {
-  background-image: url( ../../img/ico/cross-button.png );
+  background-image: url( ../img/ico/cross-button.png );
 }
 
 #content #dataimport #current_state.failure .info strong
@@ -255,13 +255,13 @@ limitations under the License.
 
 #content #dataimport #current_state.idle .info
 {
-  background-image: url( ../../img/ico/information.png );
+  background-image: url( ../img/ico/information.png );
 }
 
 #content #dataimport #error
 {
   background-color: #f00;
-  background-image: url( ../../img/ico/construction.png );
+  background-image: url( ../img/ico/construction.png );
   background-position: 10px 50%;
   color: #fff;
   font-weight: bold;
@@ -284,14 +284,14 @@ limitations under the License.
 
 #content #dataimport .block h2 a.toggle
 {
-  background-image: url( ../../img/ico/toggle-small.png );
+  background-image: url( ../img/ico/toggle-small.png );
   background-position: 0 50%;
   padding-left: 21px;
 }
 
 #content #dataimport .block.hidden h2 a.toggle
 {
-  background-image: url( ../../img/ico/toggle-small-expand.png );
+  background-image: url( ../img/ico/toggle-small-expand.png );
 }
 
 #content #dataimport #config h2 a.r
@@ -306,29 +306,29 @@ limitations under the License.
 
 #content #dataimport #config h2 a.reload_config
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
 }
 
 #content #dataimport #config h2 a.reload_config.success
 {
-  background-image: url( ../../img/ico/tick.png );
+  background-image: url( ../img/ico/tick.png );
 }
 
 #content #dataimport #config h2 a.reload_config.error
 {
-  background-image: url( ../../img/ico/slash.png );
+  background-image: url( ../img/ico/slash.png );
 }
 
 #content #dataimport #config h2 a.debug_mode
 {
-  background-image: url( ../../img/ico/hammer.png );
+  background-image: url( ../img/ico/hammer.png );
   color: #4D4D4D;
 }
 
 #content #dataimport #config.debug_mode h2 a.debug_mode
 {
   background-color: #ff0;
-  background-image: url( ../../img/ico/hammer-screwdriver.png );
+  background-image: url( ../img/ico/hammer-screwdriver.png );
   color: #333;
 }
 

@@ -25,7 +25,7 @@ limitations under the License.
 
 #content #segments .reload
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
   background-position: 50% 50%;
   display: block;
   height: 30px;
@@ -155,7 +155,7 @@ limitations under the License.
 }
 
 #content #segments #auto-refresh a {
-  background-image: url( ../../img/ico/ui-check-box-uncheck.png );
+  background-image: url( ../img/ico/ui-check-box-uncheck.png );
   background-position: 0 50%;
   color: #4D4D4D;
   display: block;
@@ -168,5 +168,5 @@ limitations under the License.
 }
 
 #content #segments #auto-refresh a.on {
-  background-image: url( ../../img/ico/ui-check-box.png );
+  background-image: url( ../img/ico/ui-check-box.png );
 }

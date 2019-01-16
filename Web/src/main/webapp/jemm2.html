@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="solrAdminApp">
 <head>
 <meta charset="UTF-8">
 <title>JEMM2</title>
@@ -7,9 +7,84 @@
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/menu.css">
   <link rel="stylesheet" type="text/css" href="css/collections.css">
+  <link rel="stylesheet" type="text/css" href="css/analysis.css">
+  <link rel="stylesheet" type="text/css" href="css/cloud.css">
+  <link rel="stylesheet" type="text/css" href="css/cores.css">
+  <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="css/dataimport.css">
+  <link rel="stylesheet" type="text/css" href="css/files.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/java-properties.css">
+  <link rel="stylesheet" type="text/css" href="css/logging.css">
+  <link rel="stylesheet" type="text/css" href="css/plugins.css">
+  <link rel="stylesheet" type="text/css" href="css/documents.css">
+  <link rel="stylesheet" type="text/css" href="css/query.css">
+  <link rel="stylesheet" type="text/css" href="css/stream.css">
+  <link rel="stylesheet" type="text/css" href="css/replication.css">
+  <link rel="stylesheet" type="text/css" href="css/schema.css">
+  <link rel="stylesheet" type="text/css" href="css/suggestions.css">
+  <link rel="stylesheet" type="text/css" href="css/segments.css">
+  <link rel="stylesheet" type="text/css" href="css/threads.css">
+  <link rel="stylesheet" type="text/css" href="css/chosen.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
 
+
+  <meta http-equiv="x-ua-compatible" content="IE=9">
+  <script src="libs/jquery-2.1.3.min.js"></script>
+  <script src="libs/chosen.jquery.js"></script>
+  <script src="libs/jquery.jstree.js"></script>
+  <script src="libs.js"></script>
+  <script src="libs-chosen.js"></script>
+  <script src="libs-resource.min.js"></script>
+  <script src="libs-route.min.js"></script>
+  <script src="libs-cookies.min.js"></script>
+  <script src="libs/ngtimeago.js"></script>
+  <script src="libs/highlight.js"></script>
+  <script src="libs/d3.js"></script>
+  <script src="libs/jquery-ui.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers/index.js"></script>
+  <script src="js/controllers/logging.js"></script>
+  <script src="js/controllers/cloud.js"></script>
+  <script src="js/controllers/collections.js"></script>
+  <script src="js/controllers/cores.js"></script>
+  <script src="js/controllers/threads.js"></script>
+  <script src="js/controllers/java-properties.js"></script>
+  <script src="js/controllers/core-overview.js"></script>
+  <script src="js/controllers/collection-overview.js"></script>
+  <script src="js/controllers/analysis.js"></script>
+  <script src="js/controllers/dataimport.js"></script>
+  <script src="js/controllers/documents.js"></script>
+  <script src="js/controllers/files.js"></script>
+  <script src="js/controllers/query.js"></script>
+  <script src="js/controllers/stream.js"></script>
+  <script src="js/controllers/plugins.js"></script>
+  <script src="js/controllers/replication.js"></script>
+  <script src="js/controllers/schema.js"></script>
+  <script src="js/controllers/segments.js"></script>
+  <script src="js/controllers/cluster-suggestions.js"></script>
+
+<Script>
+function loadData()
+{
+	alert("HELLO");
+//	$('#content').html("WOW");
+	// Make ajax call for current work assets
+	$.ajax({
+		url : 'logging',
+//		data : {
+//			userName : $('#userName').val()
+//		},
+		success : function(responseText) {
+			$('#content').html(responseText);
+		}
+	});
+}
+</Script>
 </head>
-<body>
+<body ng-controller="MainController">
 
 	<div id="wrapper" scrollable-when-small>
 
@@ -38,7 +113,8 @@
 						</p></li>
 
 					<li id="logging" class="global" ng-class="{active:page=='logging'}"><p>
-							<a href="#/~logging">Logging</a>
+<!-- 							<a href="logging" target="content-wrapper">Logging</a> -->
+							<a onClick="loadData()">Logging</a>
 						</p>
 						<ul ng-show="showingLogging">
 							<li class="level" ng-class="{active:page=='logging-levels'}"><a

@@ -31,7 +31,7 @@ limitations under the License.
 #content #cloud #error
 {
   background-color: #f00;
-  background-image: url( ../../img/ico/construction.png );
+  background-image: url( ../img/ico/construction.png );
   background-position: 10px 12px;
   color: #fff;
   font-weight: bold;
@@ -87,7 +87,7 @@ limitations under the License.
 
 #content #cloud #debug .clipboard a
 {
-  background-image: url( ../../img/ico/clipboard-paste.png );
+  background-image: url( ../img/ico/clipboard-paste.png );
   z-index: 98;
 }
 
@@ -95,7 +95,7 @@ limitations under the License.
 #content #cloud #debug .clipboard a.hover,
 #content #cloud #debug .clipboard.copied a
 {
-  background-image: url( ../../img/ico/clipboard-paste-document-text.png );
+  background-image: url( ../img/ico/clipboard-paste-document-text.png );
 }
 
 #content #cloud #debug .close
@@ -105,13 +105,13 @@ limitations under the License.
 
 #content #cloud #debug .close a
 {
-  background-image: url( ../../img/ico/cross-0.png );
+  background-image: url( ../img/ico/cross-0.png );
   padding-left: 21px;
 }
 
 #content #cloud #debug .close a:hover
 {
-  background-image: url( ../../img/ico/cross-1.png );
+  background-image: url( ../img/ico/cross-1.png );
 }
 
 #content #cloud #debug .debug
@@ -138,7 +138,7 @@ limitations under the License.
 
 #content #cloud .content.show
 {
-  background-image: url( ../../img/div.gif );
+  background-image: url( ../img/div.gif );
   background-repeat: repeat-y;
   background-position: 31% 0;
 }
@@ -169,7 +169,7 @@ limitations under the License.
 
 #content #cloud #file-content .close
 {
-  background-image: url( ../../img/ico/cross-0.png );
+  background-image: url( ../img/ico/cross-0.png );
   background-position: 50% 50%;
   display: block;
   height: 20px;
@@ -181,21 +181,21 @@ limitations under the License.
 
 #content #cloud #file-content .close:hover
 {
-  background-image: url( ../../img/ico/cross-1.png );
+  background-image: url( ../img/ico/cross-1.png );
 }
 
 #content #cloud #file-content #toggle.plus
 {
   font-style: italic;
   padding-left: 17px;
-  background-image: url( ../../img/ico/toggle-small-expand.png );
+  background-image: url( ../img/ico/toggle-small-expand.png );
 }
 
 #content #cloud #file-content #toggle.minus
 {
   font-style: italic;
   padding-left: 17px;
-  background-image: url( ../../img/ico/toggle-small.png );
+  background-image: url( ../img/ico/toggle-small.png );
 }
 
 #content #cloud #file-content #data
@@ -545,7 +545,7 @@ limitations under the License.
 
 #content #cloud .reload
 {
-  background-image: url( ../../img/ico/arrow-circle.png );
+  background-image: url( ../img/ico/arrow-circle.png );
   padding-left: 21px;
   float: left;
 }
@@ -557,7 +557,7 @@ limitations under the License.
 
 #content #cloud .details-button 
 {
-  background-image: url(../../img/ico/ui-check-box-uncheck.png);
+  background-image: url(../img/ico/ui-check-box-uncheck.png);
   background-position: 0 50%;
   color: #8D8D8D;
   margin-top: 7px;
@@ -568,7 +568,7 @@ limitations under the License.
 
 #content #cloud .details-button.on
 {
-  background-image: url( ../../img/ico/ui-check-box.png );
+  background-image: url( ../img/ico/ui-check-box.png );
   color: #333;
 }
 
