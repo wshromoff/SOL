@@ -67,9 +67,55 @@
   <script src="js/controllers/cluster-suggestions.js"></script>
 
 <Script>
+var selected = null;
+
+function clearSelected()
+{
+	if (selected != null)
+	{
+		document.getElementById(selected).className = "global";
+	}
+}
+
+function setSelected()
+{
+	if (selected != null)
+	{
+		document.getElementById(selected).className = "active";
+	}
+}
+
+function summary()
+{
+//	alert("HELLO " + selected);
+	clearSelected();
+	selected = "summary";
+	setSelected();
+//	document.getElementById(selected).className = "active";
+//	alert("HELLO");
+//	document.getElementById("logging").className = "global";
+//	$('#content').html("WOW");
+	// Make ajax call for current work assets
+	$.ajax({
+		url : 'logging',
+//		data : {
+//			userName : $('#userName').val()
+//		},
+		success : function(responseText) {
+			$('#content').html(responseText);
+		}
+	});
+}
+
+
 function loadData()
 {
-	alert("HELLO");
+//	alert("HELLO2 " + selected);
+	clearSelected();
+	selected = "logging";
+	setSelected();
+//	document.getElementById(selected).className = "active";
+//	alert("HELLO");
 //	document.getElementById("logging").className = "global";
 //	$('#content').html("WOW");
 	// Make ajax call for current work assets
@@ -108,6 +154,11 @@ function loadData()
 			<div>
 
 				<ul id="menu">
+					<li id="summary" class="global">
+						<p>
+							<a onClick="summary()">Asset Summary</a>
+						</p>
+					</li>
 
 					<li id="index" class="global" ng-class="{active:page=='index'}"><p>
 							<a href="#/">Dashboard</a>
@@ -115,7 +166,9 @@ function loadData()
 
 					<li id="logging" class="global" ng-class="{active:page=='logging'}"><p>
 <!-- 							<a href="logging" target="content-wrapper">Logging</a> -->
-							<a onClick="loadData()">Logging</a>
+<!-- 							<li id="logging" class="global"> -->
+							<a onClick="loadData()">Logging2</a>
+<!-- 							</li> -->
 						</p>
 						<ul ng-show="showingLogging">
 							<li class="level" ng-class="{active:page=='logging-levels'}"><a
