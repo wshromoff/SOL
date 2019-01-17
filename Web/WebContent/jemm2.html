@@ -106,6 +106,8 @@ function summary()
 			$('#content').html(responseText);
 		}
 	});
+	
+	$('#resultCount').html("123");
 }
 
 
@@ -189,7 +191,7 @@ function searchResults()
 					</li>
 					<li id="searchResults" class="global">
 						<p>
-							<a onClick="searchResults()">Search Results&nbsp;&nbsp;&nbsp;<span class="step" >9999</span></a>
+							<a onClick="searchResults()">Search Results&nbsp;&nbsp;<span id="resultCount" class="step" >132</span></a>
 							
 						</p>
 					</li>
