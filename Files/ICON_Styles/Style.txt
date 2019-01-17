@@ -1,0 +1,8 @@
+.mb-wrapper #header-mbgreytheme h1 span {
+    background: url("../images/jostens/logo_jostens.png") no-repeat;		/* Jostens */
+    display: block;
+    height: 50px;
+    text-indent: -999px;
+    background-position-x: 20px;
+    background-position-y: 5px;
+}
