@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>JEMM2</title>
 
+<link rel="stylesheet" type="text/css" href="css/jemm2.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/menu.css">
   <link rel="stylesheet" type="text/css" href="css/collections.css">
@@ -97,7 +98,7 @@ function summary()
 //	$('#content').html("WOW");
 	// Make ajax call for current work assets
 	$.ajax({
-		url : 'logging',
+		url : 'summary',
 //		data : {
 //			userName : $('#userName').val()
 //		},
@@ -108,11 +109,11 @@ function summary()
 }
 
 
-function loadData()
+function assetSearch()
 {
 //	alert("HELLO2 " + selected);
 	clearSelected();
-	selected = "logging";
+	selected = "search";
 	setSelected();
 //	document.getElementById(selected).className = "active";
 //	alert("HELLO");
@@ -120,7 +121,7 @@ function loadData()
 //	$('#content').html("WOW");
 	// Make ajax call for current work assets
 	$.ajax({
-		url : 'logging',
+		url : 'search',
 //		data : {
 //			userName : $('#userName').val()
 //		},
@@ -129,6 +130,28 @@ function loadData()
 		}
 	});
 }
+function searchResults()
+{
+//	alert("HELLO2 " + selected);
+	clearSelected();
+	selected = "searchResults";
+	setSelected();
+//	document.getElementById(selected).className = "active";
+//	alert("HELLO");
+//	document.getElementById("logging").className = "global";
+//	$('#content').html("WOW");
+	// Make ajax call for current work assets
+	$.ajax({
+		url : 'searchResults',
+//		data : {
+//			userName : $('#userName').val()
+//		},
+		success : function(responseText) {
+			$('#content').html(responseText);
+		}
+	});
+}
+
 </Script>
 </head>
 <body ng-controller="MainController">
@@ -159,6 +182,17 @@ function loadData()
 							<a onClick="summary()">Asset Summary</a>
 						</p>
 					</li>
+					<li id="search" class="global">
+						<p>
+							<a onClick="assetSearch()">Search&nbsp;&nbsp;&nbsp;<span class="step" >1</span></a>
+						</p>
+					</li>
+					<li id="searchResults" class="global">
+						<p>
+							<a onClick="searchResults()">Search Results&nbsp;&nbsp;&nbsp;<span class="step" >9999</span></a>
+							
+						</p>
+					</li>
 
 					<li id="index" class="global" ng-class="{active:page=='index'}"><p>
 							<a href="#/">Dashboard</a>
@@ -167,7 +201,9 @@ function loadData()
 					<li id="logging" class="global" ng-class="{active:page=='logging'}"><p>
 <!-- 							<a href="logging" target="content-wrapper">Logging</a> -->
 <!-- 							<li id="logging" class="global"> -->
-							<a onClick="loadData()">Logging2</a>
+							<a onClick="loadData()">Logging2</a><span class="step">1234</span>
+
+							
 <!-- 							</li> -->
 						</p>
 						<ul ng-show="showingLogging">
