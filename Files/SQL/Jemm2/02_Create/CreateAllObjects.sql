@@ -19,3 +19,13 @@ CREATE TABLE DESIGN
 	
 	CONSTRAINT "DESIGN_PK" PRIMARY KEY ("ID")
 );
+
+------------------------------------ Sequences
+
+-- Sequence for ID column of DESIGN table
+drop sequence DESIGN_SEQUENCE;
+create sequence DESIGN_SEQUENCE 
+start with 1 
+increment by 1 
+nocache
+nomaxvalue;
