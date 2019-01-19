@@ -29,7 +29,6 @@ public class ConnectionHelper
 			conn = DriverManager.getConnection(url, username, password);
 			conn.setAutoCommit(false);		// All connections require a user to commit the transaction
 			
-			conn.close();
 	
 		} 
 		catch (Exception e)
