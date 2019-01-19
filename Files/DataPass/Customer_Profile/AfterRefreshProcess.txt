@@ -1,0 +1,26 @@
+
+Several times a year, the PRDN database is refreshed back over the DEVN & TSTN schemas.  This is done so more real
+data is found in lower environments.  This however causes a problem for the customer profile in those environments.  After
+the refresh, the asset files should still match MB, but the database tables will be the same as production.  So there most
+asset rows match nothing like MB data in those environments.
+
+What has to happen is to synchronize up the customer profile again, which is pretty simple.
+
+As the customers login, run the SQL script 01_Reset/ResetAllObjects.sql.  This will truncate the tables and reset
+the sequences to 1.
+
+In the Brand-Fixit project run these 2 fixits in the following order.  In both cases, start the count at 0, do it for
+1000 cycles and have 5 threads.
+
+FilesystemSync - This is good to run as it will validate the files stored on the file system are accurate.  Not many
+inconsistencies should be found.
+
+DatabaseSync - This will add all the Assets once again.  This will take several hours to run because it is performing
+a database insert for all assets.
+
+DatabaseSyncValicate - A tool that validates and fixes any meta data issues.  MediaBin web service data is considered the source of truth
+and will be compared to IDOL data - AND - Customer Profile data.  If those 2 situations are brought into being in sync then
+IDOL and Customer Profile will also be in sync.
+
+DatabaseSyncAddColumns - A tool which will populate new meta data columns in the customer profile.  Values in the customer profile
+are overwritten if previously there to assure correct information and to make as fast as possible.
