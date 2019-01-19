@@ -27,12 +27,22 @@ public class DesignDatabaseHelperTest
 		ConnectionHelper.closeConnection(c);
 	}
 
-	@Test
+//	@Test
 	public void testGetDesignCount()
 	{
 		DesignDatabaseHelper helper = new DesignDatabaseHelper();
 		int designCount = helper.getDesignCount(c);
 		System.out.println("Design Count = " + designCount);
+	}
+
+	@Test
+	public void testGetNextDesignSequence()
+	{
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		int sequence = helper.getNextDesignSequence(c);
+		System.out.println("Sequence Value = " + sequence);
+		sequence = helper.getNextDesignSequence(c);
+		System.out.println("Sequence Value = " + sequence);
 	}
 
 }
