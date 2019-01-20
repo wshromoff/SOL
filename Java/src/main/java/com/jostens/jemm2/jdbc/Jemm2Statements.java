@@ -7,10 +7,10 @@ public class Jemm2Statements extends Statements
 {
 	// List all the names of SQL statements as static constants
 	public static String DESIGN_COUNT = "DESIGN_COUNT";
-	public static String DELETED_ITEMS_GUID = "DELETED_ITEMS_GUID";
-	public static String FIND_COMPLETE_FOLDER_TREE = "FIND_COMPLETE_FOLDER_TREE";
-	public static String FIND_ALL_ASSETS_FOR_FOLDER_TREE = "FIND_ALL_ASSETS_FOR_FOLDER_TREE";
-	public static String FIND_CONTAINERTREE_COUNT = "FIND_CONTAINERTREE_COUNT";
+	public static String INSERT_DESIGN_KEYWORD = "INSERT_DESIGN_KEYWORD";
+	public static String GET_KEYWORD_ID = "GET_KEYWORD_ID";
+	public static String INSERT_KEYWORD = "INSERT_KEYWORD";
+	public static String DELETE_DESIGN_KEYWORDS = "DELETE_DESIGN_KEYWORDS";
 	public static String FIND_PARENT_FOLDER_GUID = "FIND_PARENT_FOLDER_GUID";
 	public static String FIND_ASSETS_MISSING_METADATA_FIELD = "FIND_ASSETS_MISSING_METADATA_FIELD";
 	public static String FIND_ASSETS_MISSING_METADATA_FIELD_ORIGINAL = "FIND_ASSETS_MISSING_METADATA_FIELD_ORIGINAL";	

@@ -1,8 +1,11 @@
 package com.jostens.jemm2.jdbc.helpers;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.jdbc.StatementProcessor;
@@ -61,5 +64,103 @@ public class DesignDatabaseHelper
 		}
 		return value;
 	}
+	/**
+	 * Return the next sequence # from KEYWORD_SEQUENCE
+	 */
+	public int getNextKeywordSequence(Connection c)
+	{
+		int value = 0;
+		try
+		{
+			Statement statement = c.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT KEYWORD_SEQUENCE.NEXTVAL FROM DUAL");
+			rs.next();
+			value = rs.getInt(1);
+			rs.close();
+			statement.close();
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+//			ExceptionHelper.logExceptionToFile("getNextMBAssetsSequence (CustomerProfileDatabase)", e);
+			//System.out.println("Exception in retrieving next MB Assets Sequence value: " + ExceptionHelper.getStackTraceAsString(e));
+		}
+		return value;
+	}
 
+	/**
+	 * Persist keywords for a design
+	 * @throws SQLException 
+	 */
+	public void persistKeywords(Connection c, int design, List<String> keywords) throws SQLException
+	{
+		// Delete all keywords for this design first so know everything is a simple add, don't need to check first
+		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_DESIGN_KEYWORDS);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(deleteStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, design);
+		preparedDeleteStatment.executeUpdate();
+		preparedDeleteStatment.close();
+		
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_DESIGN_KEYWORD);
+
+		int sequence = 1;
+		// Need to add all design / keyword pairs
+		for (String keyword : keywords)
+		{
+			// Get keyword ID, use existing or new will be created
+			int ID = getKeywordID(c, keyword);
+
+			PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt);
+			// Populate the columns
+			preparedInsertStatment.setInt(1, design);
+			preparedInsertStatment.setInt(2, ID);
+			preparedInsertStatment.setInt(3, sequence++);
+			preparedInsertStatment.executeUpdate();
+			preparedInsertStatment.close();
+			
+		}
+		c.commit();
+	}
+	
+	/**
+	 * For the provided keyword search the keyword table and return its ID if found or
+	 * insert the keyword and return the newly created ID
+	 * @throws SQLException 
+	 */
+	public int getKeywordID(Connection c, String keyword) throws SQLException
+	{
+		int keywordID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_KEYWORD_ID);
+		selectStmt = selectStmt.replace("[KEYWORD]", keyword);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		boolean rowFound = rs.next();
+		if (rowFound)
+		{
+			keywordID = rs.getInt(1);
+		}
+		else
+		{
+			// Need to insert a keyword and keep the ID
+			keywordID = getNextKeywordSequence(c);
+			String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_KEYWORD);
+
+			PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt.toString());
+			// Populate the columns
+			preparedInsertStatment.setInt(1, keywordID);
+			preparedInsertStatment.setString(2, keyword);
+			preparedInsertStatment.executeUpdate();
+			preparedInsertStatment.close();
+		}
+
+		rs.close();
+		statement.close();
+		
+		return keywordID;
+
+
+	}
 }
