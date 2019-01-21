@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Design;
 
 public class DesignDatabaseHelperTest
 {
@@ -67,7 +68,7 @@ public class DesignDatabaseHelperTest
 		System.out.println("Keyword Value = " + keywordId);
 	}
 
-	@Test
+//	@Test
 	public void testPersistKeywords() throws SQLException
 	{
 		DesignDatabaseHelper helper = new DesignDatabaseHelper();
@@ -76,6 +77,32 @@ public class DesignDatabaseHelperTest
 		keywords.add("B");
 		keywords.add("C");
 		helper.persistKeywords(c, 134, keywords);
+		
+	}
+
+//	@Test
+	public void testGetDesignID() throws SQLException
+	{
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		int designId = helper.getDesignID(c, "Wowwy");
+		System.out.println("Design Value = " + designId);
+		designId = helper.getDesignID(c, "Dog");
+		System.out.println("Design Value = " + designId);
+	}
+
+	@Test
+	public void testPersistDesign() throws SQLException
+	{
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		
+		Design design = new Design();
+		design.setName("design1");
+		List<String> keywords = new ArrayList<String>();
+		keywords.add("D");
+		keywords.add("E");
+		keywords.add("F");
+		design.setKeywords(keywords);
+		helper.persistDesign(c, design);
 		
 	}
 

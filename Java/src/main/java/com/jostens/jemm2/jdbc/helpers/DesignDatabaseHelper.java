@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.jdbc.StatementProcessor;
+import com.jostens.jemm2.pojo.Design;
 
 /**
  * Methods for interacting with DESIGN database table so all this complex code is isolated
@@ -160,7 +161,71 @@ public class DesignDatabaseHelper
 		statement.close();
 		
 		return keywordID;
-
-
 	}
+	
+	/**
+	 * For the provided design Name search the design table and return its ID if found or
+	 * get the next sequence # and resturn
+	 * @throws SQLException 
+	 */
+	public int getDesignID(Connection c, String deisginName) throws SQLException
+	{
+		int deisgnID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_DESIGN_ID);
+		selectStmt = selectStmt.replace("[NAME]", deisginName);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		boolean rowFound = rs.next();
+		if (rowFound)
+		{
+			deisgnID = rs.getInt(1);
+		}
+		else
+		{
+			// Need to insert a keyword and keep the ID
+			deisgnID = getNextDesignSequence(c);
+		}
+
+		rs.close();
+		statement.close();
+		
+		return deisgnID;
+	}
+
+	/**
+	 * Persist the supplied Design
+	 * @throws SQLException 
+	 */
+	public void persistDesign(Connection c, Design design) throws SQLException
+	{
+		// Get this designs ID and add to supplied design object
+		int deisgnID = getDesignID(c, design.getName());
+		design.setID(deisgnID);
+
+		// Try to delete the ID from the design table
+		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_DESIGN);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(deleteStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, design.getID());
+		preparedDeleteStatment.executeUpdate();
+		preparedDeleteStatment.close();
+		
+		// Update the design and keywords for the design
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_DESIGN);
+
+		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt.toString());
+		// Populate the columns
+		preparedInsertStatment.setInt(1, deisgnID);
+		preparedInsertStatment.setString(2, design.getName());
+		preparedInsertStatment.executeUpdate();
+		preparedInsertStatment.close();
+		
+		// Persist the keywords also
+		persistKeywords(c, deisgnID, design.getKeywords());
+		
+		c.commit();
+	}
+
 }

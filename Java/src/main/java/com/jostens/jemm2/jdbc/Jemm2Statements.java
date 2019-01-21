@@ -11,9 +11,9 @@ public class Jemm2Statements extends Statements
 	public static String GET_KEYWORD_ID = "GET_KEYWORD_ID";
 	public static String INSERT_KEYWORD = "INSERT_KEYWORD";
 	public static String DELETE_DESIGN_KEYWORDS = "DELETE_DESIGN_KEYWORDS";
-	public static String FIND_PARENT_FOLDER_GUID = "FIND_PARENT_FOLDER_GUID";
-	public static String FIND_ASSETS_MISSING_METADATA_FIELD = "FIND_ASSETS_MISSING_METADATA_FIELD";
-	public static String FIND_ASSETS_MISSING_METADATA_FIELD_ORIGINAL = "FIND_ASSETS_MISSING_METADATA_FIELD_ORIGINAL";	
+	public static String GET_DESIGN_ID = "GET_DESIGN_ID";
+	public static String DELETE_DESIGN = "DELETE_DESIGN";
+	public static String INSERT_DESIGN = "INSERT_DESIGN";	
 	public static String FIND_PARENT_FOLDERS = "FIND_PARENT_FOLDERS";
 	
 	/**
