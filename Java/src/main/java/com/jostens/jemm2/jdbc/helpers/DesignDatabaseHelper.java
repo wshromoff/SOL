@@ -197,7 +197,7 @@ public class DesignDatabaseHelper
 	 * Persist the supplied Design
 	 * @throws SQLException 
 	 */
-	public void persistDesign(Connection c, Design design) throws SQLException
+	public Design persistDesign(Connection c, Design design) throws SQLException
 	{
 		// Get this designs ID and add to supplied design object
 		int deisgnID = getDesignID(c, design.getName());
@@ -226,6 +226,45 @@ public class DesignDatabaseHelper
 		persistKeywords(c, deisgnID, design.getKeywords());
 		
 		c.commit();
+		
+		return design;
+	}
+
+	/**
+	 * Persist the supplied Design
+	 * @throws SQLException 
+	 */
+	public void getDesign(Connection c, Design design) throws SQLException
+	{
+		// Get this designs ID and add to supplied design object
+//		int deisgnID = getDesignID(c, design.getName());
+//		design.setID(deisgnID);
+
+		// Try to delete the ID from the design table
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_DESIGN);
+
+		System.out.println("SQL=" + selectStmt);
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, design.getID());
+		ResultSet rs = preparedDeleteStatment.executeQuery();
+		rs.next();
+		int id = rs.getInt(1);
+		design.setName(rs.getString(2));
+		rs.close();
+		preparedDeleteStatment.close();
+		
+		// Get the keywords
+		selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_DESIGN_KEYWORDS);
+		preparedDeleteStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, design.getID());
+		rs = preparedDeleteStatment.executeQuery();
+		while (rs.next())
+		{
+			String keyword = rs.getString(1);
+			design.addKeyword(keyword);
+		}
 	}
 
 }

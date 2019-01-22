@@ -90,7 +90,7 @@ public class DesignDatabaseHelperTest
 		System.out.println("Design Value = " + designId);
 	}
 
-	@Test
+//	@Test
 	public void testPersistDesign() throws SQLException
 	{
 		DesignDatabaseHelper helper = new DesignDatabaseHelper();
@@ -103,6 +103,21 @@ public class DesignDatabaseHelperTest
 		keywords.add("F");
 		design.setKeywords(keywords);
 		helper.persistDesign(c, design);
+		
+	}
+
+	@Test
+	public void testGetDesign() throws SQLException
+	{
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		
+		Design design = new Design();
+		design.setID(3);
+		
+		helper.getDesign(c, design);
+		
+		System.out.println("Name: " + design.getName());
+		System.out.println("Keywords: " + design.getKeywords().toString());
 		
 	}
 

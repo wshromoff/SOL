@@ -45,4 +45,9 @@ public class Design
 			keywords.add(keyword);
 		}
 	}
+	
+	public void addKeyword(String keyword)
+	{
+		keywords.add(keyword);
+	}
 }

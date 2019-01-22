@@ -14,7 +14,8 @@ public class Jemm2Statements extends Statements
 	public static String GET_DESIGN_ID = "GET_DESIGN_ID";
 	public static String DELETE_DESIGN = "DELETE_DESIGN";
 	public static String INSERT_DESIGN = "INSERT_DESIGN";	
-	public static String FIND_PARENT_FOLDERS = "FIND_PARENT_FOLDERS";
+	public static String GET_DESIGN = "GET_DESIGN";
+	public static String GET_DESIGN_KEYWORDS = "GET_DESIGN_KEYWORDS";
 	
 	/**
 	 * Method to return List of statement files to load.
