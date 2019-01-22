@@ -243,7 +243,6 @@ public class DesignDatabaseHelper
 		// Try to delete the ID from the design table
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_DESIGN);
 
-		System.out.println("SQL=" + selectStmt);
 		PreparedStatement preparedDeleteStatment = c.prepareStatement(selectStmt);
 		// Populate the columns
 		preparedDeleteStatment.setInt(1, design.getID());

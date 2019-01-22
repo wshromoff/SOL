@@ -1,5 +1,7 @@
 package com.jostens.jemm2.jdbc.helpers;
 
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -106,7 +108,7 @@ public class DesignDatabaseHelperTest
 		
 	}
 
-	@Test
+//	@Test
 	public void testGetDesign() throws SQLException
 	{
 		DesignDatabaseHelper helper = new DesignDatabaseHelper();
@@ -119,6 +121,26 @@ public class DesignDatabaseHelperTest
 		System.out.println("Name: " + design.getName());
 		System.out.println("Keywords: " + design.getKeywords().toString());
 		
+	}
+
+	@Test
+	public void testImportDesign() throws SQLException
+	{
+		Design design = new Design("20180817-16357a3a71ce|School|20180817-16357a3a71ce|20180817-16357a3a71ce|Mascot|Custom (Not Stock)|||||||Common (For Many)|Manufacturing|Titan,Mythology,Spartan,Trojan|Titan|false|Head|Side View|");
+		
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		helper.persistDesign(c, design);
+		
+		Design design2 = new Design();
+		design2.setID(design.getID());
+		
+		// Populate design2 from database
+		helper.getDesign(c, design2);
+		
+		assertTrue(design.equals(design2));
+		
+		
+		System.out.println("DESIGN ID = " + design.getID());
 	}
 
 }

@@ -9,7 +9,39 @@ public class Design
 	private int ID = 0;
 	private String name;
 	private List<String> keywords = new ArrayList<String>();
-	
+
+	// 20180817-16357a3a71ce|School|20180817-16357a3a71ce|20180817-16357a3a71ce|Mascot|Custom (Not Stock)|||||||Common (For Many)|Manufacturing|Titan,Mythology,Spartan,Trojan|Titan|false|Head|Side View|
+	public Design()
+	{
+		
+	}
+	public Design(String exportString)
+	{
+		String[] stringArr = exportString.split("\\|");
+		setName(stringArr[0]);
+		setKeywords(stringArr[14]);
+		
+//		System.out.println("-->" + getName());
+
+//		StringTokenizer st = new StringTokenizer(exportString, "|");
+//		setName(st.nextToken());
+//		System.out.println("-->" + getName());
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		st.nextToken();
+//		setKeywords(st.nextToken());
+	}
+
 	public int getID()
 	{
 		return ID;
@@ -49,5 +81,25 @@ public class Design
 	public void addKeyword(String keyword)
 	{
 		keywords.add(keyword);
+	}
+	
+	public boolean equals(Object obj)
+	{
+		Design design = (Design)obj;
+
+		if (getID() != design.getID())
+		{
+			return false;
+		}
+		if (!getName().equals(design.getName()))
+		{
+			return false;
+		}
+		if (!getKeywords().equals(design.getKeywords()))
+		{
+			return false;
+		}
+		return true;
+
 	}
 }
