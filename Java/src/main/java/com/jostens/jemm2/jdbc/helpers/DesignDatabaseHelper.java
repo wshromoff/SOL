@@ -118,6 +118,7 @@ public class DesignDatabaseHelper
 			preparedInsertStatment.setInt(1, design);
 			preparedInsertStatment.setInt(2, ID);
 			preparedInsertStatment.setInt(3, sequence++);
+			System.out.println(design + "=" + ID);
 			preparedInsertStatment.executeUpdate();
 			preparedInsertStatment.close();
 			

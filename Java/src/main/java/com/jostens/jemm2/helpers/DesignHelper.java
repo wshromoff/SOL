@@ -26,7 +26,7 @@ public class DesignHelper
 	}
 
 	/**
-	 * Find all the design load files and call method to build Design objects
+	 * Find all the design load files and call method to persist Design objects
 	 * @throws IOException 
 	 */
 	public List<Design> getDesignObjects(String fileName) throws IOException
@@ -40,7 +40,7 @@ public class DesignHelper
         {
             System.out.println("Line entered : " + line);
             
-            designs.add(getDesign(line));
+            designs.add(new Design(line));
         }
 		
 		return designs;
