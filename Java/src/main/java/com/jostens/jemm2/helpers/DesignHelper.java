@@ -38,7 +38,7 @@ public class DesignHelper
         String line = null;
         while ((line = reader.readLine()) != null)
         {
-            System.out.println("Line entered : " + line);
+//            System.out.println("Line entered : " + line);
             
             designs.add(new Design(line));
         }
