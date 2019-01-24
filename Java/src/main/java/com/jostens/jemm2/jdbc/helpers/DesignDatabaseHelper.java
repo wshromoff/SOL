@@ -165,14 +165,14 @@ public class DesignDatabaseHelper
 	
 	/**
 	 * For the provided design Name search the design table and return its ID if found or
-	 * get the next sequence # and resturn
+	 * get the next sequence # and return
 	 * @throws SQLException 
 	 */
-	public int getDesignID(Connection c, String deisginName) throws SQLException
+	public int getDesignID(Connection c, String designName) throws SQLException
 	{
 		int deisgnID = 0;
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_DESIGN_ID);
-		selectStmt = selectStmt.replace("[NAME]", deisginName);
+		selectStmt = selectStmt.replace("[NAME]", designName);
 		
 		Statement statement = c.createStatement();
 		ResultSet rs = statement.executeQuery(selectStmt);
