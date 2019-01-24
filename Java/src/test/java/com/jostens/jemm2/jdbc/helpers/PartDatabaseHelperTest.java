@@ -63,6 +63,21 @@ public class PartDatabaseHelperTest
 		
 	}
 
+//	@Test
+	public void testPartDesign() throws SQLException
+	{
+		PartDatabaseHelper helper = new PartDatabaseHelper();
+		
+		Part part = new Part();
+		part.setID(7);
+		
+		helper.getPart(c, part);
+		
+		System.out.println("Name: " + part.getName());
+		System.out.println("Part Validation: " + part.getPartValidation());
+		
+	}
+
 	@Test
 	public void testImportPart() throws SQLException
 	{
@@ -70,13 +85,13 @@ public class PartDatabaseHelperTest
 		PartDatabaseHelper helper = new PartDatabaseHelper();
 		helper.persistPart(c, part);
 		
-//		Design design2 = new Design();
-//		design2.setID(design.getID());
-//		
-//		// Populate design2 from database
-//		helper.getDesign(c, design2);
-//		
-//		assertTrue(design.equals(design2));
+		Part part2 = new Part();
+		part2.setID(part.getID());
+		
+		// Populate design2 from database
+		helper.getPart(c, part2);
+		
+		assertTrue(part.equals(part2));
 		
 		
 		System.out.println("PART ID = " + part.getID());

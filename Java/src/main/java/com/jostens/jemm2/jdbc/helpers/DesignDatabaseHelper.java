@@ -248,7 +248,7 @@ public class DesignDatabaseHelper
 	}
 
 	/**
-	 * Persist the supplied Design
+	 * Get the supplied Design by ID
 	 * @throws SQLException 
 	 */
 	public void getDesign(Connection c, Design design) throws SQLException

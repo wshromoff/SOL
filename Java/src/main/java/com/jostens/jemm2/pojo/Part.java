@@ -1,5 +1,7 @@
 package com.jostens.jemm2.pojo;
 
+import java.util.Objects;
+
 public class Part
 {
 
@@ -114,4 +116,31 @@ public class Part
 	{
 		this.designID = designID;
 	}
+	
+	public boolean equals(Object obj)
+	{
+		Part part = (Part)obj;
+//		System.out.println("HELLO " + getDisplayedInitials());
+//		System.out.println("HELLO " + design.getDisplayedInitials());
+
+		if (getID() != part.getID())
+		{
+			return false;
+		}
+		if (!Objects.equals(getName(), part.getName())) { return false; }
+		if (!Objects.equals(getDesignIDString(), part.getDesignIDString())) { return false; }
+		if (!Objects.equals(getJostensIDString(), part.getJostensIDString())) { return false; }
+		if (!Objects.equals(getPartID(), part.getPartID())) { return false; }
+		if (!Objects.equals(getPartIDDerivative(), part.getPartIDDerivative())) { return false; }
+		if (!Objects.equals(getPartValidation(), part.getPartValidation())) { return false; }
+		if (getDesignID() != part.getDesignID())
+		{
+			return false;
+		}
+	
+		
+		return true;
+
+	}
+
 }

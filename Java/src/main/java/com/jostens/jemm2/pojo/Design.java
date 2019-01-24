@@ -190,14 +190,6 @@ public class Design
 		
 		
 		if (!Objects.equals(getKeywords(), design.getKeywords())) { return false; }
-//		if (!getName().equals(design.getName()))
-//		{
-//			return false;
-//		}
-//		if (!getKeywords().equals(design.getKeywords()))
-//		{
-//			return false;
-//		}
 		return true;
 
 	}

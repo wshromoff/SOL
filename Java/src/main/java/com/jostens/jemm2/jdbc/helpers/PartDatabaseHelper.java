@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Design;
 import com.jostens.jemm2.pojo.Part;
 
 public class PartDatabaseHelper
@@ -104,6 +105,37 @@ public class PartDatabaseHelper
 		c.commit();
 		
 		return part;
+	}
+
+	/**
+	 * Get the supplied Part by ID
+	 * @throws SQLException 
+	 */
+	public void getPart(Connection c, Part part) throws SQLException
+	{
+		// Get this designs ID and add to supplied design object
+//		int deisgnID = getDesignID(c, design.getName());
+//		design.setID(deisgnID);
+
+		// Try to delete the ID from the design table
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_PART);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, part.getID());
+		ResultSet rs = preparedDeleteStatment.executeQuery();
+		rs.next();
+		int id = rs.getInt(1);
+		part.setName(rs.getString(2));
+		part.setDesignIDString(rs.getString(3));
+		part.setJostensIDString(rs.getString(4));
+		part.setPartID(rs.getString(5));
+		part.setPartIDDerivative(rs.getString(6));
+		part.setPartValidation(rs.getString(7));
+		part.setDesignID(rs.getInt(8));
+		rs.close();
+		preparedDeleteStatment.close();
+		
 	}
 
 }
