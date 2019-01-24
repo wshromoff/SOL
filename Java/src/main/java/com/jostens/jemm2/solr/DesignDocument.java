@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.solr.client.solrj.beans.Field;
 
-public class Design extends SOLRBase
+public class DesignDocument extends SOLRBase
 {
 	private List<String> keywords = new ArrayList<String>();
 	@Field private	String mainSubject = null;

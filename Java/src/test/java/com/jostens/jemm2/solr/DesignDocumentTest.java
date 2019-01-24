@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import com.wassoftware.solr.ConnectToSolr;
 
-public class DesignTest
+public class DesignDocumentTest
 {
 	DocumentObjectBinder binder = new DocumentObjectBinder();
 
@@ -23,13 +23,13 @@ public class DesignTest
 	public static void abc() throws SolrServerException, IOException
 	{
 
-		Design design1 = new Design();
+		DesignDocument design1 = new DesignDocument();
 		design1.setDatabaseID(1);
 		design1.addKeyword("Shark");
 		design1.addKeyword("Blue");
 		design1.setMultipleMainSubject(true);
 
-		Design design2 = new Design();
+		DesignDocument design2 = new DesignDocument();
 		design2.setDatabaseID(2);
 		design2.addKeyword("Car");
 		design2.addKeyword("Blue");
@@ -57,7 +57,7 @@ public class DesignTest
 		
 		SolrDocumentList docList = response.getResults();
 		assertEquals(docList.getNumFound(), 1);
-		Design design = binder.getBean(Design.class, docList.get(0));
+		DesignDocument design = binder.getBean(DesignDocument.class, docList.get(0));
 		System.out.println("FOUND 1:\n" + design.toString());
 		
 		// Try query by matching keyword
@@ -67,9 +67,9 @@ public class DesignTest
 		System.out.println("     --- BLUE ----");
 		docList = response.getResults();
 		assertEquals(docList.getNumFound(), 2);
-		design = binder.getBean(Design.class, docList.get(0));
+		design = binder.getBean(DesignDocument.class, docList.get(0));
 		System.out.println("FOUND 1:\n" + design.toString());
-		design = binder.getBean(Design.class, docList.get(1));
+		design = binder.getBean(DesignDocument.class, docList.get(1));
 		System.out.println("FOUND 2:\n" + design.toString());
 
 		solr.close();

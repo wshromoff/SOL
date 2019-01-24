@@ -15,14 +15,14 @@ import org.junit.Test;
 
 import com.wassoftware.solr.ConnectToSolr;
 
-public class PartTest
+public class PartDocumentTest
 {
 	DocumentObjectBinder binder = new DocumentObjectBinder();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
 	{
-		Part part1 = new Part();
+		PartDocument part1 = new PartDocument();
 		part1.setDatabaseID(1);
 		part1.setName("JR12345");
 		part1.setDesignID("DS_000001");
@@ -47,7 +47,7 @@ public class PartTest
 		
 		SolrDocumentList docList = response.getResults();
 		assertEquals(docList.getNumFound(), 1);
-		Part part = binder.getBean(Part.class, docList.get(0));
+		PartDocument part = binder.getBean(PartDocument.class, docList.get(0));
 		System.out.println("FOUND 1:\n" + part.toString());
 
 		solr.close();

@@ -2,7 +2,7 @@ package com.jostens.jemm2.solr;
 
 import org.apache.solr.client.solrj.beans.Field;
 
-public class Part extends SOLRBase
+public class PartDocument extends SOLRBase
 {
 	private String name = null;
 	private String designID = null;
