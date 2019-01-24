@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
-import com.jostens.jemm2.pojo.Design;
 import com.jostens.jemm2.pojo.Part;
 
 public class PartDatabaseHelper
@@ -76,7 +75,12 @@ public class PartDatabaseHelper
 		// Get this designs ID and add to supplied design object
 		int partID = getPartID(c, part.getName());
 		part.setID(partID);
-
+		
+		// Get the ID of the design this part implements
+		DesignDatabaseHelper designHelper = new DesignDatabaseHelper();
+		int designID = designHelper.getDesignID(c, part.getDesignIDString());
+		part.setDesignID(designID);
+		
 		// Try to delete the ID from the design table
 		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_PART);
 
