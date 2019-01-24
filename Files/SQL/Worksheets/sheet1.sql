@@ -23,3 +23,11 @@ WHERE t2.name IS NULL;
 -- Find parts with no design ID
 SELECT * from part where designid = 0;
 
+-- Delete the 697 designs with no part usage
+delete from design
+where
+id in (SELECT t1.id
+FROM design t1
+LEFT JOIN part t2 ON t2.designid = t1.id
+WHERE t2.name IS NULL
+);
