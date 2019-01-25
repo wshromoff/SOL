@@ -8,10 +8,10 @@ import org.apache.solr.client.solrj.beans.Field;
 public class DesignDocument extends SOLRBase
 {
 	private List<String> keywords = new ArrayList<String>();
-	@Field private	String mainSubject = null;
-	@Field private boolean multipleMainSubject = false;
-	@Field private String portion = null;
-	@Field private String view = null;
+	private	String mainSubject = null;
+	private boolean multipleMainSubject = false;
+	private String portion = null;
+	private String view = null;
 
 	
 	public List<String> getKeywords()

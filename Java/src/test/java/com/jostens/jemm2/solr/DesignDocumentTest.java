@@ -25,12 +25,14 @@ public class DesignDocumentTest
 
 		DesignDocument design1 = new DesignDocument();
 		design1.setDatabaseID(1);
+		design1.setName("Design1");
 		design1.addKeyword("Shark");
 		design1.addKeyword("Blue");
 		design1.setMultipleMainSubject(true);
 
 		DesignDocument design2 = new DesignDocument();
 		design2.setDatabaseID(2);
+		design2.setName("Design2");
 		design2.addKeyword("Car");
 		design2.addKeyword("Blue");
 		design2.setMainSubject("Yugo");
