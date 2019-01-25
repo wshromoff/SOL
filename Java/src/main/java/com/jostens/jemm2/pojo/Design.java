@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
+import com.jostens.jemm2.solr.DesignDocument;
+
 public class Design
 {
 	private int ID = 0;
@@ -329,5 +331,21 @@ public class Design
 	{
 		this.viewMainSubject = viewMainSubject;
 	}
-	
+
+	/**
+	 * Return a DesignDocument representative of this Design for addition to SOLR
+	 */
+	public DesignDocument getDesignDocument()
+	{
+		DesignDocument dd = new DesignDocument();
+		dd.setDatabaseID(getID());
+		dd.setName(getName());
+		dd.setAffiliationByDepiction(getAffiliationByDepiction());
+		dd.setBrandAssetType(getBrandAssetType());
+		dd.setMascotName(getDisplayedMascot());
+		dd.setKeywords(getKeywords());
+		dd.setMainSubject(getMainSubject());
+		
+		return dd;
+	}
 }

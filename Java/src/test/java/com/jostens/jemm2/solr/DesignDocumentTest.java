@@ -3,6 +3,8 @@ package com.jostens.jemm2.solr;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -10,14 +12,20 @@ import org.apache.solr.client.solrj.beans.DocumentObjectBinder;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.jostens.jemm2.jdbc.ConnectionHelper;
+import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.jdbc.helpers.DesignDatabaseHelper;
+import com.jostens.jemm2.pojo.Design;
 import com.wassoftware.solr.ConnectToSolr;
 
 public class DesignDocumentTest
 {
 	DocumentObjectBinder binder = new DocumentObjectBinder();
+	private static Connection c = null;
 
 	@BeforeClass
 	public static void abc() throws SolrServerException, IOException
@@ -28,7 +36,9 @@ public class DesignDocumentTest
 		design1.setName("Design1");
 		design1.addKeyword("Shark");
 		design1.addKeyword("Blue");
-		design1.setMultipleMainSubject(true);
+		design1.setAffiliationByDepiction("Depiction 1");
+		design1.setBrandAssetType("type 1");
+		design1.setMascotName("mascot 1");
 
 		DesignDocument design2 = new DesignDocument();
 		design2.setDatabaseID(2);
@@ -44,10 +54,19 @@ public class DesignDocumentTest
 		solr.addBean(design2);
 		solr.commit();
 		solr.close();
-
+		
+		Jemm2Statements statements = new Jemm2Statements();
+		statements.initializeStatements();
+		c = ConnectionHelper.getJEMM2Connection();
 	}
 
-	@Test
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception
+	{
+		ConnectionHelper.closeConnection(c);
+	}
+
+//	@Test
 	public void test() throws SolrServerException, IOException
 	{
 		ConnectToSolr connect = new ConnectToSolr();
@@ -78,4 +97,29 @@ public class DesignDocumentTest
 
 	}
 
+	// Now test grabbing design 1 and add to SOLR
+	@Test
+	public void testAddDesign() throws SolrServerException, IOException, SQLException
+	{
+
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		
+		Design design = new Design();
+		design.setID(7);
+		
+		helper.getDesign(c, design);
+		
+		System.out.println("Name: " + design.getName());
+		System.out.println("Keywords: " + design.getKeywords().toString());
+
+		DesignDocument dd = design.getDesignDocument();
+		
+		ConnectToSolr connect = new ConnectToSolr();
+		HttpSolrClient solr = connect.makeConnection();
+
+		solr.addBean(dd);
+		solr.commit();
+		solr.close();
+
+	}
 }
