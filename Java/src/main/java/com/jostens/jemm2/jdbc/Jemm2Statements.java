@@ -16,6 +16,7 @@ public class Jemm2Statements extends Statements
 	public static String INSERT_DESIGN = "INSERT_DESIGN";	
 	public static String GET_DESIGN = "GET_DESIGN";
 	public static String GET_DESIGN_KEYWORDS = "GET_DESIGN_KEYWORDS";
+	public static String GET_ALL_DESIGNIDS = "GET_ALL_DESIGNIDS";
 
 	// List all the names of Part SQL statements as static constants
 	public static String DELETE_PART = "DELETE_PART";

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
@@ -298,6 +299,33 @@ public class DesignDatabaseHelper
 			String keyword = rs.getString(1);
 			design.addKeyword(keyword);
 		}
+		rs.close();
+		preparedDeleteStatment.close();
 	}
 
+	/**
+	 * Get all design IDs from the design table and return in List
+	 * @throws SQLException 
+	 */
+	public List<Integer> getAllDesignIDs(Connection c) throws SQLException
+	{
+		List<Integer> designs = new ArrayList<Integer>();
+		
+		int deisgnID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_DESIGNIDS);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			deisgnID = rs.getInt(1);
+			designs.add(new Integer(deisgnID));
+		}
+
+		rs.close();
+		statement.close();
+		
+		return designs;
+
+	}
 }

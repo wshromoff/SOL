@@ -123,7 +123,7 @@ public class DesignDatabaseHelperTest
 		
 	}
 
-	@Test
+//	@Test
 	public void testImportDesign() throws SQLException
 	{
 		Design design = new Design("20180817-16357a3a71ce|School|20180817-16357a3a71ce|20180817-16357a3a71ce|Mascot|Custom (Not Stock)|||||||Common (For Many)|Manufacturing|Titan,Mythology,Spartan,Trojan|Titan|false|Head|Side View|");
@@ -141,6 +141,17 @@ public class DesignDatabaseHelperTest
 		
 		
 		System.out.println("DESIGN ID = " + design.getID());
+	}
+
+	@Test
+	public void testGetAllDesignIDs() throws SQLException
+	{
+		DesignDatabaseHelper helper = new DesignDatabaseHelper();
+		
+		List<Integer> designs = helper.getAllDesignIDs(c);
+			
+		System.out.println("Design Count: " + designs.size());
+		
 	}
 
 }

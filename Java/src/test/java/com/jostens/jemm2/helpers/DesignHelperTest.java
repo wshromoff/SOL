@@ -5,18 +5,21 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
-import com.jostens.jemm2.jdbc.helpers.DesignDatabaseHelper;
 import com.jostens.jemm2.pojo.Design;
+import com.wassoftware.solr.ConnectToSolr;
 
 public class DesignHelperTest
 {
 	private static Connection c = null;
+	private static HttpSolrClient solr = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
@@ -24,12 +27,17 @@ public class DesignHelperTest
 		Jemm2Statements statements = new Jemm2Statements();
 		statements.initializeStatements();
 		c = ConnectionHelper.getJEMM2Connection();
+		
+		ConnectToSolr connect = new ConnectToSolr();
+		solr = connect.makeConnection();
+
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception
 	{
 		ConnectionHelper.closeConnection(c);
+		solr.close();
 	}
 
 //	@Test
@@ -52,23 +60,20 @@ public class DesignHelperTest
 		System.out.println("Keyword count = " + design.getKeywords().size());
 	}
 
-	@Test
+//	@Test
 	public void persistDesigns() throws IOException, SQLException
 	{
 		DesignHelper helper = new DesignHelper();
-		DesignDatabaseHelper dbHelper = new DesignDatabaseHelper();
 		
-//		List<Design> designs = helper.getDesignObjects("design_01.txt");
-//		List<Design> designs = helper.getDesignObjects("design_02.txt");
-		List<Design> designs = helper.getDesignObjects("design_03.txt");
+		helper.persistAllDesigns(c);
+	}
 
-		int i = 0;
-		for (Design design : designs)
-		{
-			i++;
-			System.out.println("" + i);
-			dbHelper.persistDesign(c, design);
-		}
+	@Test
+	public void persistDesignDocuments() throws SQLException, IOException, SolrServerException
+	{
+		DesignHelper helper = new DesignHelper();
+		
+		helper.persistAllDesignDocuments(c, solr);
 	}
 
 }
