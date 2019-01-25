@@ -31,29 +31,29 @@ public class DesignDocumentTest
 	public static void abc() throws SolrServerException, IOException
 	{
 
-		DesignDocument design1 = new DesignDocument();
-		design1.setDatabaseID(1);
-		design1.setName("Design1");
-		design1.addKeyword("Shark");
-		design1.addKeyword("Blue");
-		design1.setAffiliationByDepiction("Depiction 1");
-		design1.setBrandAssetType("type 1");
-		design1.setMascotName("mascot 1");
-
-		DesignDocument design2 = new DesignDocument();
-		design2.setDatabaseID(2);
-		design2.setName("Design2");
-		design2.addKeyword("Car");
-		design2.addKeyword("Blue");
-		design2.setMainSubject("Yugo");
-
-		ConnectToSolr connect = new ConnectToSolr();
-		HttpSolrClient solr = connect.makeConnection();
-
-		solr.addBean(design1);
-		solr.addBean(design2);
-		solr.commit();
-		solr.close();
+//		DesignDocument design1 = new DesignDocument();
+//		design1.setDatabaseID(1);
+//		design1.setName("Design1");
+//		design1.addKeyword("Shark");
+//		design1.addKeyword("Blue");
+//		design1.setAffiliationByDepiction("Depiction 1");
+//		design1.setBrandAssetType("type 1");
+//		design1.setMascotName("mascot 1");
+//
+//		DesignDocument design2 = new DesignDocument();
+//		design2.setDatabaseID(2);
+//		design2.setName("Design2");
+//		design2.addKeyword("Car");
+//		design2.addKeyword("Blue");
+//		design2.setMainSubject("Yugo");
+//
+//		ConnectToSolr connect = new ConnectToSolr();
+//		HttpSolrClient solr = connect.makeConnection();
+//
+//		solr.addBean(design1);
+//		solr.addBean(design2);
+//		solr.commit();
+//		solr.close();
 		
 		Jemm2Statements statements = new Jemm2Statements();
 		statements.initializeStatements();
@@ -66,7 +66,7 @@ public class DesignDocumentTest
 		ConnectionHelper.closeConnection(c);
 	}
 
-//	@Test
+	@Test
 	public void test() throws SolrServerException, IOException
 	{
 		ConnectToSolr connect = new ConnectToSolr();
@@ -82,7 +82,7 @@ public class DesignDocumentTest
 		System.out.println("FOUND 1:\n" + design.toString());
 		
 		// Try query by matching keyword
-		query.set("q", "keywords:blue");		// Case doesn't matter
+		query.set("q", "keywords:shark");		// Case doesn't matter
 		response = solr.query(query);
 
 		System.out.println("     --- BLUE ----");
@@ -98,7 +98,7 @@ public class DesignDocumentTest
 	}
 
 	// Now test grabbing design 1 and add to SOLR
-	@Test
+//	@Test
 	public void testAddDesign() throws SolrServerException, IOException, SQLException
 	{
 

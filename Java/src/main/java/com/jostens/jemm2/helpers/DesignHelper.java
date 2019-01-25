@@ -92,12 +92,12 @@ public class DesignHelper
 		
 		// Add each design to SOLR
 		
-		Design design = new Design();
 		int i = 0;
 		for (Integer designID : designs)
 		{
 			i++;
 			System.out.println("" + i);
+			Design design = new Design();
 			design.setID(designID.intValue());
 			dbHelper.getDesign(c, design);
 			
