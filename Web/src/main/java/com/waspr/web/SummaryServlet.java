@@ -14,7 +14,7 @@ import com.jostens.jemm2.solr.web.DocumentCounts;
  * Servlet implementation for summary information
  */
 @WebServlet("/summary")
-public class Summary extends HttpServlet
+public class SummaryServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +29,9 @@ public class Summary extends HttpServlet
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		System.out.println("Inside Servlet");
 		DocumentCounts helper = new DocumentCounts();
 		helper.generateCounts();
 //		response.getWriter().append("SUMMARY " + helper.getDesignCount());

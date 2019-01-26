@@ -1,6 +1,35 @@
 
 var selected = null;
+var count = 0;
+// This interval will run continuously to update the tab totals.  It's started when the page is loaded
+var totalsInterval = null;
 
+$(document).ready(function()
+{
+//			alert("WHATUP");
+//			loadData();
+	totalsInterval = setInterval(getTabTotals, 15000);
+		});
+
+// getTabTotals - Generates all the tab totals and displays their values
+function getTabTotals()
+{
+	$.ajax({
+		url : 'tabTotals',
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+			displayCount("#summaryCount", splitArray[0]);
+			displayCount("#resultCount", splitArray[1]);
+		}
+	});
+
+//	alert(count);
+//	count++;
+//	if (count > 5)
+//	{
+//		clearInterval(totalsInterval);
+//	}
+}
 function clearSelected()
 {
 	if (selected != null)
@@ -57,7 +86,6 @@ function summary()
 		}
 	});
 	
-	$('#resultCount').html("123");
 }
 
 
