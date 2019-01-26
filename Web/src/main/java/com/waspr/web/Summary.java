@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jostens.jemm2.helpers.SummaryHelper;
+import com.jostens.jemm2.solr.web.DocumentCounts;
 
 /**
  * Servlet implementation for summary information
@@ -31,10 +31,12 @@ public class Summary extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		SummaryHelper helper = new SummaryHelper();
-		helper.getSummary();
+		DocumentCounts helper = new DocumentCounts();
+		helper.generateCounts();
 //		response.getWriter().append("SUMMARY " + helper.getDesignCount());
-		response.getWriter().append("23,hello to us all");
+		
+		long delta = helper.getDeltaCount();
+		response.getWriter().append(delta + ",hello to us all");
 
 	}
 

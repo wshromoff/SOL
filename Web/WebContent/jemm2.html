@@ -67,6 +67,8 @@
   <script src="js/controllers/segments.js"></script>
   <script src="js/controllers/cluster-suggestions.js"></script>
 
+	<script src="js/jemm2.js" type="text/javascript"></script>
+
 <Script>
 var selected = null;
 
@@ -84,6 +86,19 @@ function setSelected()
 	{
 		document.getElementById(selected).className = "active";
 	}
+}
+
+function displayCount(area, value)
+{
+	if (value == '0')
+	{
+		$(area).html('');
+	}
+	else
+	{
+		$(area).html(value);
+	}
+	
 }
 
 function summary()
@@ -109,6 +124,7 @@ function summary()
 			$('#content').html(splitArray[1]);
 //			alert(splitArray[0]);
 //			alert(splitArray[1]);
+			displayCount("#summaryCount", splitArray[0]);
 		}
 	});
 	
