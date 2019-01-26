@@ -16,6 +16,7 @@ public class SOLRAdmin
 		HttpSolrClient solr = connect.makeConnection();
 		solr.deleteByQuery("*:*");
 		solr.commit();
+		solr.close();
 
 	}
 
@@ -26,6 +27,7 @@ public class SOLRAdmin
 		HttpSolrClient solr = connect.makeConnection();
 		solr.deleteByQuery("contentType:Design");
 		solr.commit();
+		solr.close();
 
 	}
 
@@ -36,6 +38,7 @@ public class SOLRAdmin
 		HttpSolrClient solr = connect.makeConnection();
 		solr.deleteByQuery("contentType:Part");
 		solr.commit();
+		solr.close();
 
 	}
 
