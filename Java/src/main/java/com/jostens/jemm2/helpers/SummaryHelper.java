@@ -14,7 +14,8 @@ public class SummaryHelper
 	private int designCount = 0;
 	private int partCount = 0;
 
-	public void getSummary()
+	// Count all the documents of various types
+	public void countDocuments()
 	{
 		ConnectToSolr solr = new ConnectToSolr();
 		try

@@ -55,6 +55,13 @@ public class DocumentCountsTest
 		System.out.println("Delta Part Counts = " + documentCounts.getDeltaPartCount());
 		System.out.println("All Delta Counts = " + documentCounts.getDeltaCount());
 
+		// Have the following uncommented to delay deleting the added design to observe what the web project might do
+		try
+		{
+			Thread.sleep(30000);
+		} catch (InterruptedException e)
+		{}
+		
 		solr.deleteByQuery("databaseID:9999");
 		solr.commit();
 		solr.close();
