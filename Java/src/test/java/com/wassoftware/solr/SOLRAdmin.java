@@ -29,7 +29,7 @@ public class SOLRAdmin
 
 	}
 
-	@Test
+//	@Test
 	public void deletePartSOLRData() throws SolrServerException, IOException
 	{
 		ConnectToSolr connect = new ConnectToSolr();

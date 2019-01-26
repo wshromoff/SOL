@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.Part;
@@ -140,6 +142,32 @@ public class PartDatabaseHelper
 		rs.close();
 		preparedDeleteStatment.close();
 		
+	}
+
+	/**
+	 * Get all part IDs from the part table and return in List
+	 * @throws SQLException 
+	 */
+	public List<Integer> getAllPartIDs(Connection c) throws SQLException
+	{
+		List<Integer> parts = new ArrayList<Integer>();
+		
+		int partID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_PARTIDS);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			partID = rs.getInt(1);
+			parts.add(new Integer(partID));
+		}
+
+		rs.close();
+		statement.close();
+		
+		return parts;
+
 	}
 
 }

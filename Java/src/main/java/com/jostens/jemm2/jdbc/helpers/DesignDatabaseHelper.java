@@ -311,15 +311,15 @@ public class DesignDatabaseHelper
 	{
 		List<Integer> designs = new ArrayList<Integer>();
 		
-		int deisgnID = 0;
+		int designID = 0;
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_DESIGNIDS);
 		
 		Statement statement = c.createStatement();
 		ResultSet rs = statement.executeQuery(selectStmt);
 		while (rs.next())
 		{
-			deisgnID = rs.getInt(1);
-			designs.add(new Integer(deisgnID));
+			designID = rs.getInt(1);
+			designs.add(new Integer(designID));
 		}
 
 		rs.close();

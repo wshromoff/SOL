@@ -23,6 +23,7 @@ public class Jemm2Statements extends Statements
 	public static String GET_PART_ID = "GET_PART_ID";
 	public static String INSERT_PART = "INSERT_PART";
 	public static String GET_PART = "GET_PART";
+	public static String GET_ALL_PARTIDS = "GET_ALL_PARTIDS";
 	
 	/**
 	 * Method to return List of statement files to load.
