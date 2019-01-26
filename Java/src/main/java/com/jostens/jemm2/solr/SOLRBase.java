@@ -11,8 +11,8 @@ public abstract class SOLRBase implements SOLRNeeded
 	
 	public String getId()
 	{
-		String formattedID = String.format("%06d", getDatabaseID());
-		return getContentTypeAbbrev() + "_" + formattedID;
+//		String formattedID = String.format("%06d", getDatabaseID());
+		return getContentTypeAbbrev() + "_" + getFormattedID(getDatabaseID());
 	}
 	@Field
 	public void setId(String id)
@@ -51,6 +51,14 @@ public abstract class SOLRBase implements SOLRNeeded
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	
+	/**
+	 * Return the provided int as a 0 pre padded String
+	 */
+	public String getFormattedID(int id)
+	{
+		return String.format("%06d", id);
 	}
 	
 	public String toString()

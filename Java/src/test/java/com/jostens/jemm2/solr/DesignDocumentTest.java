@@ -66,7 +66,7 @@ public class DesignDocumentTest
 		ConnectionHelper.closeConnection(c);
 	}
 
-	@Test
+//	@Test
 	public void test() throws SolrServerException, IOException
 	{
 		ConnectToSolr connect = new ConnectToSolr();
@@ -97,8 +97,8 @@ public class DesignDocumentTest
 
 	}
 
-	// Now test grabbing design 1 and add to SOLR
-//	@Test
+	// Now test grabbing design 1 from Oracle and add to SOLR
+	@Test
 	public void testAddDesign() throws SolrServerException, IOException, SQLException
 	{
 

@@ -4,19 +4,10 @@ import org.apache.solr.client.solrj.beans.Field;
 
 public class PartDocument extends SOLRBase
 {
-	private String name = null;
 	private String designID = null;
+	private String partValidation = null;
 	
 	
-	public String getName()
-	{
-		return name;
-	}
-	@Field
-	public void setName(String name)
-	{
-		this.name = name;
-	}
 	public String getDesignID()
 	{
 		return designID;
@@ -26,7 +17,15 @@ public class PartDocument extends SOLRBase
 	{
 		this.designID = designID;
 	}
-
+	public String getPartValidation()
+	{
+		return partValidation;
+	}
+	@Field
+	public void setPartValidation(String partValidation)
+	{
+		this.partValidation = partValidation;
+	}
 	public String getContentTypeFull()
 	{
 		return "Part";
@@ -41,6 +40,7 @@ public class PartDocument extends SOLRBase
 		StringBuffer sb = new StringBuffer();
 		sb.append(super.toString());
 		sb.append("Name: " + getName() + "\n");
+		sb.append("Part Validation: " + getPartValidation() + "\n");
 		sb.append("Design ID: " + getDesignID() + "\n");
 		
 		return sb.toString();
