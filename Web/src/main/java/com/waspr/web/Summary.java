@@ -33,7 +33,9 @@ public class Summary extends HttpServlet
 		
 		SummaryHelper helper = new SummaryHelper();
 		helper.getSummary();
-		response.getWriter().append("SUMMARY " + helper.getDesignCount());
+//		response.getWriter().append("SUMMARY " + helper.getDesignCount());
+		response.getWriter().append("23,hello to us all");
+
 	}
 
 //	/**

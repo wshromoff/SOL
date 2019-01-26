@@ -103,7 +103,12 @@ function summary()
 //			userName : $('#userName').val()
 //		},
 		success : function(responseText) {
-			$('#content').html(responseText);
+//			$('#content').html(responseText);
+			var splitArray = responseText.split(",");
+			$('#summaryCount').html(splitArray[0]);
+			$('#content').html(splitArray[1]);
+//			alert(splitArray[0]);
+//			alert(splitArray[1]);
 		}
 	});
 	
@@ -178,19 +183,20 @@ function searchResults()
 				<div><ul id="menu">
 					<li id="summary" class="global">
 						<p>
-							<a onClick="summary()">Asset Summary</a>
+							<a onClick="summary()">Dashboard&nbsp;&nbsp;&nbsp;<span id="summaryCount" class="step"></span>
+							</a>
 						</p>
 					</li>
 					<li id="search" class="global">
 						<p>
-							<a onClick="assetSearch()">Search&nbsp;&nbsp;&nbsp;<span
-								class="step">1</span></a>
+							<a onClick="assetSearch()">Search&nbsp;&nbsp;&nbsp;<span class="step">1</span>
+							</a>
 						</p>
 					</li>
 					<li id="searchResults" class="global">
 						<p>
-							<a onClick="searchResults()">Search Results&nbsp;&nbsp;<span
-								id="resultCount" class="step">132</span></a>
+							<a onClick="searchResults()">Search Results&nbsp;&nbsp;<span id="resultCount" class="step">132</span>
+							</a>
 
 						</p>
 					</li>
