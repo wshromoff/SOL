@@ -54,14 +54,14 @@ public class PartDocumentTest
 		ConnectionHelper.closeConnection(c);
 	}
 
-//	@Test
+	@Test
 	public void test() throws SolrServerException, IOException
 	{
 		ConnectToSolr connect = new ConnectToSolr();
 		HttpSolrClient solr = connect.makeConnection();
 
 		SolrQuery query = new SolrQuery();
-		query.set("q", "{!join from=id to=designID}keywords:blue");
+		query.set("q", "{!join from=id to=designID}keywords:Shark");
 		QueryResponse response = solr.query(query);
 		
 		SolrDocumentList docList = response.getResults();
@@ -74,7 +74,7 @@ public class PartDocumentTest
 	}
 
 	// Now test grabbing Part 1 from Oracle and add to SOLR
-	@Test
+//	@Test
 	public void testAddPart() throws SolrServerException, IOException, SQLException
 	{
 
