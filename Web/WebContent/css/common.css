@@ -210,8 +210,8 @@ ul
 
 #header #solr
 {
-  background-image: url( ../img/solr.svg );
-  background-size: 128px;
+  background-image: url( ../img/mediabin_icon.png );
+  background-size: contain;
   display: block;
   height: 78px;
   width: 150px;

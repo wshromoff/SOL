@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jostens.jemm2.helpers.SummaryHelper;
+
 /**
  * Servlet implementation for summary information
  */
@@ -28,7 +30,10 @@ public class Summary extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("SUMMARY");
+		
+		SummaryHelper helper = new SummaryHelper();
+		helper.getSummary();
+		response.getWriter().append("SUMMARY " + helper.getDesignCount());
 	}
 
 //	/**
