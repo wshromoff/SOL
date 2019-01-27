@@ -92,7 +92,7 @@ function summary()
 		success : function(responseText) {
 //			$('#content').html(responseText);
 			var splitArray = responseText.split(",");
-			$('#summaryCount').html(splitArray[0]);
+//			$('#summaryCount').html(splitArray[0]);
 			$('#content').html(splitArray[1]);
 //			alert(splitArray[0]);
 //			alert(splitArray[1]);
@@ -102,8 +102,7 @@ function summary()
 	
 }
 
-
-function assetSearch()
+function initSearch()
 {
 	clearTabInterval();
 
@@ -118,11 +117,32 @@ function assetSearch()
 	// Make ajax call for current work assets
 	$.ajax({
 		url : 'search',
+//		type : 'post',
 //		data : {
-//			userName : $('#userName').val()
+//			query : $('#jemmSearch').val()
 //		},
 		success : function(responseText) {
-			$('#content').html(responseText);
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+			$('#content').html(splitArray[1]);
+			displayCount("#resultCount", splitArray[0]);
+		}
+	});
+}
+
+function assetSearch()
+{
+	$.ajax({
+		url : 'search',
+		type : 'post',
+		data : {
+			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+//			$('#content').html(splitArray[1]);
+			displayCount("#resultCount", splitArray[0]);
 		}
 	});
 }
@@ -150,3 +170,10 @@ function searchResults()
 	});
 }
 
+$('jemmSearch').on('keyup', function()
+{
+	alert("HI");
+    if (this.value.length > 1) {
+         // do search for this.value here
+    }
+});
