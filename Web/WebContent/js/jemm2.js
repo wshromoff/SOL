@@ -3,12 +3,14 @@ var selected = null;
 var count = 0;
 // This interval will run continuously to update the tab totals.  It's started when the page is loaded
 var totalsInterval = null;
+// This interval is the tab interval currently running
+var tabInterval = null;
 
 $(document).ready(function()
 {
 //			alert("WHATUP");
 //			loadData();
-	totalsInterval = setInterval(getTabTotals, 15000);
+	totalsInterval = setInterval(getTabTotals, 150000);
 		});
 
 // getTabTotals - Generates all the tab totals and displays their values
@@ -29,6 +31,16 @@ function getTabTotals()
 //	{
 //		clearInterval(totalsInterval);
 //	}
+}
+
+// Clear the current tab interval if one is running.  All tab functions should call this to reset another tabs functionality
+function clearTabInterval()
+{
+	if (tabInterval != null)
+	{
+		clearInterval(tabInterval);
+	}
+	tabInterval = null;
 }
 function clearSelected()
 {
@@ -61,6 +73,8 @@ function displayCount(area, value)
 
 function summary()
 {
+	clearTabInterval();
+	tabInterval = setInterval(summary, 30000);
 //	alert("HELLO " + selected);
 	clearSelected();
 	selected = "summary";
@@ -91,6 +105,8 @@ function summary()
 
 function assetSearch()
 {
+	clearTabInterval();
+
 //	alert("HELLO2 " + selected);
 	clearSelected();
 	selected = "search";
@@ -112,6 +128,8 @@ function assetSearch()
 }
 function searchResults()
 {
+	clearTabInterval();
+
 //	alert("HELLO2 " + selected);
 	clearSelected();
 	selected = "searchResults";

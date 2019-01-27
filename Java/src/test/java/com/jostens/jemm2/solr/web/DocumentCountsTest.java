@@ -58,7 +58,7 @@ public class DocumentCountsTest
 		// Have the following uncommented to delay deleting the added design to observe what the web project might do
 		try
 		{
-			Thread.sleep(30000);
+			Thread.sleep(90000);
 		} catch (InterruptedException e)
 		{}
 		

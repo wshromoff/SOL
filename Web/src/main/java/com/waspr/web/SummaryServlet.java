@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.solr.web.DocumentCounts;
+import com.jostens.jemm2.web.HTMLHelper;
 
 /**
  * Servlet implementation for summary information
@@ -31,13 +32,22 @@ public class SummaryServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		System.out.println("Inside Servlet");
+		System.out.println("Inside Summary Servlet");
+		
+		// Get the HTML template and replace marker location with resource HTML
+		String dashboardHTML = HTMLHelper.getTemplateHTML("/Dashboard.html");
+//		System.out.println("HTML=" + manageResources);
 		DocumentCounts helper = new DocumentCounts();
 		helper.generateCounts();
 //		response.getWriter().append("SUMMARY " + helper.getDesignCount());
 		
+		dashboardHTML = dashboardHTML.replace("[DESIGN_COUNT]", helper.getDesignCount() + "");
+		dashboardHTML = dashboardHTML.replace("[DESIGN_DELTA]", helper.getDeltaDesignCount() + "");
+		dashboardHTML = dashboardHTML.replace("[PART_COUNT]", helper.getPartCount() + "");
+		dashboardHTML = dashboardHTML.replace("[PART_DELTA]", helper.getDeltaPartCount() + "");
+		
 		long delta = helper.getDeltaCount();
-		response.getWriter().append(delta + ",hello to us all");
+		response.getWriter().append(delta + "," + dashboardHTML);
 
 	}
 
