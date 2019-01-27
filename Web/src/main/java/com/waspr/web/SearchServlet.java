@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jostens.jemm2.solr.web.SOLRQuery;
 import com.jostens.jemm2.web.HTMLHelper;
 
 @WebServlet("/search")
@@ -25,9 +26,12 @@ public class SearchServlet extends HttpServlet
 
 		
 		// Get the HTML template and replace marker location with resource HTML
-		String searchdHTML = HTMLHelper.getTemplateHTML("/Search.html");
+		String searchHTML = HTMLHelper.getTemplateHTML("/Search.html");
 		
-		response.getWriter().append(0 + "," + searchdHTML);
+		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
+		searchHTML = searchHTML.replace("[QUERY]", solrQuery.getQuery()); 
+		
+		response.getWriter().append(solrQuery.getResults() + "," + searchHTML);
 
 	}
 
@@ -43,14 +47,21 @@ public class SearchServlet extends HttpServlet
 		
 		if ("true".equals(newSearch))
 		{
-			// Get the HTML template and replace marker location with resource HTML
-			String searchdHTML = HTMLHelper.getTemplateHTML("/Search.html");
+			SOLRQuery.newQuery();
 			
-			response.getWriter().append(0 + "," + searchdHTML);
+			// Get the HTML template and replace marker location with resource HTML
+			String searchHTML = HTMLHelper.getTemplateHTML("/Search.html");
+			searchHTML = searchHTML.replace("[QUERY]", ""); 
+			
+			response.getWriter().append(0 + "," + searchHTML);
 			return;
 		}
 
-		response.getWriter().append(46 + ",");
+		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
+		solrQuery.setQuery(query);
+		solrQuery.performQuery();		
+
+		response.getWriter().append(solrQuery.getResults() + ",");
 
 	}
 

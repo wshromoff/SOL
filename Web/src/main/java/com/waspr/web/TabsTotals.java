@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.solr.web.DocumentCounts;
+import com.jostens.jemm2.solr.web.SOLRQuery;
 
 /**
  * Servlet implementation for tab totals information
@@ -17,7 +18,7 @@ import com.jostens.jemm2.solr.web.DocumentCounts;
 public class TabsTotals extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static long searchResultsValue = 0;
+//	private static long searchResultsValue = 0;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,7 +26,7 @@ public class TabsTotals extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		long dashboardValue = 0;
-//		long searchResultsValue = 0;
+		long searchResultsValue = 0;
 		
 		System.out.println("Inside tab totals Servlet");
 		DocumentCounts helper = new DocumentCounts();
@@ -33,8 +34,10 @@ public class TabsTotals extends HttpServlet
 //		response.getWriter().append("SUMMARY " + helper.getDesignCount());
 		
 		dashboardValue = helper.getDeltaCount();
+		
+		searchResultsValue = SOLRQuery.getActiveQuery().getResults();
+
 		response.getWriter().append(dashboardValue + "," + searchResultsValue);
-		searchResultsValue++;
 
 	}
 
