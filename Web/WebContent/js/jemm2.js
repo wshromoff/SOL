@@ -146,6 +146,27 @@ function assetSearch()
 		}
 	});
 }
+
+function newSearch()
+{
+//	alert("HEW ");
+	$.ajax({
+		url : 'search',
+		type : 'post',
+		data : {
+			newSearch: 'true'
+//			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+			$('#content').html(splitArray[1]);
+			displayCount("#resultCount", splitArray[0]);
+		}
+	});
+	
+}
+
 function searchResults()
 {
 	clearTabInterval();

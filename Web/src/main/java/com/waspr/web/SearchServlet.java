@@ -22,6 +22,8 @@ public class SearchServlet extends HttpServlet
 		String query = request.getParameter("query");
 		System.out.println("query=" + query);
 		
+
+		
 		// Get the HTML template and replace marker location with resource HTML
 		String searchdHTML = HTMLHelper.getTemplateHTML("/Search.html");
 		
@@ -35,7 +37,19 @@ public class SearchServlet extends HttpServlet
 		
 		String query = request.getParameter("query");
 		System.out.println("query=" + query);
+
+		String newSearch = request.getParameter("newSearch");
+		System.out.println("New Search=" + newSearch);
 		
+		if ("true".equals(newSearch))
+		{
+			// Get the HTML template and replace marker location with resource HTML
+			String searchdHTML = HTMLHelper.getTemplateHTML("/Search.html");
+			
+			response.getWriter().append(0 + "," + searchdHTML);
+			return;
+		}
+
 		response.getWriter().append(46 + ",");
 
 	}
