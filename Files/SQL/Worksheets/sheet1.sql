@@ -14,6 +14,13 @@ select designid, count(*) from part
 group by designid
 order by count(*) desc;
 
+-- Show keywords for design ID
+select b.keyword from design_keyword a
+inner join keyword b on b.id = a.keyword_id
+where a.design = 3814;
+
+
+
 -- Find designs not referenced by a part
 SELECT t1.id, t1.name
 FROM design t1
