@@ -16,7 +16,7 @@ public class SOLRQueryTest
 		System.out.println("RESULTS = " + query.getResults());
 	}
 
-	@Test
+//	@Test
 	public void test1KeywordKeyEntry()
 	{
 		SOLRQuery query = SOLRQuery.getActiveQuery();
@@ -35,6 +35,28 @@ public class SOLRQueryTest
 		query.setQuery("Shark");
 		query.performQuery();		
 		System.out.println("(Shark) RESULTS = " + query.getResults());
+	}
+
+	// Test 2 keywords anded together
+//	@Test
+	public void test2Keyword()
+	{
+		SOLRQuery query = SOLRQuery.getActiveQuery();
+		query.setQuery("Cat Ha");
+		query.performQuery();
+		
+		System.out.println("RESULTS = " + query.getResults());
+	}
+
+	// Test 2 keywords anded together
+	@Test
+	public void testPart()
+	{
+		SOLRQuery query = SOLRQuery.getActiveQuery();
+		query.setQuery("BR000795 CE015443");
+		query.performQuery();
+		
+		System.out.println("RESULTS = " + query.getResults());
 	}
 
 }
