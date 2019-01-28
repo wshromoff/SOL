@@ -42,5 +42,19 @@ SOLR Books: http://lucene.apache.org/solr/resources.html#tutorials
 
 SOLRJ code examples: https://github.com/apache/lucene-solr/blob/master/solr/solrj/src/test/org/apache/solr/client/solrj/beans/TestDocumentObjectBinder.java
 
+For this query:
+http://localhost:8983/solr/jemm2/select?fl=keywords id&q=keywords:Cat && keywords:H&rows=5
+
+fl: Fields to return -> space separated
+q:keywords with Cat AND H    <-- If the word AND or OR is used it MUST be upper case
+rows:  <-- # of rows to return, a value of 0 will only return the result count
+
+Query based on multiple keywords
+{!join from=id to=designID}(keywords:Cat* AND keywords:Ha*) || name:BR000795
+
+
+Linking queries:
+http://<code>hostname:8983/solr/select?q=*:*&fq={!join+from=bookId+to=id}authorId:{!join+from=authorId+to=authorId}author.name:Rowling
+
 
 
