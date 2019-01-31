@@ -4,11 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Blob;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +47,17 @@ public class ImageServlet extends HttpServlet
 	        OutputStream os = response.getOutputStream();
 	        ImageIO.write(bi, "png", os);
 
+	        // SVG - NOT HANDLED - NEEDS LOTS OF WORK
+////	        Blob blob = rs.getBlob("ICON");
+//	        String filePath = "/Users/wadeshromoff/assets/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_XX.svg";
+//		       filePath = filePath.replace("XX", type);
+//		       File file = new File(filePath);
+//		       FileInputStream fis = new FileInputStream(file);
+//	        byte[] bytes = new byte[5000];
+//	        fis.read(bytes);
+//	        response.getOutputStream().write(bytes);
+//	        response.setContentType("image/svg+xml");
+	        
 //	       File file = new File(filePath);
 //	       System.out.println("FILE=" + file.getParent());
 //	       FileInputStream fis = new FileInputStream(file);

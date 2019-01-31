@@ -198,3 +198,16 @@ $('jemmSearch').on('keyup', function()
          // do search for this.value here
     }
 });
+
+var divShowing = null;
+function showPartDetails(whatToShow)
+{
+	if (divShowing != null)
+	{
+		document.getElementById(divShowing).style.display = 'none';
+	}
+//	alert(whatToShow);
+//	whatToShow.style.visibility='visible';
+	document.getElementById(whatToShow).style.display = 'block';
+	divShowing = whatToShow;
+}

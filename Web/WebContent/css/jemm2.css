@@ -13,3 +13,91 @@ span.step {
   text-align: center;
    width: 3.0em;
 }
+
+table {
+	table-layout: fixed;
+//	width: 100%;
+	white-space: nowrap;
+}
+#noChanges { 
+	color: black;
+	background: LightYellow;  
+	text-align: center; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 2px; 
+    border: 2px solid black;
+}
+
+#assetName { 
+	font-size: 10px;
+}
+
+.verticalhorizontal {
+    display: table-cell;
+    height: 130px;
+    text-align: center;
+    width: 130px;
+    vertical-align: middle;
+}
+
+.active, .verticalhorizontal:hover {
+  background-color: LightYellow;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+/*   border-bottom: 1px dotted black; */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  	font-size: 10px;
+
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+
