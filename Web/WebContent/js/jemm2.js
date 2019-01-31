@@ -202,12 +202,24 @@ $('jemmSearch').on('keyup', function()
 var divShowing = null;
 function showPartDetails(whatToShow)
 {
-	if (divShowing != null)
-	{
-		document.getElementById(divShowing).style.display = 'none';
-	}
+//	if (divShowing != null)
+//	{
+//		document.getElementById(divShowing).style.display = 'none';
+//	}
 //	alert(whatToShow);
 //	whatToShow.style.visibility='visible';
 	document.getElementById(whatToShow).style.display = 'block';
-	divShowing = whatToShow;
+//	divShowing = whatToShow;
+}
+
+function clearPartDetails(whatToShow)
+{
+//	if (divShowing != null)
+//	{
+		document.getElementById(whatToShow).style.display = 'none';
+//	}
+//	alert(whatToShow);
+//	whatToShow.style.visibility='visible';
+//	document.getElementById(whatToShow).style.display = 'block';
+//	divShowing = whatToShow;
 }
