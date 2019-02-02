@@ -170,6 +170,7 @@ function newSearch()
 function searchResults()
 {
 	clearTabInterval();
+	hidedet1 = true;
 
 //	alert("HELLO2 " + selected);
 	clearSelected();
@@ -193,7 +194,7 @@ function searchResults()
 
 $('jemmSearch').on('keyup', function()
 {
-	alert("HI");
+//	alert("HI");
     if (this.value.length > 1) {
          // do search for this.value here
     }
@@ -224,6 +225,7 @@ function clearPartDetails(whatToShow)
 //	divShowing = whatToShow;
 }
 
+var hidedet1 = true;
 function assetDetails(assetID)
 {
 	$.ajax({
@@ -246,6 +248,13 @@ function assetDetails(assetID)
 
 function assetDetailsHide()
 {
-	document.getElementById('det1').style.display = 'none';
+	if (hidedet1 == true)
+	{
+		document.getElementById('det1').style.display = 'none';
+	}
+}
 
+function lockDet1()
+{
+	hidedet1 = false;
 }
