@@ -22,7 +22,7 @@ public class PartDatabaseHelper
 	 */
 	public int getPartID(Connection c, String partName) throws SQLException
 	{
-		int deisgnID = 0;
+		int partID = 0;
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_PART_ID);
 		selectStmt = selectStmt.replace("[NAME]", partName);
 		
@@ -31,18 +31,18 @@ public class PartDatabaseHelper
 		boolean rowFound = rs.next();
 		if (rowFound)
 		{
-			deisgnID = rs.getInt(1);
+			partID = rs.getInt(1);
 		}
 		else
 		{
 			// Need to insert a keyword and keep the ID
-			deisgnID = getNextPartSequence(c);
+			partID = getNextPartSequence(c);
 		}
 
 		rs.close();
 		statement.close();
 		
-		return deisgnID;
+		return partID;
 	}
 
 	/**

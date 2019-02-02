@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
-import com.jostens.jemm2.pojo.Design;
 import com.jostens.jemm2.pojo.Part;
 
 public class PartDatabaseHelperTest

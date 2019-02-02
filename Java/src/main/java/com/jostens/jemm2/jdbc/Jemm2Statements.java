@@ -24,7 +24,10 @@ public class Jemm2Statements extends Statements
 	public static String INSERT_PART = "INSERT_PART";
 	public static String GET_PART = "GET_PART";
 	public static String GET_ALL_PARTIDS = "GET_ALL_PARTIDS";
-	
+
+	// List all the names of CUSTOMER SQL statements as static constants
+	public static String GET_CUSTOMER_ID = "GET_CUSTOMER_ID";
+
 	/**
 	 * Method to return List of statement files to load.
 	 */
@@ -33,6 +36,7 @@ public class Jemm2Statements extends Statements
 		List<String> filePaths = new ArrayList<String>();
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/DesignStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/PartStatements.sql");
+		filePaths.add("/com/jostens/jemm2/jdbc/resources/CustomerStatements.sql");
 		return filePaths;
 	}
 
