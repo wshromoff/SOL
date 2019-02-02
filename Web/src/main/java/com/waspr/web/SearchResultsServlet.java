@@ -24,7 +24,17 @@ public class SearchResultsServlet extends HttpServlet
 		query.performQuery(false);
 		
 		System.out.println("IDs=" + query.getResultIDs());
+		// Build up all the search result document TD cells
+		StringBuffer sb = new StringBuffer();
+		for (String docID : query.getResultIDs())
+		{
+			String resultDocument = HTMLHelper.getTemplateHTML("/SearchResultDocument.html");
+			resultDocument = resultDocument.replace("[DOCUMENT_ID]", docID);
+			sb.append(resultDocument);
+			
+		}
 
+		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENS]", sb.toString());
 		response.getWriter().append(dashboardHTML);
 
 	}
