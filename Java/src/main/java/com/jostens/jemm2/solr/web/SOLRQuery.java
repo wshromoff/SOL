@@ -9,6 +9,7 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 
 import com.wassoftware.solr.ConnectToSolr;
@@ -28,7 +29,8 @@ public class SOLRQuery
 	
 	private List<String> keywords = new ArrayList<String>();
 	private List<String> parts = new ArrayList<String>();
-	
+
+	private List<String> resultIDs = new ArrayList<String>();	
 	private long results = 0;		// Documents found
 
 	public static SOLRQuery getActiveQuery()
@@ -58,8 +60,15 @@ public class SOLRQuery
 	{
 		return results;
 	}
+	public List<String> getResultIDs()
+	{
+		return resultIDs;
+	}
 
-	public void performQuery()
+	/**
+	 * Count Only - Set parameter to true if count only is desired
+	 */
+	public void performQuery(boolean countOnly)
 	{
 		if (query == null || query.trim().length() == 0)
 		{
@@ -71,6 +80,7 @@ public class SOLRQuery
 		// Clear the parsed strings
 		keywords.clear();
 		parts.clear();
+		resultIDs.clear();
 		results = 0;
 		
 		try
@@ -106,16 +116,40 @@ public class SOLRQuery
 				{
 					sb.append(" AND " + keywords.get(i));
 				}
-				System.out.println("--->" + sb.toString());
+				System.out.println("Keywords: --->" + sb.toString());
 	
 				SolrQuery query = new SolrQuery();
 	//			query.set("q", "{!join from=id to=designID}keywords:" + getQuery() + "*");
 				query.set("q", "{!join from=id to=designID}(" + sb.toString() + ")");
 				query.setRows(0);
+				if (countOnly)
+				{
+					query.setRows(0);
+				}
+				else
+				{
+					query.setFields("id");
+					query.setRows(15);
+				}
 				QueryResponse response = solr.query(query);
 				
 				SolrDocumentList docList = response.getResults();
-				results = results + docList.getNumFound();
+				if (countOnly)
+				{
+					results = results + docList.getNumFound();
+				}
+				else
+				{
+					for (SolrDocument doc : docList)
+					{
+						if (resultIDs.size() >= 15)
+						{
+							break;
+						}
+						String documentID = (String)doc.getFieldValue("id");
+						resultIDs.add(documentID);
+					}
+				}
 			}
 			
 			if (!parts.isEmpty())
@@ -125,16 +159,39 @@ public class SOLRQuery
 				{
 					sb.append(" OR " + parts.get(i));
 				}
-				System.out.println("--->" + sb.toString());
+				System.out.println("Parts: --->" + sb.toString());
 	
 				SolrQuery query = new SolrQuery();
 	//			query.set("q", "{!join from=id to=designID}keywords:" + getQuery() + "*");
 				query.set("q", "name:(" + sb.toString() + ")");
-				query.setRows(0);
+				if (countOnly)
+				{
+					query.setRows(0);
+				}
+				else
+				{
+					query.setFields("id");
+					query.setRows(15);
+				}
 				QueryResponse response = solr.query(query);
 				
 				SolrDocumentList docList = response.getResults();
-				results = results + docList.getNumFound();
+				if (countOnly)
+				{
+					results = results + docList.getNumFound();
+				}
+				else
+				{
+					for (SolrDocument doc : docList)
+					{
+						if (resultIDs.size() >= 15)
+						{
+							break;
+						}
+						String documentID = (String)doc.getFieldValue("id");
+						resultIDs.add(documentID);
+					}
+				}
 				
 			}
 

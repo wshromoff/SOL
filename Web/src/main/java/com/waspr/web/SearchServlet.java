@@ -59,7 +59,7 @@ public class SearchServlet extends HttpServlet
 
 		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
 		solrQuery.setQuery(query);
-		solrQuery.performQuery();		
+		solrQuery.performQuery(true);		
 
 		response.getWriter().append(solrQuery.getResults() + ",");
 
