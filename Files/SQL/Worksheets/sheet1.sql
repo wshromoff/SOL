@@ -2,6 +2,7 @@ select count(*) from design;
 select count(*) from keyword;
 select count(*) from design_keyword;
 select count(*) from part;
+select count(*) from customer;
 
 -- Show descending keyword count usage
 select b.keyword, count(*) from design_keyword a
