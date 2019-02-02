@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Design;
 import com.jostens.jemm2.pojo.Part;
 
 public class PartDatabaseHelper
@@ -141,6 +142,19 @@ public class PartDatabaseHelper
 		part.setDesignID(rs.getInt(8));
 		rs.close();
 		preparedDeleteStatment.close();
+		
+		if (part.getDesignID() == 0)
+		{
+			part.setDesign(new Design());
+			return;
+		}
+		
+		// If the design ID is != 0, go and get the design also
+		DesignDatabaseHelper designHelper = new DesignDatabaseHelper();
+		Design design = new Design();
+		design.setID(part.getDesignID());
+		designHelper.getDesign(c, design);
+		part.setDesign(design);
 		
 	}
 

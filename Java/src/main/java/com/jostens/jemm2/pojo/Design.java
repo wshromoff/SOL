@@ -140,6 +140,21 @@ public class Design
 	{
 		return keywords;
 	}
+	public String getKeywordsForDisplay()
+	{
+		StringBuffer sb = new StringBuffer();
+		int cnt = 0;
+		for (String keyword : keywords)
+		{
+			if (cnt > 0)
+			{
+				sb.append(", ");
+			}
+			sb.append(keyword);
+			cnt++;
+		}
+		return sb.toString();
+	}
 	public void setKeywords(List<String> keywords)
 	{
 		this.keywords = keywords;
@@ -237,6 +252,10 @@ public class Design
 	}
 	public String getDisplayedInitials()
 	{
+		if (displayedInitials == null)
+		{
+			return "";
+		}
 		return displayedInitials;
 	}
 	public void setDisplayedInitials(String displayedInitials)
@@ -245,6 +264,10 @@ public class Design
 	}
 	public String getDisplayedName()
 	{
+		if (displayedName == null)
+		{
+			return "";
+		}
 		return displayedName;
 	}
 	public void setDisplayedName(String displayedName)
@@ -253,6 +276,10 @@ public class Design
 	}
 	public String getDisplayedMascot()
 	{
+		if (displayedMascot == null)
+		{
+			return "";
+		}
 		return displayedMascot;
 	}
 	public void setDisplayedMascot(String displayedMascot)
@@ -261,6 +288,10 @@ public class Design
 	}
 	public String getDisplayedMotto()
 	{
+		if (displayedMotto == null)
+		{
+			return "";
+		}
 		return displayedMotto;
 	}
 	public void setDisplayedMotto(String displayedMotto)
@@ -269,6 +300,10 @@ public class Design
 	}
 	public String getDisplayedInscription()
 	{
+		if (displayedInscription == null)
+		{
+			return "";
+		}
 		return displayedInscription;
 	}
 	public void setDisplayedInscription(String displayedInscription)
@@ -277,6 +312,10 @@ public class Design
 	}
 	public String getDisplayedYearDate()
 	{
+		if (displayedYearDate == null)
+		{
+			return "";
+		}
 		return displayedYearDate;
 	}
 	public void setDisplayedYearDate(String displayedYearDate)
@@ -301,6 +340,10 @@ public class Design
 	}
 	public String getMainSubject()
 	{
+		if (mainSubject == null)
+		{
+			return "";
+		}
 		return mainSubject;
 	}
 	public void setMainSubject(String mainSubject)
@@ -309,6 +352,10 @@ public class Design
 	}
 	public String getMultipleMainSubject()
 	{
+		if (multipleMainSubject == null)
+		{
+			return "";
+		}
 		return multipleMainSubject;
 	}
 	public void setMultipleMainSubject(String multipleMainSubject)
@@ -317,6 +364,10 @@ public class Design
 	}
 	public String getPortionMainSubject()
 	{
+		if (portionMainSubject == null)
+		{
+			return "";
+		}
 		return portionMainSubject;
 	}
 	public void setPortionMainSubject(String portionMainSubject)
@@ -325,6 +376,10 @@ public class Design
 	}
 	public String getViewMainSubject()
 	{
+		if (viewMainSubject == null)
+		{
+			return "";
+		}
 		return viewMainSubject;
 	}
 	public void setViewMainSubject(String viewMainSubject)

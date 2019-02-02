@@ -16,6 +16,7 @@ public class Part
 	private String partIDDerivative;
 	private String partValidation;
 	private int designID;
+	private Design design;		// Populated Design for specified designID
 	
 	public Part()
 	{
@@ -158,6 +159,15 @@ public class Part
 		pd.setDesignID("DS_" + pd.getFormattedID(designID));
 		
 		return pd;
+	}
+	
+	public Design getDesign()
+	{
+		return design;
+	}
+	public void setDesign(Design design)
+	{
+		this.design = design;
 	}
 
 }
