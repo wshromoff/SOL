@@ -223,3 +223,29 @@ function clearPartDetails(whatToShow)
 //	document.getElementById(whatToShow).style.display = 'block';
 //	divShowing = whatToShow;
 }
+
+function assetDetails(assetID)
+{
+	$.ajax({
+		url : 'AssetDetails',
+//		type : 'post',
+		data : {
+			ID : assetID
+		},
+		success : function(responseText) {
+			$('#det1').html(responseText);
+			document.getElementById('det1').style.display = 'block';
+
+//			var splitArray = responseText.split(",");
+////			$('#summaryCount').html(splitArray[0]);
+////			$('#content').html(splitArray[1]);
+//			displayCount("#resultCount", splitArray[0]);
+		}
+	});
+}
+
+function assetDetailsHide()
+{
+	document.getElementById('det1').style.display = 'none';
+
+}
