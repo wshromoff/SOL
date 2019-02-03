@@ -1,7 +1,5 @@
 package com.jostens.jemm2.jdbc.helpers;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -11,6 +9,8 @@ import org.junit.Test;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.pojo.Customer;
 
 public class PackageDatabaseHelperTest
 {
@@ -40,14 +40,34 @@ public class PackageDatabaseHelperTest
 		System.out.println("Sequence Value = " + sequence);
 	}
 	
-	@Test
-	public void testGetPackageID() throws SQLException
+//	@Test
+	public void testGetPackageByIdentifier() throws SQLException
 	{
 		PackageDatabaseHelper helper = new PackageDatabaseHelper();
-		int packageId = helper.getPackageID(c, "1234|567");
+		int packageId = helper.getPackageIDByIdentifier(c, "1234|567");
 		System.out.println("Package Value = " + packageId);
-		packageId = helper.getPackageID(c, "222|333");
+		packageId = helper.getPackageIDByIdentifier(c, "222|333");
 		System.out.println("Package Value = " + packageId);
+	}
+
+//	@Test
+	public void testGetPackageIDByName() throws SQLException
+	{
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+		int packageId = helper.getPackageIDByName(c, "a");
+		System.out.println("Package Value = " + packageId);
+		packageId = helper.getPackageIDByName(c, "xx");
+		System.out.println("Package Value = " + packageId);
+	}
+
+	@Test
+	public void testPersistPackage() throws SQLException
+	{
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+
+		AssetPackage aPackage = new AssetPackage();
+		aPackage.setName("a");
+		helper.persistPackage(c, aPackage);		
 	}
 
 }

@@ -33,7 +33,9 @@ public class Jemm2Statements extends Statements
 	public static String GET_ALL_CUSTOMERIDS = "GET_ALL_CUSTOMERIDS";
 
 	// List all the names of PACKAGE SQL statements as static constants
-	public static String GET_PACKAGE_ID = "GET_PACKAGE_ID";
+	public static String GET_PACKAGE_ID_IDENTIFIER = "GET_PACKAGE_ID_IDENTIFIER";
+	public static String GET_PACKAGE_ID_NAME = "GET_PACKAGE_ID_NAME";
+	public static String DELETE_PACKAGE = "DELETE_PACKAGE";
 
 	/**
 	 * Method to return List of statement files to load.

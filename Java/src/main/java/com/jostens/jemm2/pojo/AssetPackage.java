@@ -1,6 +1,6 @@
 package com.jostens.jemm2.pojo;
 
-public class Package
+public class AssetPackage
 {
 	private int ID = 0;
 	private String name;
@@ -22,8 +22,9 @@ public class Package
 	private String color10;
 	private String baseColor;
 	private String colorScheme;
+	private String identifier;
 	
-	public Package()
+	public AssetPackage()
 	{
 		
 	}
@@ -59,7 +60,7 @@ public class Package
 //	1S											28
 //	BA											29
 
-	public Package(String exportString)
+	public AssetPackage(String exportString)
 	{
 		String splitString = exportString.replaceAll("\\|\\|", "| |");
 		splitString = splitString.replaceAll("\\|\\|", "| |");
@@ -77,6 +78,9 @@ public class Package
 		setBrandAssetType(emptyToNull(stringArr[1]));
 		setPartName(emptyToNull(stringArr[2]));
 		setFirstCustomerID(emptyToNull(stringArr[3]));
+		// Remove the first customer ID from the asset name since packages are not customer specific
+		String newName = getName().replace(getFirstCustomerID() + "_", "");
+		setName(newName);
 //		setColor1(emptyToNull(stringArr[4]));		//		Skip
 //		setColor2(emptyToNull(stringArr[5]));		// Affiliation by use		<Customer>
 		setBaseColor(emptyToNull(stringArr[6]));
@@ -283,7 +287,7 @@ public class Package
 	/**
 	 * Return a combination of fields which mark this package with a unique name
 	 */
-	public String getUniqueIdentifier()
+	public String getIdentifier()
 	{
 		StringBuffer sb = new StringBuffer(getPartID() + "|");
 		sb.append(getBrandAssetType() + "|");
@@ -294,4 +298,9 @@ public class Package
 		return sb.toString();
 		
 	}
+	public void setIdentifier(String identifier)
+	{
+		this.identifier = identifier;
+	}
+	
 }
