@@ -69,14 +69,27 @@ public class SOLRQueryTest
 		System.out.println("Part IDs found = " + query.getResultIDs());
 	}
 	// Test 2 parts for keywords
-	@Test
+//	@Test
 	public void testKeywordIDs()
 	{
 		SOLRQuery query = SOLRQuery.getActiveQuery();
 		query.setQuery("Shark");
+		query.doPartSearch();
 		query.performQuery(false);
 		
 		System.out.println("Part IDs found = " + query.getResultIDs());
+	}
+
+	// Test Customer Searches
+	@Test
+	public void testCustomer()
+	{
+		SOLRQuery query = SOLRQuery.getActiveQuery();
+		query.setQuery("1026953");
+		query.doCustomerSearch();
+		query.performQuery(false);
+		
+		System.out.println("Customer IDs found = " + query.getResultIDs());
 	}
 
 }

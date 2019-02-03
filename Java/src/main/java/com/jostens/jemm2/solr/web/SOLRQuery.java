@@ -32,6 +32,7 @@ public class SOLRQuery
 	
 	private List<String> keywords = new ArrayList<String>();
 	private List<String> parts = new ArrayList<String>();
+	private List<String> customers = new ArrayList<String>();
 
 	private List<String> resultIDs = new ArrayList<String>();	
 	private long results = 0;		// Documents found
@@ -83,6 +84,7 @@ public class SOLRQuery
 		// Clear the parsed strings
 		keywords.clear();
 		parts.clear();
+		customers.clear();
 		resultIDs.clear();
 		results = 0;
 		
@@ -91,25 +93,19 @@ public class SOLRQuery
 			connect = new ConnectToSolr();
 			solr = connect.makeConnection();
 
-			// Tokenize the query and determine if Part or valid keyword
-			StringTokenizer st = new StringTokenizer(query, " ");
-			while (st.hasMoreTokens())
-			{
-				String token = st.nextToken();
-				if (tokenIsPart(token))
-				{
-					System.out.println("Part: " + token);
-					parts.add(token);
-					continue;
-				}
-				keywords.add("keywords:" + token + "*");
-			}
+			// Break apart the query by term and determine what it should be part of searching
+			tokenizeQuery(query);
 			
-			if (keywords.isEmpty() && parts.isEmpty())
+			if (keywords.isEmpty() && parts.isEmpty() && customers.isEmpty())
 			{
 				// No matches
 				results = 0;
 				return;
+			}
+			
+			if (!customers.isEmpty())
+			{
+				// Searching for customer information
 			}
 
 			if (!keywords.isEmpty())
@@ -222,6 +218,34 @@ public class SOLRQuery
 		return false;
 	}
 
+	/*
+	 * Look at each term in the query along with document type selected to determine if it's
+	 * a keyword search, part search or customer search term.
+	 */
+	private void tokenizeQuery(String query) throws SolrServerException, IOException
+	{
+		// Tokenize the query and determine if Part or valid keyword
+		StringTokenizer st = new StringTokenizer(query, " ");
+		while (st.hasMoreTokens())
+		{
+			String token = st.nextToken();
+			if (isCustomerSearch())
+			{
+				System.out.println("Customer: " + token + "*");
+				customers.add(token);
+				continue;
+			}
+			if (tokenIsPart(token))
+			{
+				System.out.println("Part: " + token);
+				parts.add(token);
+				continue;
+			}
+			keywords.add("keywords:" + token + "*");
+		}
+		
+	}
+
 	public boolean isPartSearch()
 	{
 		return partSearch;
@@ -234,9 +258,23 @@ public class SOLRQuery
 	{
 		return packageSearch;
 	}
+	
+	public void doPartSearch()
+	{
+		setDocument("part");
+	}
+	public void doCustomerSearch()
+	{
+		setDocument("customer");
+	}
+	public void doPackageSearch()
+	{
+		setDocument("package");
+	}
+
 	public void setDocument(String documentType)
 	{
-		System.out.println("DOCUMENT = " + documentType);
+//		System.out.println("DOCUMENT = " + documentType);
 		if ("part".equals(documentType))
 		{
 			partSearch = true;
