@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.Customer;
@@ -105,6 +107,61 @@ public class CustomerDatabaseHelper
 		c.commit();
 		
 		return customer;
+	}
+
+	/**
+	 * Get the supplied Customer by ID
+	 * @throws SQLException 
+	 */
+	public void getCustomer(Connection c, Customer customer) throws SQLException
+	{
+
+		// Try to delete the ID from the design table
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CUSTOMER);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, customer.getID());
+		ResultSet rs = preparedDeleteStatment.executeQuery();
+		rs.next();
+		rs.getInt(1);
+		customer.setName(rs.getString(2));
+		customer.setCustomerID(rs.getString(3));
+		customer.setCity(rs.getString(4));
+		customer.setState(rs.getString(5));
+		customer.setColor1(rs.getString(6));
+		customer.setColor2(rs.getString(7));
+		customer.setColor3(rs.getString(8));
+		customer.setMascot(rs.getString(9));
+		rs.close();
+		preparedDeleteStatment.close();
+		
+	}
+
+	/**
+	 * Get all customer IDs from the customer table and return in List
+	 * @throws SQLException 
+	 */
+	public List<Integer> getAllCustomerIDs(Connection c) throws SQLException
+	{
+		List<Integer> customers = new ArrayList<Integer>();
+		
+		int customerID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_CUSTOMERIDS);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			customerID = rs.getInt(1);
+			customers.add(new Integer(customerID));
+		}
+
+		rs.close();
+		statement.close();
+		
+		return customers;
+
 	}
 
 }

@@ -29,6 +29,8 @@ public class Jemm2Statements extends Statements
 	public static String GET_CUSTOMER_ID = "GET_CUSTOMER_ID";
 	public static String DELETE_CUSTOMER = "DELETE_CUSTOMER";
 	public static String INSERT_CUSTOMER = "INSERT_CUSTOMER";
+	public static String GET_CUSTOMER = "GET_CUSTOMER";
+	public static String GET_ALL_CUSTOMERIDS = "GET_ALL_CUSTOMERIDS";
 
 	/**
 	 * Method to return List of statement files to load.

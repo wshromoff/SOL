@@ -1,5 +1,7 @@
 package com.jostens.jemm2.jdbc.helpers;
 
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -49,7 +51,7 @@ public class CustomerDatabaseHelperTest
 		System.out.println("Part Value = " + customerId);
 	}
 
-	@Test
+//	@Test
 	public void testPersistCustomer() throws SQLException
 	{
 		CustomerDatabaseHelper helper = new CustomerDatabaseHelper();
@@ -57,8 +59,26 @@ public class CustomerDatabaseHelperTest
 		Customer customer = new Customer();
 		customer.setCustomerID("432145");
 		customer.setName("Osceola High School");
+		helper.persistCustomer(c, customer);		
+	}
+
+	@Test
+	public void testImportCustomer() throws SQLException
+	{
+		Customer customer = new Customer("Harmony High School (Farmington, IA)|1071790|Farmington|Iowa|US|Red|White|NA|Rockets|");
+		CustomerDatabaseHelper helper = new CustomerDatabaseHelper();
 		helper.persistCustomer(c, customer);
 		
+		Customer customer2 = new Customer();
+		customer2.setID(customer.getID());
+		
+		// Populate customer2 from database
+		helper.getCustomer(c, customer2);
+		
+		assertTrue(customer.equals(customer2));
+		
+		
+		System.out.println("Customer ID = " + customer.getID());
 	}
 
 }

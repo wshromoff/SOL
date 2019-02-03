@@ -132,7 +132,7 @@ public class PartDatabaseHelper
 		preparedDeleteStatment.setInt(1, part.getID());
 		ResultSet rs = preparedDeleteStatment.executeQuery();
 		rs.next();
-		int id = rs.getInt(1);
+		rs.getInt(1);
 		part.setName(rs.getString(2));
 		part.setDesignIDString(rs.getString(3));
 		part.setJostensIDString(rs.getString(4));
