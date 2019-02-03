@@ -30,7 +30,32 @@ public class SearchServlet extends HttpServlet
 		
 		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
 		searchHTML = searchHTML.replace("[QUERY]", solrQuery.getQuery()); 
-		
+		if (solrQuery.isPartSearch())
+		{
+			searchHTML = searchHTML.replace("[PART_CHECKED]", "checked=\"checked\""); 			
+		}
+		else
+		{
+			searchHTML = searchHTML.replace("[PART_CHECKED]", ""); 
+		}
+		if (solrQuery.isCustomerSearch())
+		{
+			searchHTML = searchHTML.replace("[CUSTOMER_CHECKED]", "checked=\"checked\""); 			
+		}
+		else
+		{
+			searchHTML = searchHTML.replace("[CUSTOMER_CHECKED]", ""); 
+		}
+		if (solrQuery.isPackageSearch())
+		{
+			searchHTML = searchHTML.replace("[PACKAGE_CHECKED]", "checked=\"checked\""); 			
+		}
+		else
+		{
+			searchHTML = searchHTML.replace("[PACKAGE_CHECKED]", ""); 
+		}
+
+//		System.out.println("-->" + searchHTML);
 		response.getWriter().append(solrQuery.getResults() + "," + searchHTML);
 
 	}
@@ -41,6 +66,8 @@ public class SearchServlet extends HttpServlet
 		
 		String query = request.getParameter("query");
 		System.out.println("query=" + query);
+		String document = request.getParameter("document");
+		System.out.println("document=" + document);
 
 		String newSearch = request.getParameter("newSearch");
 		System.out.println("New Search=" + newSearch);
@@ -52,6 +79,9 @@ public class SearchServlet extends HttpServlet
 			// Get the HTML template and replace marker location with resource HTML
 			String searchHTML = HTMLHelper.getTemplateHTML("/Search.html");
 			searchHTML = searchHTML.replace("[QUERY]", ""); 
+			searchHTML = searchHTML.replace("[PART_CHECKED]", "checked=\"checked\""); 
+			searchHTML = searchHTML.replace("[PACKAGE_CHECKED]", ""); 
+			searchHTML = searchHTML.replace("[CUSTOMER_CHECKED]", ""); 
 			
 			response.getWriter().append(0 + "," + searchHTML);
 			return;
@@ -59,6 +89,7 @@ public class SearchServlet extends HttpServlet
 
 		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
 		solrQuery.setQuery(query);
+		solrQuery.setDocument(document);
 		solrQuery.performQuery(true);		
 
 		response.getWriter().append(solrQuery.getResults() + ",");

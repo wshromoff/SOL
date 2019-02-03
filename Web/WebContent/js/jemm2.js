@@ -132,11 +132,15 @@ function initSearch()
 
 function assetSearch()
 {
+	var docSelected = document.querySelector('input[name="docSearch"]:checked').value;
+//	alert(docSelected);
+	
 	$.ajax({
 		url : 'search',
 		type : 'post',
 		data : {
-			query : $('#jemmSearch').val()
+			query : $('#jemmSearch').val(),
+			document : docSelected
 		},
 		success : function(responseText) {
 			var splitArray = responseText.split(",");

@@ -26,6 +26,9 @@ public class SOLRQuery
 	private static SOLRQuery activeQuery = null;
 	
 	private String query = "";		// Current user query
+	private boolean partSearch = true;		// Searching for parts
+	private boolean customerSearch = false;		// Searching for customers
+	private boolean packageSearch = false;		// Searching for packages
 	
 	private List<String> keywords = new ArrayList<String>();
 	private List<String> parts = new ArrayList<String>();
@@ -218,4 +221,40 @@ public class SOLRQuery
 		}
 		return false;
 	}
+
+	public boolean isPartSearch()
+	{
+		return partSearch;
+	}
+	public boolean isCustomerSearch()
+	{
+		return customerSearch;
+	}
+	public boolean isPackageSearch()
+	{
+		return packageSearch;
+	}
+	public void setDocument(String documentType)
+	{
+		System.out.println("DOCUMENT = " + documentType);
+		if ("part".equals(documentType))
+		{
+			partSearch = true;
+			customerSearch = false;
+			packageSearch = false;
+		}
+		if ("customer".equals(documentType))
+		{
+			partSearch = false;
+			customerSearch = true;
+			packageSearch = false;
+		}
+		if ("package".equals(documentType))
+		{
+			partSearch = false;
+			customerSearch = false;
+			packageSearch = true;
+		}
+	}
+	
 }
