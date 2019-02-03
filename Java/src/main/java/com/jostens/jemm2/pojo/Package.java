@@ -64,7 +64,7 @@ public class Package
 		String splitString = exportString.replaceAll("\\|\\|", "| |");
 		splitString = splitString.replaceAll("\\|\\|", "| |");
 		String[] stringArr = splitString.split("\\|");
-		if (stringArr.length != 9)
+		if (stringArr.length != 30)
 		{
 			System.out.println("-->(" + stringArr.length + ") " + exportString);
 			for (int i = 0; i < stringArr.length; i++)
@@ -279,5 +279,19 @@ public class Package
 	{
 		this.colorScheme = colorScheme;
 	}
-	
+
+	/**
+	 * Return a combination of fields which mark this package with a unique name
+	 */
+	public String getUniqueIdentifier()
+	{
+		StringBuffer sb = new StringBuffer(getPartID() + "|");
+		sb.append(getBrandAssetType() + "|");
+		sb.append(getBaseColorTones() + "|");
+		sb.append(getEnhancementColor() + "|");
+		sb.append(getColorScheme() + "|");
+		
+		return sb.toString();
+		
+	}
 }
