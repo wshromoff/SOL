@@ -66,7 +66,9 @@ public class PackageDatabaseHelperTest
 		PackageDatabaseHelper helper = new PackageDatabaseHelper();
 
 		AssetPackage aPackage = new AssetPackage();
-		aPackage.setName("a");
+		aPackage.setName("b");
+		aPackage.setIdentifier("22|444");
+		aPackage.setPartID(141);
 		helper.persistPackage(c, aPackage);		
 	}
 

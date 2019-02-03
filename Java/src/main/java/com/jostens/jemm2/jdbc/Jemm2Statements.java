@@ -36,6 +36,7 @@ public class Jemm2Statements extends Statements
 	public static String GET_PACKAGE_ID_IDENTIFIER = "GET_PACKAGE_ID_IDENTIFIER";
 	public static String GET_PACKAGE_ID_NAME = "GET_PACKAGE_ID_NAME";
 	public static String DELETE_PACKAGE = "DELETE_PACKAGE";
+	public static String INSERT_PACKAGE = "INSERT_PACKAGE";
 
 	/**
 	 * Method to return List of statement files to load.

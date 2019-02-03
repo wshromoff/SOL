@@ -106,8 +106,6 @@ public class PackageDatabaseHelper
 		int packageID = getPackageIDByName(c, aPackage.getName());
 		aPackage.setID(packageID);
 		
-		System.out.println("THE ID=" + packageID);
-		
 		// Try to delete the ID from the customer table
 		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_PACKAGE);
 
@@ -117,22 +115,33 @@ public class PackageDatabaseHelper
 		preparedDeleteStatment.executeUpdate();
 		preparedDeleteStatment.close();
 		
-//		// Update the design and keywords for the design
-//		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_PACKAGE);
-//
-//		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt.toString());
-//		// Populate the columns
-//		preparedInsertStatment.setInt(1, customerID);
-//		preparedInsertStatment.setString(2, aPackage.getName());
-//		preparedInsertStatment.setString(3, aPackage.getCustomerID());
-//		preparedInsertStatment.setString(4, aPackage.getCity());
-//		preparedInsertStatment.setString(5, aPackage.getState());
-//		preparedInsertStatment.setString(6, aPackage.getColor1());
-//		preparedInsertStatment.setString(7, aPackage.getColor2());
-//		preparedInsertStatment.setString(8, aPackage.getColor3());
-//		preparedInsertStatment.setString(9, aPackage.getMascot());
-//		preparedInsertStatment.executeUpdate();
-//		preparedInsertStatment.close();
+		// Update the design and keywords for the design
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_PACKAGE);
+
+		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt.toString());
+		// Populate the columns
+		preparedInsertStatment.setInt(1, packageID);
+		preparedInsertStatment.setString(2, aPackage.getName());
+		preparedInsertStatment.setString(3, aPackage.getIdentifier());
+		preparedInsertStatment.setInt(4, aPackage.getPartID());
+		preparedInsertStatment.setString(5, aPackage.getFirstCustomerID());
+		preparedInsertStatment.setString(6, aPackage.getBrandAssetType());
+		preparedInsertStatment.setString(7, aPackage.getBaseColorTones());
+		preparedInsertStatment.setString(8, aPackage.getEnhancementColor());
+		preparedInsertStatment.setString(9, aPackage.getColor1());
+		preparedInsertStatment.setString(10, aPackage.getColor2());
+		preparedInsertStatment.setString(11, aPackage.getColor3());
+		preparedInsertStatment.setString(12, aPackage.getColor4());
+		preparedInsertStatment.setString(13, aPackage.getColor5());
+		preparedInsertStatment.setString(14, aPackage.getColor6());
+		preparedInsertStatment.setString(15, aPackage.getColor7());
+		preparedInsertStatment.setString(16, aPackage.getColor8());
+		preparedInsertStatment.setString(17, aPackage.getColor9());
+		preparedInsertStatment.setString(18, aPackage.getColor10());
+		preparedInsertStatment.setString(19, aPackage.getBaseColor());
+		preparedInsertStatment.setString(20, aPackage.getColorScheme());
+		preparedInsertStatment.executeUpdate();
+		preparedInsertStatment.close();
 		
 		c.commit();
 		
