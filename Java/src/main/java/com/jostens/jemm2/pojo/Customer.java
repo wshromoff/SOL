@@ -2,6 +2,9 @@ package com.jostens.jemm2.pojo;
 
 import java.util.Objects;
 
+import com.jostens.jemm2.solr.CustomerDocument;
+import com.jostens.jemm2.solr.PartDocument;
+
 public class Customer
 {
 	private int ID = 0;
@@ -148,18 +151,20 @@ public class Customer
 	}
 
 	/**
-	 * Return a PartDocument representative of this Part for addition to SOLR
+	 * Return a CustomerDocument representative of this Customer for addition to SOLR
 	 */
-//	public PartDocument getPartDocument()
-//	{
-//		PartDocument pd = new PartDocument();
-//		pd.setDatabaseID(getID());
-//		pd.setName(getName());
-//		pd.setPartValidation(getPartValidation());
-//		pd.setDesignID("DS_" + pd.getFormattedID(designID));
-//		
-//		return pd;
-//	}
+	public CustomerDocument getCustomerDocument()
+	{
+		CustomerDocument cd = new CustomerDocument();
+		cd.setDatabaseID(getID());
+		cd.setName(getName());
+		cd.setCustomerID(getCustomerID());
+		cd.setCity(getCity());
+		cd.setState(getState());
+		cd.setMascot(getMascot());
+		
+		return cd;
+	}
 
 	
 }

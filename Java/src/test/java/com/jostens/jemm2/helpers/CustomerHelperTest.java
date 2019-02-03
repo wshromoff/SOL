@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -36,13 +37,21 @@ public class CustomerHelperTest
 		solr.close();
 	}
 
-	@Test
+//	@Test
 	public void persistCustomer() throws IOException, SQLException
 	{
 		CustomerHelper helper = new CustomerHelper();
 		
 		helper.persistAllCustomers(c);
 
+	}
+
+	@Test
+	public void persistCustomerDocuments() throws SQLException, IOException, SolrServerException
+	{
+		CustomerHelper helper = new CustomerHelper();
+		
+		helper.persistAllCustomerDocuments(c, solr);
 	}
 
 }

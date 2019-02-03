@@ -42,4 +42,15 @@ public class SOLRAdmin
 
 	}
 
+//	@Test
+	public void deleteCustomerSOLRData() throws SolrServerException, IOException
+	{
+		ConnectToSolr connect = new ConnectToSolr();
+		HttpSolrClient solr = connect.makeConnection();
+		solr.deleteByQuery("contentType:Customer");
+		solr.commit();
+		solr.close();
+
+	}
+
 }

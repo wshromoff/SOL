@@ -9,8 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+
 import com.jostens.jemm2.jdbc.helpers.CustomerDatabaseHelper;
 import com.jostens.jemm2.pojo.Customer;
+import com.jostens.jemm2.solr.CustomerDocument;
 
 public class CustomerHelper
 {
@@ -54,8 +58,45 @@ public class CustomerHelper
 		for (Customer customer : customers)
 		{
 			i++;
-			System.out.println("" + i);
+//			System.out.println("" + i);
 			dbHelper.persistCustomer(c, customer);
+		}
+	}
+
+	/**
+	 * Get all Customers from Oracle and persist into SOLR
+	 * @throws SQLException 
+	 * @throws SolrServerException 
+	 * @throws IOException 
+	 */
+	public void persistAllCustomerDocuments(Connection c, HttpSolrClient solr) throws SQLException, IOException, SolrServerException
+	{
+		CustomerDatabaseHelper dbHelper = new CustomerDatabaseHelper();
+		
+		List<Integer> customers = dbHelper.getAllCustomerIDs(c);
+
+		System.out.println("Customers found = " + customers.size());
+		
+		// Add each part to SOLR
+		
+		int i = 0;
+		for (Integer customerID : customers)
+		{
+			i++;
+			System.out.println("" + i);
+			Customer customer = new Customer();
+			customer.setID(customerID.intValue());
+			dbHelper.getCustomer(c, customer);
+			
+			// Now persist the design into SOLR
+			CustomerDocument pd = customer.getCustomerDocument();
+			solr.addBean(pd);
+			solr.commit();
+
+//			if (i > 5)
+//			{
+//				break;
+//			}
 		}
 	}
 

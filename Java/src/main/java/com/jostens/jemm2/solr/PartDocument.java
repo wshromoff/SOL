@@ -39,7 +39,6 @@ public class PartDocument extends SOLRBase
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(super.toString());
-		sb.append("Name: " + getName() + "\n");
 		sb.append("Part Validation: " + getPartValidation() + "\n");
 		sb.append("Design ID: " + getDesignID() + "\n");
 		
