@@ -1,5 +1,7 @@
 package com.jostens.jemm2.pojo;
 
+import java.util.Objects;
+
 public class AssetPackage
 {
 	private int ID = 0;
@@ -302,5 +304,42 @@ public class AssetPackage
 	{
 		this.identifier = identifier;
 	}
-	
+
+	public boolean equals(Object obj)
+	{
+		AssetPackage aPackage = (AssetPackage)obj;
+
+		if (getID() != aPackage.getID())
+		{
+			return false;
+		}
+		if (getPartID() != aPackage.getPartID())
+		{
+			return false;
+		}
+		
+//		ID, NAME, IDENTIFIER, PARTID, FIRSTCUSTOMERID, BRAND_ASSET_TYPE, BASE_COLOR_TONES, ENHANCEMENT_COLOR, COLOR1, COLOR2, COLOR3, COLOR4, COLOR5, COLOR6, COLOR7, COLOR8, COLOR9, COLOR10, BASE_COLOR, COLOR_SCHEME
+		if (!Objects.equals(getName(), aPackage.getName())) { return false; }
+		if (!Objects.equals(getIdentifier(), aPackage.getIdentifier())) { return false; }
+		if (!Objects.equals(getFirstCustomerID(), aPackage.getFirstCustomerID())) { return false; }
+		if (!Objects.equals(getBrandAssetType(), aPackage.getBrandAssetType())) { return false; }
+		if (!Objects.equals(getBaseColorTones(), aPackage.getBaseColorTones())) { return false; }
+		if (!Objects.equals(getEnhancementColor(), aPackage.getEnhancementColor())) { return false; }
+		if (!Objects.equals(getColor1(), aPackage.getColor1())) { return false; }
+		if (!Objects.equals(getColor2(), aPackage.getColor2())) { return false; }
+		if (!Objects.equals(getColor3(), aPackage.getColor3())) { return false; }
+		if (!Objects.equals(getColor4(), aPackage.getColor4())) { return false; }
+		if (!Objects.equals(getColor5(), aPackage.getColor5())) { return false; }
+		if (!Objects.equals(getColor6(), aPackage.getColor6())) { return false; }
+		if (!Objects.equals(getColor7(), aPackage.getColor7())) { return false; }
+		if (!Objects.equals(getColor8(), aPackage.getColor8())) { return false; }
+		if (!Objects.equals(getColor9(), aPackage.getColor9())) { return false; }
+		if (!Objects.equals(getColor10(), aPackage.getColor10())) { return false; }
+		if (!Objects.equals(getBaseColor(), aPackage.getBaseColor())) { return false; }
+		if (!Objects.equals(getColorScheme(), aPackage.getColorScheme())) { return false; }
+			
+		return true;
+
+	}
+
 }

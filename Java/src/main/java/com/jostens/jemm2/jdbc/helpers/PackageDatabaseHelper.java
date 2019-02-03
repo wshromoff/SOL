@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.pojo.Customer;
 
 public class PackageDatabaseHelper
 {
@@ -146,6 +147,45 @@ public class PackageDatabaseHelper
 		c.commit();
 		
 		return aPackage;
+	}
+
+	/**
+	 * Get the supplied Package by ID
+	 * @throws SQLException 
+	 */
+	public void getPackage(Connection c, AssetPackage aPackage) throws SQLException
+	{
+
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_PACKAGE);
+
+		PreparedStatement preparedSelectStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedSelectStatment.setInt(1, aPackage.getID());
+		ResultSet rs = preparedSelectStatment.executeQuery();
+		rs.next();
+		rs.getInt(1);
+		aPackage.setName(rs.getString(2));
+		aPackage.setIdentifier(rs.getString(3));
+		aPackage.setPartID(rs.getInt(4));
+		aPackage.setFirstCustomerID(rs.getString(5));
+		aPackage.setBrandAssetType(rs.getString(6));
+		aPackage.setBaseColorTones(rs.getString(7));
+		aPackage.setEnhancementColor(rs.getString(8));
+		aPackage.setColor1(rs.getString(9));
+		aPackage.setColor2(rs.getString(10));
+		aPackage.setColor3(rs.getString(11));
+		aPackage.setColor4(rs.getString(12));
+		aPackage.setColor5(rs.getString(13));
+		aPackage.setColor6(rs.getString(14));
+		aPackage.setColor7(rs.getString(15));
+		aPackage.setColor8(rs.getString(16));
+		aPackage.setColor9(rs.getString(17));
+		aPackage.setColor10(rs.getString(18));
+		aPackage.setBaseColor(rs.getString(19));
+		aPackage.setColorScheme(rs.getString(20));
+		rs.close();
+		preparedSelectStatment.close();
+		
 	}
 
 }

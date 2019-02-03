@@ -116,13 +116,12 @@ public class CustomerDatabaseHelper
 	public void getCustomer(Connection c, Customer customer) throws SQLException
 	{
 
-		// Try to delete the ID from the design table
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CUSTOMER);
 
-		PreparedStatement preparedDeleteStatment = c.prepareStatement(selectStmt);
+		PreparedStatement preparedSelectStatment = c.prepareStatement(selectStmt);
 		// Populate the columns
-		preparedDeleteStatment.setInt(1, customer.getID());
-		ResultSet rs = preparedDeleteStatment.executeQuery();
+		preparedSelectStatment.setInt(1, customer.getID());
+		ResultSet rs = preparedSelectStatment.executeQuery();
 		rs.next();
 		rs.getInt(1);
 		customer.setName(rs.getString(2));
@@ -134,7 +133,7 @@ public class CustomerDatabaseHelper
 		customer.setColor3(rs.getString(8));
 		customer.setMascot(rs.getString(9));
 		rs.close();
-		preparedDeleteStatment.close();
+		preparedSelectStatment.close();
 		
 	}
 
