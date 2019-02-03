@@ -3,7 +3,6 @@ package com.jostens.jemm2.pojo;
 import java.util.Objects;
 
 import com.jostens.jemm2.solr.CustomerDocument;
-import com.jostens.jemm2.solr.PartDocument;
 
 public class Customer
 {

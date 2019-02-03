@@ -41,6 +41,7 @@ public class Jemm2Statements extends Statements
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/DesignStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/PartStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/CustomerStatements.sql");
+		filePaths.add("/com/jostens/jemm2/jdbc/resources/PackageStatements.sql");
 		return filePaths;
 	}
 
