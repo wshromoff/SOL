@@ -36,6 +36,7 @@ public class DocumentCountsTest
 
 		System.out.println("Design Counts = " + documentCounts.getDesignCount());
 		System.out.println("Part Counts = " + documentCounts.getPartCount());
+		System.out.println("Customer Counts = " + documentCounts.getCustomerCount());
 
 		// Add a temporary Design to show counts change
 		DesignDocument design2 = new DesignDocument();
@@ -53,12 +54,13 @@ public class DocumentCountsTest
 		
 		System.out.println("Delta Design Counts = " + documentCounts.getDeltaDesignCount());
 		System.out.println("Delta Part Counts = " + documentCounts.getDeltaPartCount());
+		System.out.println("Delta Customer Counts = " + documentCounts.getDeltaCustomerCount());
 		System.out.println("All Delta Counts = " + documentCounts.getDeltaCount());
 
 		// Have the following uncommented to delay deleting the added design to observe what the web project might do
 		try
 		{
-			Thread.sleep(90000);
+			Thread.sleep(60000);
 		} catch (InterruptedException e)
 		{}
 		

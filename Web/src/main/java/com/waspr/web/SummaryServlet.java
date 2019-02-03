@@ -45,6 +45,8 @@ public class SummaryServlet extends HttpServlet
 		dashboardHTML = dashboardHTML.replace("[DESIGN_DELTA]", helper.getDeltaDesignCount() + "");
 		dashboardHTML = dashboardHTML.replace("[PART_COUNT]", helper.getPartCount() + "");
 		dashboardHTML = dashboardHTML.replace("[PART_DELTA]", helper.getDeltaPartCount() + "");
+		dashboardHTML = dashboardHTML.replace("[CUSTOMER_COUNT]", helper.getCustomerCount() + "");
+		dashboardHTML = dashboardHTML.replace("[CUSTOMER_DELTA]", helper.getDeltaCustomerCount() + "");
 		
 		long delta = helper.getDeltaCount();
 		response.getWriter().append(delta + "," + dashboardHTML);
