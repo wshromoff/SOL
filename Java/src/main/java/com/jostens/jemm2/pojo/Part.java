@@ -2,7 +2,6 @@ package com.jostens.jemm2.pojo;
 
 import java.util.Objects;
 
-import com.jostens.jemm2.solr.DesignDocument;
 import com.jostens.jemm2.solr.PartDocument;
 
 public class Part

@@ -27,6 +27,8 @@ public class Jemm2Statements extends Statements
 
 	// List all the names of CUSTOMER SQL statements as static constants
 	public static String GET_CUSTOMER_ID = "GET_CUSTOMER_ID";
+	public static String DELETE_CUSTOMER = "DELETE_CUSTOMER";
+	public static String INSERT_CUSTOMER = "INSERT_CUSTOMER";
 
 	/**
 	 * Method to return List of statement files to load.

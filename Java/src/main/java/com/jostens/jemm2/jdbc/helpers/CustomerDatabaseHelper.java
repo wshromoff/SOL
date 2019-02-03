@@ -1,11 +1,13 @@
 package com.jostens.jemm2.jdbc.helpers;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Customer;
 
 public class CustomerDatabaseHelper
 {
@@ -62,6 +64,47 @@ public class CustomerDatabaseHelper
 			//System.out.println("Exception in retrieving next MB Assets Sequence value: " + ExceptionHelper.getStackTraceAsString(e));
 		}
 		return value;
+	}
+
+	/**
+	 * Persist the supplied Customer
+	 * @throws SQLException 
+	 */
+	public Customer persistCustomer(Connection c, Customer customer) throws SQLException
+	{
+		// Get this customer ID and add to supplied customer object
+		int customerID = getCustomerID(c, customer.getCustomerID());
+		customer.setID(customerID);
+		
+		// Try to delete the ID from the customer table
+		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_CUSTOMER);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(deleteStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, customer.getID());
+		preparedDeleteStatment.executeUpdate();
+		preparedDeleteStatment.close();
+		
+		// Update the design and keywords for the design
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_CUSTOMER);
+
+		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt.toString());
+		// Populate the columns
+		preparedInsertStatment.setInt(1, customerID);
+		preparedInsertStatment.setString(2, customer.getName());
+		preparedInsertStatment.setString(3, customer.getCustomerID());
+		preparedInsertStatment.setString(4, customer.getCity());
+		preparedInsertStatment.setString(5, customer.getState());
+		preparedInsertStatment.setString(6, customer.getColor1());
+		preparedInsertStatment.setString(7, customer.getColor2());
+		preparedInsertStatment.setString(8, customer.getColor3());
+		preparedInsertStatment.setString(9, customer.getMascot());
+		preparedInsertStatment.executeUpdate();
+		preparedInsertStatment.close();
+		
+		c.commit();
+		
+		return customer;
 	}
 
 }

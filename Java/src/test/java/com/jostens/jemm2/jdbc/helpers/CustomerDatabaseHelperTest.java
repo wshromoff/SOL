@@ -1,7 +1,5 @@
 package com.jostens.jemm2.jdbc.helpers;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -11,6 +9,7 @@ import org.junit.Test;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Customer;
 
 public class CustomerDatabaseHelperTest
 {
@@ -40,7 +39,7 @@ public class CustomerDatabaseHelperTest
 		System.out.println("Sequence Value = " + sequence);
 	}
 
-	@Test
+//	@Test
 	public void testGetPartID() throws SQLException
 	{
 		CustomerDatabaseHelper helper = new CustomerDatabaseHelper();
@@ -48,6 +47,18 @@ public class CustomerDatabaseHelperTest
 		System.out.println("Part Value = " + customerId);
 		customerId = helper.getCustomerID(c, "23332");
 		System.out.println("Part Value = " + customerId);
+	}
+
+	@Test
+	public void testPersistCustomer() throws SQLException
+	{
+		CustomerDatabaseHelper helper = new CustomerDatabaseHelper();
+		
+		Customer customer = new Customer();
+		customer.setCustomerID("432145");
+		customer.setName("Osceola High School");
+		helper.persistCustomer(c, customer);
+		
 	}
 
 }
