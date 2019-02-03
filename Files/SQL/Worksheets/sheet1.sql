@@ -39,3 +39,8 @@ FROM design t1
 LEFT JOIN part t2 ON t2.designid = t1.id
 WHERE t2.name IS NULL
 );
+
+-- Show descending mascot count usage for customers
+select mascot, count(*) from customer
+group by mascot
+order by count(*) desc;
