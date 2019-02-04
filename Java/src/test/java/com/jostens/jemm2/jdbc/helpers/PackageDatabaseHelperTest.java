@@ -12,7 +12,6 @@ import org.junit.Test;
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.AssetPackage;
-import com.jostens.jemm2.pojo.Customer;
 
 public class PackageDatabaseHelperTest
 {

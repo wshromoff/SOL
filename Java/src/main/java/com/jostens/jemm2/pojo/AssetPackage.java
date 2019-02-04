@@ -261,7 +261,12 @@ public class AssetPackage
 	}
 	public String getPartName()
 	{
-		return partName;
+		int i = getName().indexOf("_");
+		if (i == -1)
+		{
+			return "";
+		}
+		return getName().substring(0, i);
 	}
 	public void setPartName(String partName)
 	{

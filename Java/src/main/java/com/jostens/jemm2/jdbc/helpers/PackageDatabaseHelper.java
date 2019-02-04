@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.AssetPackage;
-import com.jostens.jemm2.pojo.Customer;
 
 public class PackageDatabaseHelper
 {
@@ -31,11 +30,11 @@ public class PackageDatabaseHelper
 		{
 			customerID = rs.getInt(1);
 		}
-		else
-		{
-			// Need to insert a keyword and keep the ID
-			customerID = getNextPackageSequence(c);
-		}
+//		else
+//		{
+//			// Need to insert a keyword and keep the ID
+//			customerID = getNextPackageSequence(c);
+//		}
 
 		rs.close();
 		statement.close();
@@ -98,13 +97,28 @@ public class PackageDatabaseHelper
 	}
 
 	/**
-	 * Persist the supplied Customer
+	 * Persist the supplied Package
 	 * @throws SQLException 
 	 */
 	public AssetPackage persistPackage(Connection c, AssetPackage aPackage) throws SQLException
 	{
+		// Get the Part ID for the Part on this packages name
+		PartDatabaseHelper partHelper = new PartDatabaseHelper();
+		int partID = partHelper.getPartID(c, aPackage.getPartName());
+		aPackage.setPartID(partID);
+		
+//		System.out.println("IDENT=" + aPackage.getIdentifier());
+		// Attempt to find Package by identifier. If found, no persisting is needed.
+		int packageID = getPackageIDByIdentifier(c, aPackage.getIdentifier());
+		if (packageID > 0)
+		{
+//			System.out.println("Found by Itentifier");
+			aPackage.setID(packageID);
+			return aPackage;
+		}
+			
 		// Get this customer ID and add to supplied customer object
-		int packageID = getPackageIDByName(c, aPackage.getName());
+		packageID = getPackageIDByName(c, aPackage.getName());
 		aPackage.setID(packageID);
 		
 		// Try to delete the ID from the customer table
