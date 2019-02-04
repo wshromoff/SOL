@@ -1,5 +1,7 @@
 package com.jostens.jemm2.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AssetPackage
@@ -25,6 +27,13 @@ public class AssetPackage
 	private String baseColor;
 	private String colorScheme;
 	private String identifier;
+	
+	String found1B;
+	String found1G;
+	String found1S;
+	String foundBA;
+	
+	private List<Asset> assets = new ArrayList<Asset>();
 	
 	public AssetPackage()
 	{
@@ -106,11 +115,15 @@ public class AssetPackage
 		setBaseColorTones(emptyToNull(stringArr[23]));
 		setEnhancementColor(emptyToNull(stringArr[24]));
 //		setMascot(emptyToNull(stringArr[25]));		// Business Default Use		<Customer>
-		String found1B = emptyToNull(stringArr[26]);	// Black asset found
-		String found1G = emptyToNull(stringArr[27]);	// Gold asset found
-		String found1S = emptyToNull(stringArr[28]);	// Silver asset found
-		String foundBA = emptyToNull(stringArr[29]);	// Best Available asset found
+		found1B = emptyToNull(stringArr[26]);	// Black asset found
+		found1G = emptyToNull(stringArr[27]);	// Gold asset found
+		found1S = emptyToNull(stringArr[28]);	// Silver asset found
+		foundBA = emptyToNull(stringArr[29]);	// Best Available asset found
 
+		addAssetIfNeeded(found1B, true, false, false, false);
+		addAssetIfNeeded(found1G, false, true, false, false);
+		addAssetIfNeeded(found1S, false, false, true, false);
+		addAssetIfNeeded(foundBA, false, false, false, true);
 	}
 
 	private String emptyToNull(String strValue)
@@ -122,6 +135,35 @@ public class AssetPackage
 		return strValue;
 	}
 	
+	private void addAssetIfNeeded(String wasFound, boolean black, boolean gold, boolean silver, boolean bestAvailable)
+	{
+		if ("false".equals(wasFound))
+		{
+			return;
+		}
+		Asset asset = new Asset();
+		if (black)
+		{
+			asset.setIsBlack(1);
+			asset.setName(getName().replace(".cdr", "_1b_2550.png"));
+		}
+		if (gold)
+		{
+			asset.setIsGold(1);
+			asset.setName(getName().replace(".cdr", "_1g_2550.png"));
+		}
+		if (silver)
+		{
+			asset.setIsSilver(1);
+			asset.setName(getName().replace(".cdr", "_1s_2550.png"));
+		}
+		if (bestAvailable)
+		{
+			asset.setIsBestAvailable(1);
+			asset.setName(getName().replace(".cdr", "_ba_2550.png"));
+		}
+		assets.add(asset);
+	}
 
 	public int getID()
 	{
@@ -347,4 +389,16 @@ public class AssetPackage
 
 	}
 
+	public List<Asset> getAssets()
+	{
+		return assets;
+	}
+	public void setAssets(List<Asset> assets)
+	{
+		this.assets = assets;
+	}
+	public void addAsset(Asset asset)
+	{
+		assets.add(asset);
+	}
 }
