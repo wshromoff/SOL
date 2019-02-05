@@ -34,6 +34,7 @@ public class AssetPackage
 	String foundBA;
 	
 	private List<Asset> assets = new ArrayList<Asset>();
+	private CustomerPackage customerPackage = new CustomerPackage();
 	
 	public AssetPackage()
 	{
@@ -92,8 +93,8 @@ public class AssetPackage
 		// Remove the first customer ID from the asset name since packages are not customer specific
 		String newName = getName().replace(getFirstCustomerID() + "_", "");
 		setName(newName);
-//		setColor1(emptyToNull(stringArr[4]));		//		Skip
-//		setColor2(emptyToNull(stringArr[5]));		// Affiliation by use		<Customer>
+//		setColor1(emptyToNull(stringArr[4]));		//		Skip - This is customer country
+		customerPackage.setAffiliationByUse(emptyToNull(stringArr[5]));		// Affiliation by use		<Customer>
 		setBaseColor(emptyToNull(stringArr[6]));
 		setColor1(emptyToNull(stringArr[7]));
 		setColor2(emptyToNull(stringArr[8]));
@@ -106,15 +107,15 @@ public class AssetPackage
 		setColor9(emptyToNull(stringArr[15]));
 //		setColor10(emptyToNull(stringArr[16]));		// Export missed color10
 		setColorScheme(emptyToNull(stringArr[16]));
-//		setMascot(emptyToNull(stringArr[17]));		// Historic use color		<Customer>
-//		setMascot(emptyToNull(stringArr[18]));		// Historic use design		<Customer>
-//		setMascot(emptyToNull(stringArr[19]));		// Status life cycle		<Customer>
-//		setMascot(emptyToNull(stringArr[20]));		// Status Cataloging		<Customer>
-//		setMascot(emptyToNull(stringArr[21]));		// Status Automation		<Customer>
-//		setMascot(emptyToNull(stringArr[22]));		// Status Availability		<Customer>
+		customerPackage.setHistoricUseColor(emptyToNull(stringArr[17]));		// Historic use color		<Customer>
+		customerPackage.setHistoricUseDesign(emptyToNull(stringArr[18]));		// Historic use design		<Customer>
+		customerPackage.setStatusLifeCycle(emptyToNull(stringArr[19]));		// Status life cycle		<Customer>
+		customerPackage.setStatusCataloging(emptyToNull(stringArr[20]));		// Status Cataloging		<Customer>
+		customerPackage.setStatusAutomation(emptyToNull(stringArr[21]));		// Status Automation		<Customer>
+		customerPackage.setStatusAvailability(emptyToNull(stringArr[22]));		// Status Availability		<Customer>
 		setBaseColorTones(emptyToNull(stringArr[23]));
 		setEnhancementColor(emptyToNull(stringArr[24]));
-//		setMascot(emptyToNull(stringArr[25]));		// Business Default Use		<Customer>
+		customerPackage.setBusinessDefaultUse(emptyToNull(stringArr[25]));		// Business Default Use		<Customer>
 		found1B = emptyToNull(stringArr[26]);	// Black asset found
 		found1G = emptyToNull(stringArr[27]);	// Gold asset found
 		found1S = emptyToNull(stringArr[28]);	// Silver asset found
@@ -403,4 +404,10 @@ public class AssetPackage
 	{
 		assets.add(asset);
 	}
+
+	public CustomerPackage getCustomerPackage()
+	{
+		return customerPackage;
+	}
+	
 }

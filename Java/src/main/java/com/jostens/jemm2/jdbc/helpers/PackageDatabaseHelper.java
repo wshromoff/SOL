@@ -10,6 +10,7 @@ import java.util.List;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.Asset;
 import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.pojo.CustomerPackage;
 
 public class PackageDatabaseHelper
 {
@@ -104,24 +105,55 @@ public class PackageDatabaseHelper
 	 */
 	public AssetPackage persistPackage(Connection c, AssetPackage aPackage) throws SQLException
 	{
+		boolean persistCustomerPackage = true;
+		if (aPackage.getFirstCustomerID() == null)
+		{
+//			System.out.println("NULL FOUND");
+			persistCustomerPackage = false;
+			
+		}
 		// Get the Part ID for the Part on this packages name
 		PartDatabaseHelper partHelper = new PartDatabaseHelper();
 		int partID = partHelper.getPartID(c, aPackage.getPartName());
 		aPackage.setPartID(partID);
+
+		// Get a CustomerPackage ready to be saved
+		CustomerPackage customerPackage = aPackage.getCustomerPackage();
+		if (persistCustomerPackage)
+		{
+			
+			CustomerDatabaseHelper cdHelper = new CustomerDatabaseHelper();
+			int customerID = cdHelper.getCustomerID(c, aPackage.getFirstCustomerID());
+			customerPackage.setCustomerID(customerID);
+		}
 		
 //		System.out.println("IDENT=" + aPackage.getIdentifier());
 		// Attempt to find Package by identifier. If found, no persisting is needed.
 		int packageID = getPackageIDByIdentifier(c, aPackage.getIdentifier());
+		customerPackage.setPackageID(packageID);
 		if (packageID > 0)
 		{
+			if (persistCustomerPackage)
+			{
+				// Now persist customer package
+				persistCustomerPackage(c, customerPackage);
+			}
+
 //			System.out.println("Found by Itentifier");
 			aPackage.setID(packageID);
 			return aPackage;
 		}
 			
-		// Get this customer ID and add to supplied customer object
+		// Get this package ID and add to supplied package object
 		packageID = getPackageIDByName(c, aPackage.getName());
 		aPackage.setID(packageID);
+		customerPackage.setPackageID(packageID);
+
+		if (persistCustomerPackage)
+		{
+			// Now persist customer package
+			persistCustomerPackage(c, customerPackage);
+		}
 		
 		// Try to delete the ID from the customer table
 		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_PACKAGE);
@@ -265,4 +297,42 @@ public class PackageDatabaseHelper
 		c.commit();
 
 	}
+	
+	/**
+	 * Persist a customer package
+	 * @throws SQLException 
+	 */
+	public void persistCustomerPackage(Connection c, CustomerPackage customerPackage) throws SQLException
+	{
+		// Delete customer package record first so the data can be simpler added instead of updated
+		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_CUSTOMER_PACKAGE);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(deleteStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, customerPackage.getPackageID());
+		preparedDeleteStatment.setInt(2, customerPackage.getCustomerID());
+		preparedDeleteStatment.executeUpdate();
+		preparedDeleteStatment.close();
+		
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_CUSTOMER_PACKAGE);
+
+		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt);
+		// Populate the columns
+		preparedInsertStatment.setInt(1, customerPackage.getPackageID());
+		preparedInsertStatment.setInt(2, customerPackage.getCustomerID());
+		preparedInsertStatment.setString(3, customerPackage.getAffiliationByUse());
+		preparedInsertStatment.setString(4, customerPackage.getHistoricUseColor());
+		preparedInsertStatment.setString(5, customerPackage.getHistoricUseDesign());
+		preparedInsertStatment.setString(6, customerPackage.getStatusLifeCycle());
+		preparedInsertStatment.setString(7, customerPackage.getStatusCataloging());
+		preparedInsertStatment.setString(8, customerPackage.getStatusAutomation());
+		preparedInsertStatment.setString(9, customerPackage.getStatusAvailability());
+		preparedInsertStatment.setString(10, customerPackage.getBusinessDefaultUse());
+		preparedInsertStatment.executeUpdate();
+		preparedInsertStatment.close();
+			
+		c.commit();
+
+	}
+
 }

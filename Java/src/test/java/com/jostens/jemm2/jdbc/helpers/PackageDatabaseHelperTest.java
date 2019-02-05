@@ -15,6 +15,7 @@ import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.Asset;
 import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.pojo.CustomerPackage;
 
 public class PackageDatabaseHelperTest
 {
@@ -109,6 +110,19 @@ public class PackageDatabaseHelperTest
 		assets.add(asset);
 		
 		helper.persistAssets(c, 432, assets);
+		
+	}
+
+//	@Test
+	public void testPersistCustomerPackage() throws SQLException
+	{
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+		CustomerPackage customerPackage = new CustomerPackage();
+		customerPackage.setPackageID(23);
+		customerPackage.setCustomerID(432);
+		customerPackage.setBusinessDefaultUse("BDU");
+
+		helper.persistCustomerPackage(c, customerPackage);
 		
 	}
 
