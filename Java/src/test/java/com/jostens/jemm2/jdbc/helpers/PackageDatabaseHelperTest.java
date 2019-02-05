@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -11,6 +13,7 @@ import org.junit.Test;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Asset;
 import com.jostens.jemm2.pojo.AssetPackage;
 
 public class PackageDatabaseHelperTest
@@ -89,6 +92,24 @@ public class PackageDatabaseHelperTest
 		assertTrue(aPackage.equals(aPackage2));
 				
 		System.out.println("Customer ID = " + aPackage.getID());
+	}
+
+//	@Test
+	public void testPersistAssets() throws SQLException
+	{
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+
+		List<Asset> assets = new ArrayList<Asset>();
+		
+		Asset asset = new Asset();
+		asset.setFolderPath("/abc/def/");
+		asset.setIsBestAvailable(1);
+		asset.setName("Asset1");
+		
+		assets.add(asset);
+		
+		helper.persistAssets(c, 432, assets);
+		
 	}
 
 }

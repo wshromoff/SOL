@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.pojo.Asset;
 import com.jostens.jemm2.pojo.AssetPackage;
 
 public class PackageDatabaseHelper
@@ -157,6 +159,8 @@ public class PackageDatabaseHelper
 		preparedInsertStatment.setString(20, aPackage.getColorScheme());
 		preparedInsertStatment.executeUpdate();
 		preparedInsertStatment.close();
+
+		persistAssets(c, packageID, aPackage.getAssets());
 		
 		c.commit();
 		
@@ -202,4 +206,40 @@ public class PackageDatabaseHelper
 		
 	}
 
+	/**
+	 * Persist Assets for this Package
+	 * @throws SQLException 
+	 */
+	public void persistAssets(Connection c, int packageID, List<Asset> assets) throws SQLException
+	{
+		// Delete all assets for this packageID first so know everything is a simple add, don't need to check first
+		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_ASSET_FOR_PACKAGE);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(deleteStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, packageID);
+		preparedDeleteStatment.executeUpdate();
+		preparedDeleteStatment.close();
+		
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_ASSET_FOR_PACKAGE);
+
+		// Need to add all assets
+		for (Asset asset : assets)
+		{
+			PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt);
+			// Populate the columns
+			preparedInsertStatment.setInt(1, packageID);
+			preparedInsertStatment.setString(2, asset.getName());
+			preparedInsertStatment.setString(3, asset.getFolderPath());
+			preparedInsertStatment.setInt(4, asset.getIsBlack());
+			preparedInsertStatment.setInt(5, asset.getIsGold());
+			preparedInsertStatment.setInt(6, asset.getIsSilver());
+			preparedInsertStatment.setInt(7, asset.getIsBestAvailable());
+			preparedInsertStatment.executeUpdate();
+			preparedInsertStatment.close();
+			
+		}
+		c.commit();
+
+	}
 }
