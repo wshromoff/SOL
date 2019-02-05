@@ -203,7 +203,30 @@ public class PackageDatabaseHelper
 		aPackage.setColorScheme(rs.getString(20));
 		rs.close();
 		preparedSelectStatment.close();
-		
+
+		// Get the assets for this package
+		aPackage.getAssets().clear();
+		selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ASSETS_FOR_PACKAGE);
+		preparedSelectStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedSelectStatment.setInt(1, aPackage.getID());
+		rs = preparedSelectStatment.executeQuery();
+		while (rs.next())
+		{
+			Asset asset = new Asset();
+			asset.setPackageID(rs.getInt(1));
+			asset.setName(rs.getString(2));
+			asset.setFolderPath(rs.getString(3));
+			asset.setIsBlack(rs.getInt(4));
+			asset.setIsGold(rs.getInt(5));
+			asset.setIsSilver(rs.getInt(6));
+			asset.setIsBestAvailable(rs.getInt(7));
+			
+			aPackage.getAssets().add(asset);
+		}
+		rs.close();
+		preparedSelectStatment.close();
+
 	}
 
 	/**

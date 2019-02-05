@@ -1,5 +1,7 @@
 package com.jostens.jemm2.pojo;
 
+import java.util.Objects;
+
 public class Asset
 {
 	private int ID = 0;
@@ -75,5 +77,21 @@ public class Asset
 	public void setIsBestAvailable(int isBestAvailable)
 	{
 		this.isBestAvailable = isBestAvailable;
+	}
+	
+	public boolean equals(Object obj)
+	{
+		Asset asset = (Asset)obj;
+
+		if (!Objects.equals(getName(), asset.getName())) { return false; }
+		if (!Objects.equals(getFolderPath(), asset.getFolderPath())) { return false; }
+
+		if (getPackageID() != asset.getPackageID()) {return false;}
+		if (getIsBlack() != asset.getIsBlack()) {return false;}
+		if (getIsGold() != asset.getIsGold()) {return false;}
+		if (getIsSilver() != asset.getIsSilver()) {return false;}
+		if (getIsBestAvailable() != asset.getIsBestAvailable()) {return false;}
+		
+		return true;
 	}
 }

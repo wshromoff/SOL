@@ -384,7 +384,9 @@ public class AssetPackage
 		if (!Objects.equals(getColor10(), aPackage.getColor10())) { return false; }
 		if (!Objects.equals(getBaseColor(), aPackage.getBaseColor())) { return false; }
 		if (!Objects.equals(getColorScheme(), aPackage.getColorScheme())) { return false; }
-			
+
+		if (getAssets().size() != aPackage.getAssets().size()) {return false;}
+		
 		return true;
 
 	}
