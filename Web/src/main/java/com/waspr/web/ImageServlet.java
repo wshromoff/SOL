@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Blob;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -13,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.jostens.jemm2.JEMM2Constants;
 
 /**
  * Display the supplied image to a web site
@@ -38,9 +39,18 @@ public class ImageServlet extends HttpServlet
 //	       
 //	       InputStream is = sc.getResourceAsStream("/Users/wadeshromoff/assets/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_1b_2550.png");
 
-	       // PNG
-	       String filePath = "/Users/wadeshromoff/assets/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_XX_2550.png";
-	       filePath = filePath.replace("XX", type);
+	       String filePath = "";
+	       
+	       if (JEMM2Constants.useHardCoded)
+	       {
+		       // hard coded paths are used during development testing
+		       filePath = JEMM2Constants.ROOT_DAM_PATH +   "/DAM/2/61/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_XX_2550.png";
+		       filePath = filePath.replace("XX", type);
+	       }
+	       else
+	       {
+	    	   // For demo testing need to get path from Asset table TODO:
+	       }
 	       File file = new File(filePath);
 	       FileInputStream fis = new FileInputStream(file);
 	        BufferedImage bi = ImageIO.read(fis);

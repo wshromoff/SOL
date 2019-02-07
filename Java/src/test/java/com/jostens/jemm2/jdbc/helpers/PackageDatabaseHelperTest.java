@@ -93,6 +93,10 @@ public class PackageDatabaseHelperTest
 		assertTrue(aPackage.equals(aPackage2));
 				
 		System.out.println("Customer ID = " + aPackage.getID());
+		
+		aPackage = new AssetPackage("MO076155_x_crest_vector_flat_3t_dbks_0x_svs_rds_bks_x_x_x_x_x_x_x.cdr|Crest|MO076155|x|US|School|Silver|Silver|Red|Black|||||||Silver, Red, Black|Announcement (Traditional)|Announcement (Traditional)|Complete (Publish-Ready)|Cataloged|||3|Black|Customer Default|true|true|true|true|");
+		helper.persistPackage(c, aPackage);
+		System.out.println("Customer ID = " + aPackage.getID());
 	}
 
 //	@Test

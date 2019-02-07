@@ -240,7 +240,16 @@ function assetDetails(assetID)
 		},
 		success : function(responseText) {
 			$('#det1').html(responseText);
+			if (hidedet1 == false)
+			{	// Show detail actions
+				document.getElementById('detailActions').style.display = 'block';
+			}
+			else
+			{	// Hide detail actions
+				document.getElementById('detailActions').style.display = 'none';
+			}
 			document.getElementById('det1').style.display = 'block';
+			
 
 //			var splitArray = responseText.split(",");
 ////			$('#summaryCount').html(splitArray[0]);
@@ -258,7 +267,16 @@ function assetDetailsHide()
 	}
 }
 
+// Toggle the locking of the details area of the page
 function lockDet1()
 {
-	hidedet1 = false;
+	if (hidedet1 == true)
+	{
+		hidedet1 = false;
+	}
+	else
+	{
+		hidedet1 = true;
+	}
+
 }

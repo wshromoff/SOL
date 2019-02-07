@@ -192,6 +192,7 @@ public class PackageDatabaseHelper
 		preparedInsertStatment.executeUpdate();
 		preparedInsertStatment.close();
 
+		// Persist the assets of the package
 		persistAssets(c, packageID, aPackage.getAssets());
 		
 		c.commit();

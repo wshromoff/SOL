@@ -35,7 +35,7 @@ public class AssetDetailsServlet extends HttpServlet
 				
 		String id = request.getParameter("ID");
 		int databaseID = new Integer(id.substring(3)).intValue();
-		System.out.println("In Details Servlet " + id);
+//		System.out.println("In Details Servlet " + id);
 
 		String responseHTML = null;
 		if (id.startsWith("PR_"))

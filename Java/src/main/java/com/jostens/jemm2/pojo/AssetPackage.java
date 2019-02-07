@@ -35,6 +35,8 @@ public class AssetPackage
 	
 	private List<Asset> assets = new ArrayList<Asset>();
 	private CustomerPackage customerPackage = new CustomerPackage();
+
+	private String startAssetPath = "";
 	
 	public AssetPackage()
 	{
@@ -90,8 +92,31 @@ public class AssetPackage
 		setBrandAssetType(emptyToNull(stringArr[1]));
 		setPartName(emptyToNull(stringArr[2]));
 		setFirstCustomerID(emptyToNull(stringArr[3]));
+		
+		// Build the start asset path based on customer ID so the asset is found in customer profile
+		if (firstCustomerID == null || firstCustomerID.length() != 7)
+		{	// This is the case for etching with no customer defined
+			firstCustomerID = "0000000";
+		}
+		String level1 = firstCustomerID.substring(6);
+		String level2 = firstCustomerID.substring(4, 6);
+		startAssetPath = "DAM/" + level1 + "/" + level2 + "/";		
+		
 		// Remove the first customer ID from the asset name since packages are not customer specific
-		String newName = getName().replace(getFirstCustomerID() + "_", "");
+		String newName = "";
+		System.out.println(" * 0 *" + getFirstCustomerID());
+
+		if ("0000000".equals(getFirstCustomerID()))
+		{
+			System.out.println(" * 1 *");
+			newName = getName().replaceFirst("_x_", "_");
+		}
+		else
+		{
+			System.out.println(" * 2 *");
+			newName = getName().replace(getFirstCustomerID() + "_", "");
+		}
+		System.out.println("-->" + getName() + ":" + newName);
 		setName(newName);
 //		setColor1(emptyToNull(stringArr[4]));		//		Skip - This is customer country
 		customerPackage.setAffiliationByUse(emptyToNull(stringArr[5]));		// Affiliation by use		<Customer>
@@ -163,6 +188,19 @@ public class AssetPackage
 			asset.setIsBestAvailable(1);
 			asset.setName(getName().replace(".cdr", "_ba_2550.png"));
 		}
+		// Build the folder path
+		int i = asset.getName().indexOf("_");
+		String nameWCustomerID = "";
+		if ("0000000".equals(getFirstCustomerID()))
+		{
+			nameWCustomerID = asset.getName().substring(0, i) + "_x" + asset.getName().substring(i);
+		}
+		else
+		{
+			nameWCustomerID = asset.getName().substring(0, i) + "_" + firstCustomerID + asset.getName().substring(i);
+		}
+
+		asset.setFolderPath(startAssetPath + nameWCustomerID);
 		assets.add(asset);
 	}
 

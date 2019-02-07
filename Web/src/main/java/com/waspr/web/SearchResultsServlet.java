@@ -34,7 +34,7 @@ public class SearchResultsServlet extends HttpServlet
 			
 		}
 
-		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENS]", sb.toString());
+		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENTS]", sb.toString());
 		response.getWriter().append(dashboardHTML);
 
 	}
