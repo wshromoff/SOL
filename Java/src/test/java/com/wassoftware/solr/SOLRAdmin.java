@@ -53,4 +53,26 @@ public class SOLRAdmin
 
 	}
 
+//	@Test
+	public void deletePackageSOLRData() throws SolrServerException, IOException
+	{
+		ConnectToSolr connect = new ConnectToSolr();
+		HttpSolrClient solr = connect.makeConnection();
+		solr.deleteByQuery("contentType:Package");
+		solr.commit();
+		solr.close();
+
+	}
+
+//	@Test
+	public void deleteCustomerPackageSOLRData() throws SolrServerException, IOException
+	{
+		ConnectToSolr connect = new ConnectToSolr();
+		HttpSolrClient solr = connect.makeConnection();
+		solr.deleteByQuery("contentType:CustomerPackage");
+		solr.commit();
+		solr.close();
+
+	}
+
 }
