@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.jostens.jemm2.solr.CustomerDocument;
+import com.jostens.jemm2.solr.PackageDocument;
+
 public class AssetPackage
 {
 	private int ID = 0;
@@ -37,6 +40,7 @@ public class AssetPackage
 	private CustomerPackage customerPackage = new CustomerPackage();
 
 	private String startAssetPath = "";
+	private int designID = 0;
 	
 	public AssetPackage()
 	{
@@ -444,5 +448,29 @@ public class AssetPackage
 	{
 		return customerPackage;
 	}
-	
+
+	/**
+	 * Return a CustomerDocument representative of this Customer for addition to SOLR
+	 */
+	public PackageDocument getPackageDocument()
+	{
+		PackageDocument pd = new PackageDocument();
+		pd.setDatabaseID(getID());
+		pd.setName(getName());
+		pd.setPartID(getPartID() + "");
+		pd.setDesignID(getDesignID() + "");
+		pd.setBrandAssetType(getBrandAssetType());
+		
+		return pd;
+	}
+
+	public int getDesignID()
+	{
+		return designID;
+	}
+	public void setDesignID(int designID)
+	{
+		this.designID = designID;
+	}
+
 }

@@ -33,11 +33,11 @@ public class PartDatabaseHelper
 		{
 			partID = rs.getInt(1);
 		}
-		else
-		{
-			// Need to insert a keyword and keep the ID
-			partID = getNextPartSequence(c);
-		}
+//		else
+//		{
+//			// Need to insert a keyword and keep the ID
+//			partID = getNextPartSequence(c);
+//		}
 
 		rs.close();
 		statement.close();
@@ -75,8 +75,14 @@ public class PartDatabaseHelper
 	 */
 	public Part persistPart(Connection c, Part part) throws SQLException
 	{
-		// Get this designs ID and add to supplied design object
+		// Get this part ID and add to supplied part object
+		// Check if part by name already exists and use that ID again.  Or get
+		// the next one from the sequence
 		int partID = getPartID(c, part.getName());
+		if (partID == 0)
+		{
+			partID = getNextPartSequence(c);
+		}
 		part.setID(partID);
 		
 		// Get the ID of the design this part implements
@@ -127,11 +133,16 @@ public class PartDatabaseHelper
 		// Try to delete the ID from the design table
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_PART);
 
-		PreparedStatement preparedDeleteStatment = c.prepareStatement(selectStmt);
+		PreparedStatement preparedSelectStatment = c.prepareStatement(selectStmt);
+//		System.out.println("PARTID = " + part.getID());
 		// Populate the columns
-		preparedDeleteStatment.setInt(1, part.getID());
-		ResultSet rs = preparedDeleteStatment.executeQuery();
-		rs.next();
+		preparedSelectStatment.setInt(1, part.getID());
+		ResultSet rs = preparedSelectStatment.executeQuery();
+		if (!rs.next())
+		{
+			System.out.println("Unable to find part with ID of 0");
+			return;
+		}
 		rs.getInt(1);
 		part.setName(rs.getString(2));
 		part.setDesignIDString(rs.getString(3));
@@ -141,7 +152,7 @@ public class PartDatabaseHelper
 		part.setPartValidation(rs.getString(7));
 		part.setDesignID(rs.getInt(8));
 		rs.close();
-		preparedDeleteStatment.close();
+		preparedSelectStatment.close();
 		
 		if (part.getDesignID() == 0)
 		{

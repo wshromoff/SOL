@@ -9,8 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+
 import com.jostens.jemm2.jdbc.helpers.PackageDatabaseHelper;
 import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.solr.PackageDocument;
 
 public class PackageHelper
 {
@@ -29,7 +33,14 @@ public class PackageHelper
         while ((line = reader.readLine()) != null)
         {
 //            System.out.println("Line entered : " + line);
-            
+        	// If first character is lower case it's a derivative package which are being skipped now due to
+        	// derivative parts not in extract for some reason
+        	char[] firstChar = line.substring(0, 1).toCharArray();
+        	if (Character.isLowerCase(firstChar[0]))
+        	{
+        		continue;		// Skip derivative package
+        	}
+             
         	packages.add(new AssetPackage(line));
         }
 		
@@ -60,6 +71,43 @@ public class PackageHelper
 			{
 //				break;
 			}
+		}
+	}
+
+	/**
+	 * Get all Packages from Oracle and persist into SOLR
+	 * @throws SQLException 
+	 * @throws SolrServerException 
+	 * @throws IOException 
+	 */
+	public void persistAllPackageDocuments(Connection c, HttpSolrClient solr) throws SQLException, IOException, SolrServerException
+	{
+		PackageDatabaseHelper dbHelper = new PackageDatabaseHelper();
+		
+		List<Integer> packages = dbHelper.getAllPackageIDs(c);
+
+		System.out.println("Packages found = " + packages.size());
+		
+		// Add each part to SOLR
+		
+		int i = 0;
+		for (Integer packageID : packages)
+		{
+			i++;
+			System.out.println("" + i + " : " + packageID);
+			AssetPackage aPackage = new AssetPackage();
+			aPackage.setID(packageID.intValue());
+			dbHelper.getPackage(c, aPackage);
+			
+			// Now persist the design into SOLR
+			PackageDocument pd = aPackage.getPackageDocument();
+			solr.addBean(pd);
+			solr.commit();
+
+//			if (i >= 5)
+//			{
+//				break;
+//			}
 		}
 	}
 

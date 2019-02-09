@@ -12,6 +12,9 @@ import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.pojo.Asset;
 import com.jostens.jemm2.pojo.AssetPackage;
 import com.jostens.jemm2.pojo.CustomerPackage;
+import com.jostens.jemm2.pojo.Part;
+
+import oracle.jdbc.proxy.annotation.SetDelegate;
 
 public class PackageDatabaseHelper
 {
@@ -261,6 +264,13 @@ public class PackageDatabaseHelper
 		rs.close();
 		preparedSelectStatment.close();
 
+		// Need to also get the design ID from the partID
+		PartDatabaseHelper partHelper = new PartDatabaseHelper();
+		Part aPart = new Part();
+		aPart.setID(aPackage.getPartID());
+		partHelper.getPart(c, aPart);
+		aPackage.setDesignID(aPart.getDesignID());
+		
 	}
 
 	/**
