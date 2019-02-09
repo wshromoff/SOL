@@ -45,6 +45,8 @@ public class Jemm2Statements extends Statements
 	public static String INSERT_CUSTOMER_PACKAGE = "INSERT_CUSTOMER_PACKAGE";
 	public static String GET_CUSTOMER_PACKAGE_ID = "GET_CUSTOMER_PACKAGE_ID";
 	public static String GET_CUSTOMER_PACKAGE = "GET_CUSTOMER_PACKAGE";
+	public static String GET_ALL_PACKAGEIDS = "GET_ALL_PACKAGEIDS";
+	public static String GET_ALL_CUSTOMER_PACKAGEIDS = "GET_ALL_CUSTOMER_PACKAGEIDS";
 
 	/**
 	 * Method to return List of statement files to load.

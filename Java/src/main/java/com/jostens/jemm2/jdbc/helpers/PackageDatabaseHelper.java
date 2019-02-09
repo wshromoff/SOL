@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
@@ -424,6 +425,58 @@ public class PackageDatabaseHelper
 		aPackage.setBusinessDefaultUse(rs.getString(11));
 		rs.close();
 		preparedSelectStatment.close();
+	}
+
+	/**
+	 * Get all package IDs from the customer table and return in List
+	 * @throws SQLException 
+	 */
+	public List<Integer> getAllPackageIDs(Connection c) throws SQLException
+	{
+		List<Integer> customers = new ArrayList<Integer>();
+		
+		int customerID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_PACKAGEIDS);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			customerID = rs.getInt(1);
+			customers.add(new Integer(customerID));
+		}
+
+		rs.close();
+		statement.close();
+		
+		return customers;
+
+	}
+
+	/**
+	 * Get all customer_package IDs from the customer table and return in List
+	 * @throws SQLException 
+	 */
+	public List<Integer> getAllCustomerPackageIDs(Connection c) throws SQLException
+	{
+		List<Integer> customers = new ArrayList<Integer>();
+		
+		int customerID = 0;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_CUSTOMER_PACKAGEIDS);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			customerID = rs.getInt(1);
+			customers.add(new Integer(customerID));
+		}
+
+		rs.close();
+		statement.close();
+		
+		return customers;
+
 	}
 
 }
