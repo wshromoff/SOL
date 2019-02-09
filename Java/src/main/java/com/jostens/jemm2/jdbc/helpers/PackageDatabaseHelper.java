@@ -397,4 +397,33 @@ public class PackageDatabaseHelper
 		return value;
 	}
 
+	/**
+	 * Get the supplied Customer Package by ID
+	 * @throws SQLException 
+	 */
+	public void getCustomerPackage(Connection c, CustomerPackage aPackage) throws SQLException
+	{
+
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CUSTOMER_PACKAGE);
+
+		PreparedStatement preparedSelectStatment = c.prepareStatement(selectStmt);
+		// Populate the columns
+		preparedSelectStatment.setInt(1, aPackage.getID());
+		ResultSet rs = preparedSelectStatment.executeQuery();
+		rs.next();
+		rs.getInt(1);
+		aPackage.setPackageID(rs.getInt(2));
+		aPackage.setCustomerID(rs.getInt(3));
+		aPackage.setAffiliationByUse(rs.getString(4));
+		aPackage.setHistoricUseColor(rs.getString(5));
+		aPackage.setHistoricUseDesign(rs.getString(6));
+		aPackage.setStatusLifeCycle(rs.getString(7));
+		aPackage.setStatusCataloging(rs.getString(8));
+		aPackage.setStatusAutomation(rs.getString(9));
+		aPackage.setStatusAvailability(rs.getString(10));
+		aPackage.setBusinessDefaultUse(rs.getString(11));
+		rs.close();
+		preparedSelectStatment.close();
+	}
+
 }
