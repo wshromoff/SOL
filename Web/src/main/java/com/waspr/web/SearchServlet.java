@@ -16,19 +16,65 @@ public class SearchServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
+	// doGet is what makes the search page look the same as last time user was on the page.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		System.out.println("Inside Search Get Servlet");
-		
-		String query = request.getParameter("query");
-		System.out.println("query=" + query);
-		
-
-		
-		// Get the HTML template and replace marker location with resource HTML
-		String searchHTML = HTMLHelper.getTemplateHTML("/Search.html");
+		// The SOLR active query has how it appeared when the user was last on it.
+//		System.out.println("Inside Search Get Servlet");
 		
 		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
+		String searchHTML = getBuiltOutTemplate(solrQuery);
+		
+
+//		System.out.println("-->" + searchHTML);
+		response.getWriter().append(solrQuery.getHitCount() + "," + searchHTML);
+
+	}
+
+	// doPost is what performs the query
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+//		System.out.println("Inside Search Post Servlet");
+
+		// Get form parameters
+		String query = request.getParameter("query");
+		String document = request.getParameter("document");
+		String newSearch = request.getParameter("newSearch");
+
+		// Display values from form
+//		System.out.println("query=" + query);
+//		System.out.println("document=" + document);
+//		System.out.println("New Search=" + newSearch);
+		
+		if ("true".equals(newSearch))
+		{
+			SOLRQuery.newQuery();
+			
+			SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
+			String searchHTML = getBuiltOutTemplate(solrQuery);
+			
+			response.getWriter().append(0 + "," + searchHTML);
+			return;
+		}
+
+		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
+		solrQuery.setDocument(document);		// Must set document type first
+		solrQuery.setQuery(query);
+		solrQuery.setHitCountOnly(true);
+		solrQuery.performQuery();		
+
+		response.getWriter().append(solrQuery.getHitCount() + ",");
+
+	}
+
+	/**
+	 * Get the current query object and update the template HTML based on that's objects values
+	 */
+	private String getBuiltOutTemplate(SOLRQuery solrQuery)
+	{
+
+		// Get the HTML template and replace marker location with resource HTML based on last query
+		String searchHTML = HTMLHelper.getTemplateHTML("/Search.html");		
 		searchHTML = searchHTML.replace("[QUERY]", solrQuery.getQuery()); 
 		if (solrQuery.isPartSearch())
 		{
@@ -54,46 +100,14 @@ public class SearchServlet extends HttpServlet
 		{
 			searchHTML = searchHTML.replace("[PACKAGE_CHECKED]", ""); 
 		}
-
-//		System.out.println("-->" + searchHTML);
-		response.getWriter().append(solrQuery.getResults() + "," + searchHTML);
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		System.out.println("Inside Search Post Servlet");
-		
-		String query = request.getParameter("query");
-		System.out.println("query=" + query);
-		String document = request.getParameter("document");
-		System.out.println("document=" + document);
-
-		String newSearch = request.getParameter("newSearch");
-		System.out.println("New Search=" + newSearch);
-		
-		if ("true".equals(newSearch))
+		if (solrQuery.isCustomerPackageSearch())
 		{
-			SOLRQuery.newQuery();
-			
-			// Get the HTML template and replace marker location with resource HTML
-			String searchHTML = HTMLHelper.getTemplateHTML("/Search.html");
-			searchHTML = searchHTML.replace("[QUERY]", ""); 
-			searchHTML = searchHTML.replace("[PART_CHECKED]", "checked=\"checked\""); 
-			searchHTML = searchHTML.replace("[PACKAGE_CHECKED]", ""); 
-			searchHTML = searchHTML.replace("[CUSTOMER_CHECKED]", ""); 
-			
-			response.getWriter().append(0 + "," + searchHTML);
-			return;
+			searchHTML = searchHTML.replace("[CUSTOMER_PACKAGE_CHECKED]", "checked=\"checked\""); 			
 		}
-
-		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
-		solrQuery.setQuery(query);
-		solrQuery.setDocument(document);
-		solrQuery.performQuery(true);		
-
-		response.getWriter().append(solrQuery.getResults() + ",");
-
+		else
+		{
+			searchHTML = searchHTML.replace("[CUSTOMER_PACKAGE_CHECKED]", ""); 
+		}
+		return searchHTML;
 	}
-
 }

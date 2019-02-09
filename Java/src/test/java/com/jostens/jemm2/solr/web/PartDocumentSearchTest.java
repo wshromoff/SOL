@@ -17,6 +17,16 @@ public class PartDocumentSearchTest
 	}
 
 	@Test
+	public void test1Package()
+	{
+		
+		query.setQuery("BR006786_1680371_mascot_vector_flat_2t_dx_0x_svs_wts_yls_ors_bzs_bks_x_x_x_x.cdr");
+		query.performQuery();
+		
+		System.out.println("Hit Count = " + query.getHitCount());
+	}
+
+//	@Test
 	public void test1Keyword()
 	{
 		

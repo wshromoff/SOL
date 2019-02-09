@@ -21,7 +21,8 @@ public class SearchResultsServlet extends HttpServlet
 		String dashboardHTML = HTMLHelper.getTemplateHTML("/SearchResults.html");
 
 		SOLRQuery query = SOLRQuery.getActiveQuery();
-		query.performQuery(false);
+		query.setHitCountOnly(false);
+		query.performQuery();
 		
 		System.out.println("IDs=" + query.getResultIDs());
 		// Build up all the search result document TD cells

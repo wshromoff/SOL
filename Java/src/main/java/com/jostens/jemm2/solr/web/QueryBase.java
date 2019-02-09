@@ -9,6 +9,7 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 
 import com.wassoftware.solr.ConnectToSolr;
@@ -32,7 +33,8 @@ public abstract class QueryBase
 	protected List<String> customers = new ArrayList<String>();
 	protected List<String> packages = new ArrayList<String>();
 
-	private List<String> resultIDs = new ArrayList<String>();	
+	private List<String> resultIDs = new ArrayList<String>();		// If ID's are desired
+	private long hitCount = 0;		// The count of hits found
 
 	// Form attributes that are part of the query
 	protected String query = "";		// Current user query
@@ -149,7 +151,7 @@ public abstract class QueryBase
 	/**
 	 * Abstract method that extender document search classes must implement
 	 */
-	protected abstract void performDocumentQuery();
+	protected abstract void performDocumentQuery()  throws SolrServerException, IOException;
 
 	public String getQuery()
 	{
@@ -172,5 +174,51 @@ public abstract class QueryBase
 		this.hitCountOnly = hitCountOnly;
 	}
 	
+	/**
+	 * Perform the supplied query updating row count found or IDs if asked for
+	 * @throws IOException 
+	 * @throws SolrServerException 
+	 */
+	public void executeQuery(SolrQuery query) throws SolrServerException, IOException
+	{
+		if (hitCountOnly)
+		{
+			query.setRows(0);
+		}
+		else
+		{
+			query.setFields("id");
+			query.setRows(15);
+		}
+		QueryResponse response = solr.query(query);
+		
+		SolrDocumentList docList = response.getResults();
+		if (hitCountOnly)
+		{
+			hitCount = hitCount + docList.getNumFound();
+		}
+		else
+		{
+			for (SolrDocument doc : docList)
+			{
+				if (resultIDs.size() >= 15)
+				{
+					break;
+				}
+				String documentID = (String)doc.getFieldValue("id");
+				resultIDs.add(documentID);
+			}
+		}
+	}
+
+	public long getHitCount()
+	{
+		return hitCount;
+	}
+
+	public List<String> getResultIDs()
+	{
+		return resultIDs;
+	}
 	
 }

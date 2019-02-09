@@ -4,14 +4,15 @@
 <br>
 <form>
   Criteria:
-  <input type="text" id="jemmSearch" size="90" oninput="assetSearch()" spellcheck="false" value="[QUERY]">
+  <input type="text" id="jemmSearch" size="185" oninput="assetSearch()" spellcheck="false" value="[QUERY]">
 <br>
 <br>
   Document type:
   <p>
-  &nbsp;&nbsp;<input type="radio" id="document" name="docSearch" value="package" [PACKAGE_CHECKED] onclick="assetSearch()"> Package<br>
-  &nbsp;&nbsp;<input type="radio" id="document" name="docSearch" value="customer" [CUSTOMER_CHECKED] onclick="assetSearch()"> Customer<br>  
   &nbsp;&nbsp;<input type="radio" id="document" name="docSearch" value="part" [PART_CHECKED] onclick="assetSearch()"> Part<br>
+  &nbsp;&nbsp;<input type="radio" id="document" name="docSearch" value="package" [PACKAGE_CHECKED] onclick="assetSearch()"> Package<br>
+  &nbsp;&nbsp;<input type="radio" id="document" name="docSearch" value="customerPackage" [CUSTOMER_PACKAGE_CHECKED] onclick="assetSearch()"> Customer Package<br>
+  &nbsp;&nbsp;<input type="radio" id="document" name="docSearch" value="customer" [CUSTOMER_CHECKED] onclick="assetSearch()"> Customer<br>  
   </p>
 <br>
 <br>

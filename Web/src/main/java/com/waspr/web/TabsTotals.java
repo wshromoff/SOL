@@ -25,17 +25,15 @@ public class TabsTotals extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		long dashboardValue = 0;
-		long searchResultsValue = 0;
+//		System.out.println("Inside tab totals Servlet");
 		
-		System.out.println("Inside tab totals Servlet");
+		// Get the current SOLR document counts and take the delta count as documents changed today
 		DocumentCounts helper = new DocumentCounts();
 		helper.generateCounts();
-//		response.getWriter().append("SUMMARY " + helper.getDesignCount());
-		
-		dashboardValue = helper.getDeltaCount();
-		
-		searchResultsValue = SOLRQuery.getActiveQuery().getResults();
+		long dashboardValue = helper.getDeltaCount();
+
+		// Get the most recent query count
+		long searchResultsValue = SOLRQuery.getActiveQuery().getHitCount();
 
 		response.getWriter().append(dashboardValue + "," + searchResultsValue);
 

@@ -57,15 +57,6 @@ public class SOLRQuery
 		activeQuery = new SOLRQuery();		
 	}
 
-	public long getHitCount()
-	{
-		return results;
-	}
-	public List<String> getResultIDs()
-	{
-		return resultIDs;
-	}
-
 	public void performQuery()
 	{
 		// Call the perform query method on the document search implementation class
@@ -344,5 +335,13 @@ public class SOLRQuery
 	{
 		return customerPackageSearch;
 	}
-
+	public long getHitCount()
+	{
+		return documentQuery.getHitCount();
+	}
+	public List<String> getResultIDs()
+	{
+		return documentQuery.getResultIDs();
+	}
+	
 }
