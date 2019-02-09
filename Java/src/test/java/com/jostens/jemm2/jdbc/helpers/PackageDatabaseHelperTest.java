@@ -92,11 +92,11 @@ public class PackageDatabaseHelperTest
 		
 		assertTrue(aPackage.equals(aPackage2));
 				
-		System.out.println("Customer ID = " + aPackage.getID());
+		System.out.println("Package ID = " + aPackage.getID());
 		
 		aPackage = new AssetPackage("MO076155_x_crest_vector_flat_3t_dbks_0x_svs_rds_bks_x_x_x_x_x_x_x.cdr|Crest|MO076155|x|US|School|Silver|Silver|Red|Black|||||||Silver, Red, Black|Announcement (Traditional)|Announcement (Traditional)|Complete (Publish-Ready)|Cataloged|||3|Black|Customer Default|true|true|true|true|");
 		helper.persistPackage(c, aPackage);
-		System.out.println("Customer ID = " + aPackage.getID());
+		System.out.println("Package ID = " + aPackage.getID());
 	}
 
 //	@Test
@@ -128,6 +128,24 @@ public class PackageDatabaseHelperTest
 
 		helper.persistCustomerPackage(c, customerPackage);
 		
+	}
+
+//	@Test
+	public void testGetCustomerPackageIDByIdentifiers() throws SQLException
+	{
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+		int id = helper.getCustomerPackageIDByIdentifiers(c, 45, 32);
+		System.out.println("Cusomer Package ID = " + id);
+	}
+
+//	@Test
+	public void testGetNextCustomerPackageSequence()
+	{
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+		int sequence = helper.getNextCustomerPackageSequence(c);
+		System.out.println("Sequence Value = " + sequence);
+		sequence = helper.getNextCustomerPackageSequence(c);
+		System.out.println("Sequence Value = " + sequence);
 	}
 
 }

@@ -1,8 +1,11 @@
 package com.jostens.jemm2.pojo;
 
+import java.util.Objects;
+
 public class CustomerPackage
 {
 
+	private int ID = 0;
 	private int packageID;
 	private int customerID;
 	private String affiliationByUse;
@@ -14,6 +17,14 @@ public class CustomerPackage
 	private String statusAvailability;
 	private String businessDefaultUse;
 	
+	public int getID()
+	{
+		return ID;
+	}
+	public void setID(int iD)
+	{
+		ID = iD;
+	}
 	public int getPackageID()
 	{
 		return packageID;
@@ -93,5 +104,36 @@ public class CustomerPackage
 	public void setBusinessDefaultUse(String businessDefaultUse)
 	{
 		this.businessDefaultUse = businessDefaultUse;
-	}	
+	}
+	
+	public boolean equals(Object obj)
+	{
+		CustomerPackage aCustomerPackage = (CustomerPackage)obj;
+
+		if (getID() != aCustomerPackage.getID())
+		{
+			return false;
+		}
+		if (getPackageID() != aCustomerPackage.getPackageID())
+		{
+			return false;
+		}
+		if (getCustomerID() != aCustomerPackage.getCustomerID())
+		{
+			return false;
+		}
+		
+		if (!Objects.equals(getAffiliationByUse(), aCustomerPackage.getAffiliationByUse())) { return false; }
+		if (!Objects.equals(getHistoricUseColor(), aCustomerPackage.getHistoricUseColor())) { return false; }
+		if (!Objects.equals(getHistoricUseDesign(), aCustomerPackage.getHistoricUseDesign())) { return false; }
+		if (!Objects.equals(getStatusLifeCycle(), aCustomerPackage.getStatusLifeCycle())) { return false; }
+		if (!Objects.equals(getStatusCataloging(), aCustomerPackage.getStatusCataloging())) { return false; }
+		if (!Objects.equals(getStatusAutomation(), aCustomerPackage.getStatusAutomation())) { return false; }
+		if (!Objects.equals(getStatusAvailability(), aCustomerPackage.getStatusAvailability())) { return false; }
+		if (!Objects.equals(getBusinessDefaultUse(), aCustomerPackage.getBusinessDefaultUse())) { return false; }
+		
+		return true;
+
+	}
+
 }

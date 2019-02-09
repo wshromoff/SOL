@@ -43,6 +43,7 @@ public class Jemm2Statements extends Statements
 	public static String GET_ASSETS_FOR_PACKAGE = "GET_ASSETS_FOR_PACKAGE";
 	public static String DELETE_CUSTOMER_PACKAGE = "DELETE_CUSTOMER_PACKAGE";
 	public static String INSERT_CUSTOMER_PACKAGE = "INSERT_CUSTOMER_PACKAGE";
+	public static String GET_CUSTOMER_PACKAGE_ID = "GET_CUSTOMER_PACKAGE_ID";
 
 	/**
 	 * Method to return List of statement files to load.

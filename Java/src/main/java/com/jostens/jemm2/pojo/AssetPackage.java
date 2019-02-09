@@ -104,19 +104,16 @@ public class AssetPackage
 		
 		// Remove the first customer ID from the asset name since packages are not customer specific
 		String newName = "";
-		System.out.println(" * 0 *" + getFirstCustomerID());
 
 		if ("0000000".equals(getFirstCustomerID()))
 		{
-			System.out.println(" * 1 *");
 			newName = getName().replaceFirst("_x_", "_");
 		}
 		else
 		{
-			System.out.println(" * 2 *");
 			newName = getName().replace(getFirstCustomerID() + "_", "");
 		}
-		System.out.println("-->" + getName() + ":" + newName);
+//		System.out.println("-->" + getName() + ":" + newName);
 		setName(newName);
 //		setColor1(emptyToNull(stringArr[4]));		//		Skip - This is customer country
 		customerPackage.setAffiliationByUse(emptyToNull(stringArr[5]));		// Affiliation by use		<Customer>
