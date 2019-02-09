@@ -6,14 +6,14 @@ public class SOLRQueryTest
 {
 
 
-//	@Test
+	@Test
 	public void test1Keyword()
 	{
 		SOLRQuery query = SOLRQuery.getActiveQuery();
 		query.setQuery("Shark");
 		query.performQuery(true);
 		
-		System.out.println("RESULTS = " + query.getResults());
+		System.out.println("RESULTS = " + query.getHitCount());
 	}
 
 //	@Test
@@ -22,19 +22,19 @@ public class SOLRQueryTest
 		SOLRQuery query = SOLRQuery.getActiveQuery();
 		query.setQuery("S");
 		query.performQuery(true);		
-		System.out.println("(S) RESULTS = " + query.getResults());
+		System.out.println("(S) RESULTS = " + query.getHitCount());
 		query.setQuery("Sh");
 		query.performQuery(true);		
-		System.out.println("(Sh) RESULTS = " + query.getResults());
+		System.out.println("(Sh) RESULTS = " + query.getHitCount());
 		query.setQuery("Sha");
 		query.performQuery(true);		
-		System.out.println("(Sha) RESULTS = " + query.getResults());
+		System.out.println("(Sha) RESULTS = " + query.getHitCount());
 		query.setQuery("Shar");
 		query.performQuery(true);		
-		System.out.println("(Shar) RESULTS = " + query.getResults());
+		System.out.println("(Shar) RESULTS = " + query.getHitCount());
 		query.setQuery("Shark");
 		query.performQuery(true);		
-		System.out.println("(Shark) RESULTS = " + query.getResults());
+		System.out.println("(Shark) RESULTS = " + query.getHitCount());
 	}
 
 	// Test 2 keywords anded together
@@ -45,7 +45,7 @@ public class SOLRQueryTest
 		query.setQuery("Cat Ha");
 		query.performQuery(true);
 		
-		System.out.println("RESULTS = " + query.getResults());
+		System.out.println("RESULTS = " + query.getHitCount());
 	}
 
 	// Test 2 parts anded together
@@ -56,7 +56,7 @@ public class SOLRQueryTest
 		query.setQuery("BR000795 CE015443");
 		query.performQuery(true);
 		
-		System.out.println("Part count found = " + query.getResults());
+		System.out.println("Part count found = " + query.getHitCount());
 	}
 	// Test 2 parts anded together showing IDs
 //	@Test
@@ -81,7 +81,7 @@ public class SOLRQueryTest
 	}
 
 	// Test Customer Searches
-	@Test
+//	@Test
 	public void testCustomer()
 	{
 		SOLRQuery query = SOLRQuery.getActiveQuery();

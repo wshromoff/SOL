@@ -15,20 +15,25 @@ import org.apache.solr.common.SolrDocumentList;
 import com.wassoftware.solr.ConnectToSolr;
 
 /**
- * Object that performs a SOLR query and is called from the web application
+ * Object that performs a SOLR query and is called from the SearchServlet
  */
 public class SOLRQuery
 {
 	private ConnectToSolr connect = null;
 	private HttpSolrClient solr = null;
 
-	// This static instance holds the users current query
+	// This static instance holds the users current query (Instantaion of this object)
 	private static SOLRQuery activeQuery = null;
+
+	// This is the search implementation being called
+	private QueryBase documentQuery = new PartDocumentSearch();
 	
-	private String query = "";		// Current user query
+//	private String query = "";		// Current user query
 	private boolean partSearch = true;		// Searching for parts
 	private boolean customerSearch = false;		// Searching for customers
 	private boolean packageSearch = false;		// Searching for packages
+	private boolean customerPackageSearch = false;		// Searching for customer packages
+
 	
 	private List<String> keywords = new ArrayList<String>();
 	private List<String> parts = new ArrayList<String>();
@@ -52,15 +57,7 @@ public class SOLRQuery
 		activeQuery = new SOLRQuery();		
 	}
 
-	public String getQuery()
-	{
-		return query;
-	}
-	public void setQuery(String query)
-	{
-		this.query = query;
-	}
-	public long getResults()
+	public long getHitCount()
 	{
 		return results;
 	}
@@ -69,12 +66,17 @@ public class SOLRQuery
 		return resultIDs;
 	}
 
+	public void performQuery()
+	{
+		// Call the perform query method on the document search implementation class
+		documentQuery.performQuery();
+	}
 	/**
 	 * Count Only - Set parameter to true if count only is desired
 	 */
 	public void performQuery(boolean countOnly)
 	{
-		if (query == null || query.trim().length() == 0)
+		if (getQuery() == null || getQuery().trim().length() == 0)
 		{
 			// Nothing set so query can't be completed
 			results = 0;
@@ -94,7 +96,7 @@ public class SOLRQuery
 			solr = connect.makeConnection();
 
 			// Break apart the query by term and determine what it should be part of searching
-			tokenizeQuery(query);
+			tokenizeQuery(getQuery());
 			
 			if (keywords.isEmpty() && parts.isEmpty() && customers.isEmpty())
 			{
@@ -246,18 +248,6 @@ public class SOLRQuery
 		
 	}
 
-	public boolean isPartSearch()
-	{
-		return partSearch;
-	}
-	public boolean isCustomerSearch()
-	{
-		return customerSearch;
-	}
-	public boolean isPackageSearch()
-	{
-		return packageSearch;
-	}
 	
 	public void doPartSearch()
 	{
@@ -272,27 +262,87 @@ public class SOLRQuery
 		setDocument("package");
 	}
 
+	// ----------------- Methods related to update document specific query objects --------------
 	public void setDocument(String documentType)
 	{
 //		System.out.println("DOCUMENT = " + documentType);
 		if ("part".equals(documentType))
 		{
+			// Did the document type change
+			if (!partSearch)
+			{
+				documentQuery = new PartDocumentSearch();
+			}
 			partSearch = true;
 			customerSearch = false;
 			packageSearch = false;
+			customerPackageSearch = false;
 		}
 		if ("customer".equals(documentType))
 		{
+			// Did the document type change
+			if (!customerSearch)
+			{
+				documentQuery = new CustomerDocumentSearch();
+			}
 			partSearch = false;
 			customerSearch = true;
 			packageSearch = false;
+			customerPackageSearch = false;
 		}
 		if ("package".equals(documentType))
 		{
+			// Did the document type change
+			if (!packageSearch)
+			{
+				documentQuery = new PackageDocumentSearch();
+			}
 			partSearch = false;
 			customerSearch = false;
 			packageSearch = true;
+			customerPackageSearch = false;
+		}
+		if ("customerPackage".equals(documentType))
+		{
+			// Did the document type change
+			if (!customerPackageSearch)
+			{
+				documentQuery = new CustomerPackageDocumentSearch();
+			}
+			partSearch = false;
+			customerSearch = false;
+			packageSearch = false;
+			customerPackageSearch = true;
 		}
 	}
-	
+
+	public void setHitCountOnly(boolean hitCountOnly)
+	{
+		documentQuery.setHitCountOnly(hitCountOnly);
+	}
+	public String getQuery()
+	{
+		return documentQuery.getQuery();
+	}
+	public void setQuery(String query)
+	{
+		documentQuery.setQuery(query);
+	}
+	public boolean isPartSearch()
+	{
+		return partSearch;
+	}
+	public boolean isCustomerSearch()
+	{
+		return customerSearch;
+	}
+	public boolean isPackageSearch()
+	{
+		return packageSearch;
+	}
+	public boolean isCustomerPackageSearch()
+	{
+		return customerPackageSearch;
+	}
+
 }
