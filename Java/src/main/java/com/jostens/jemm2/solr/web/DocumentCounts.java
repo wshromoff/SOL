@@ -23,6 +23,8 @@ public class DocumentCounts
 	private long designCount = 0;
 	private long partCount = 0;
 	private long customerCount = 0;
+	private long packageCount = 0;
+	private long customerPackageCount = 0;
 
 	public void generateCounts()
 	{
@@ -34,6 +36,8 @@ public class DocumentCounts
 			designCount = getCountForContentType("Design");
 			partCount = getCountForContentType("Part");
 			customerCount = getCountForContentType("Customer");
+			packageCount = getCountForContentType("Package");
+			customerPackageCount = getCountForContentType("CustomerPackage");
 
 			solr.close();
 			// If startingCounts is null then need to add this as a static instance for values at startup
@@ -72,6 +76,14 @@ public class DocumentCounts
 	{
 		return customerCount;
 	}
+	public long getPackageCount()
+	{
+		return packageCount;
+	}
+	public long getCustomerPackageCount()
+	{
+		return customerPackageCount;
+	}
 
 	public long getDeltaDesignCount()
 	{
@@ -85,13 +97,21 @@ public class DocumentCounts
 	{
 		return customerCount - startingCounts.getCustomerCount();
 	}
+	public long getDeltaPackageCount()
+	{
+		return packageCount - startingCounts.getPackageCount();
+	}
+	public long getDeltaCustomerPackageCount()
+	{
+		return customerPackageCount - startingCounts.getCustomerPackageCount();
+	}
 
 	/**
 	 * Return delta for all documents
 	 */
 	public long getDeltaCount()
 	{
-		long delta = getDeltaDesignCount() + getDeltaPartCount() + getDeltaCustomerCount();
+		long delta = getDeltaDesignCount() + getDeltaPartCount() + getDeltaCustomerCount() + getDeltaPackageCount() + getDeltaCustomerPackageCount();
 		return delta;
 	}
 
