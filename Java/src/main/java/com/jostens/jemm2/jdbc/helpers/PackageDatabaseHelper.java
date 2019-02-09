@@ -14,8 +14,6 @@ import com.jostens.jemm2.pojo.AssetPackage;
 import com.jostens.jemm2.pojo.CustomerPackage;
 import com.jostens.jemm2.pojo.Part;
 
-import oracle.jdbc.proxy.annotation.SetDelegate;
-
 public class PackageDatabaseHelper
 {
 
@@ -435,6 +433,12 @@ public class PackageDatabaseHelper
 		aPackage.setBusinessDefaultUse(rs.getString(11));
 		rs.close();
 		preparedSelectStatment.close();
+		
+		// Get the AssetPackage and set into CustomerPackage
+		AssetPackage assetPackage = new AssetPackage();
+		assetPackage.setID(aPackage.getPackageID());
+		getPackage(c, assetPackage);
+		aPackage.setaPackage(assetPackage);
 	}
 
 	/**

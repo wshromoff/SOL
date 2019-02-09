@@ -2,6 +2,8 @@ package com.jostens.jemm2.pojo;
 
 import java.util.Objects;
 
+import com.jostens.jemm2.solr.CustomerPackageDocument;
+
 public class CustomerPackage
 {
 
@@ -16,6 +18,8 @@ public class CustomerPackage
 	private String statusAutomation;
 	private String statusAvailability;
 	private String businessDefaultUse;
+	
+	private AssetPackage aPackage = null;
 	
 	public int getID()
 	{
@@ -136,4 +140,30 @@ public class CustomerPackage
 
 	}
 
+	/**
+	 * Return a CustomerPackageDocument representative of this CustomerPackage for addition to SOLR
+	 */
+	public CustomerPackageDocument getCustomerPackageDocument()
+	{
+		CustomerPackageDocument pd = new CustomerPackageDocument();
+		pd.setDatabaseID(getID());
+		pd.setName(getPackageID() + ":" + getCustomerID());
+		pd.setPartID(getaPackage().getPartID() + "");
+		pd.setDesignID(getaPackage().getDesignID() + "");
+		pd.setClientID(getCustomerID() + "");
+		pd.setStatusLifeCycle(getStatusLifeCycle());
+		pd.setStatusAvailability(getStatusAvailability());
+		pd.setBusinessDefaultUse(getBusinessDefaultUse());
+		
+		return pd;
+	}
+	
+	public AssetPackage getaPackage()
+	{
+		return aPackage;
+	}
+	public void setaPackage(AssetPackage aPackage)
+	{
+		this.aPackage = aPackage;
+	}
 }

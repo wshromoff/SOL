@@ -46,12 +46,20 @@ public class PackageHelperTest
 
 	}
 
-	@Test
-	public void persistCustomerDocuments() throws SQLException, IOException, SolrServerException
+//	@Test
+	public void persistPackageDocuments() throws SQLException, IOException, SolrServerException
 	{
 		PackageHelper helper = new PackageHelper();
 		
 		helper.persistAllPackageDocuments(c, solr);
+	}
+
+	@Test
+	public void persistCustomerPackageDocuments() throws SQLException, IOException, SolrServerException
+	{
+		PackageHelper helper = new PackageHelper();
+		
+		helper.persistAllCustomerPackageDocuments(c, solr);
 	}
 
 }

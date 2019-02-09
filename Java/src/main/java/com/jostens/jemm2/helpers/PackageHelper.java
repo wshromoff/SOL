@@ -14,6 +14,8 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 
 import com.jostens.jemm2.jdbc.helpers.PackageDatabaseHelper;
 import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.pojo.CustomerPackage;
+import com.jostens.jemm2.solr.CustomerPackageDocument;
 import com.jostens.jemm2.solr.PackageDocument;
 
 public class PackageHelper
@@ -111,5 +113,41 @@ public class PackageHelper
 		}
 	}
 
+	/**
+	 * Get all Customer Packages from Oracle and persist into SOLR
+	 * @throws SQLException 
+	 * @throws SolrServerException 
+	 * @throws IOException 
+	 */
+	public void persistAllCustomerPackageDocuments(Connection c, HttpSolrClient solr) throws SQLException, IOException, SolrServerException
+	{
+		PackageDatabaseHelper dbHelper = new PackageDatabaseHelper();
+		
+		List<Integer> customerPackages = dbHelper.getAllCustomerPackageIDs(c);
+
+		System.out.println("Customer Packages found = " + customerPackages.size());
+		
+		// Add each customer project document to SOLR
+		
+		int i = 0;
+		for (Integer customerPackageID : customerPackages)
+		{
+			i++;
+			System.out.println("" + i + " : " + customerPackageID);
+			CustomerPackage aPackage = new CustomerPackage();
+			aPackage.setID(customerPackageID.intValue());
+			dbHelper.getCustomerPackage(c, aPackage);
+			
+			// Now persist the design into SOLR
+			CustomerPackageDocument pd = aPackage.getCustomerPackageDocument();
+			solr.addBean(pd);
+			solr.commit();
+
+//			if (i >= 5)
+//			{
+//				break;
+//			}
+		}
+	}
 
 }
