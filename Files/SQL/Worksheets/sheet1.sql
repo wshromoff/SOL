@@ -47,3 +47,9 @@ WHERE t2.name IS NULL
 select mascot, count(*) from customer
 group by mascot
 order by count(*) desc;
+
+-- Show descending packageid count usage
+select packageid, count(*) from customer_package
+group by packageid
+order by count(*) desc;
+

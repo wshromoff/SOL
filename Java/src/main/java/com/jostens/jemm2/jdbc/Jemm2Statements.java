@@ -48,6 +48,9 @@ public class Jemm2Statements extends Statements
 	public static String GET_ALL_PACKAGEIDS = "GET_ALL_PACKAGEIDS";
 	public static String GET_ALL_CUSTOMER_PACKAGEIDS = "GET_ALL_CUSTOMER_PACKAGEIDS";
 
+	// List all the names of Image statements SQL statements as static constants
+	public static String GET_PART_FOLDER_PATH = "GET_PART_FOLDER_PATH";
+
 	/**
 	 * Method to return List of statement files to load.
 	 */
@@ -58,6 +61,7 @@ public class Jemm2Statements extends Statements
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/PartStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/CustomerStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/PackageStatements.sql");
+		filePaths.add("/com/jostens/jemm2/jdbc/resources/ImageStatements.sql");
 		return filePaths;
 	}
 

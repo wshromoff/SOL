@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.JEMM2Constants;
+import com.jostens.jemm2.jdbc.ConnectionHelper;
+import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.jdbc.helpers.ImagePathHelper;
 
 /**
  * Display the supplied image to a web site
@@ -29,33 +34,50 @@ public class ImageServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		Jemm2Statements statements = new Jemm2Statements();
+		statements.initializeStatements();
+		Connection c = ConnectionHelper.getJEMM2Connection();
+
 		System.out.println("Inside Image Servlet");
 		
+		String id = request.getParameter("id");
 		String type = request.getParameter("type");
-	       System.out.println("type=" + type);
+		System.out.println("ImageServlet=" + id + ":" + type);
 		
+		String filePath = "";
+		
+		// Use image path helper to get full path to .png image to use
+		ImagePathHelper helper = new ImagePathHelper();
+		
+		try
+		{
+			filePath = helper.getImagePath(c, id, type);
+			System.out.println("Image_Path= " + filePath);
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
 
 //	       ServletContext sc = getServletContext();
 //	       
 //	       InputStream is = sc.getResourceAsStream("/Users/wadeshromoff/assets/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_1b_2550.png");
 
-	       String filePath = "";
+		// Override the above found value if Constant says to use hard coded value
+       if (JEMM2Constants.useHardCoded)
+       {
+	       // hard coded paths are used during development testing
+	       filePath = JEMM2Constants.ROOT_DAM_PATH +   "/DAM/2/61/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_XX_2550.png";
+	       filePath = filePath.replace("XX", type);
+       }
 	       
-	       if (JEMM2Constants.useHardCoded)
-	       {
-		       // hard coded paths are used during development testing
-		       filePath = JEMM2Constants.ROOT_DAM_PATH +   "/DAM/2/61/BR000860_1062612_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_XX_2550.png";
-		       filePath = filePath.replace("XX", type);
-	       }
-	       else
-	       {
-	    	   // For demo testing need to get path from Asset table TODO:
-	       }
-	       File file = new File(filePath);
-	       FileInputStream fis = new FileInputStream(file);
-	        BufferedImage bi = ImageIO.read(fis);
-	        OutputStream os = response.getOutputStream();
-	        ImageIO.write(bi, "png", os);
+       ConnectionHelper.closeConnection(c);
+
+       File file = new File(filePath);
+       FileInputStream fis = new FileInputStream(file);
+       BufferedImage bi = ImageIO.read(fis);
+       OutputStream os = response.getOutputStream();
+       ImageIO.write(bi, "png", os);
 
 	        // SVG - NOT HANDLED - NEEDS LOTS OF WORK
 ////	        Blob blob = rs.getBlob("ICON");

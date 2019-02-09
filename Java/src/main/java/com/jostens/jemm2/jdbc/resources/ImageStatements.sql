@@ -1,0 +1,10 @@
+-- Statements related to getting image paths in support of the ImageServlet
+
+-- FOR PARTS, GET THE FOLDER PATH
+GET_PART_FOLDER_PATH
+{
+	SELECT B.FOLDER_PATH FROM PACKAGE A
+	INNER JOIN ASSET B ON B.PACKAGEID = A.ID
+	WHERE PARTID = [PARTID]
+	AND ([IMAGECOLOR] = 1 OR ISBESTAVAILABLE = 1)
+}
