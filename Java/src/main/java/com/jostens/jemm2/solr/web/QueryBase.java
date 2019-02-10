@@ -208,6 +208,7 @@ public abstract class QueryBase
 				}
 				String documentID = (String)doc.getFieldValue("id");
 				resultIDs.add(documentID);
+				hitCount++;
 			}
 		}
 	}

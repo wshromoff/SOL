@@ -27,7 +27,7 @@ public class PartDocumentSearch extends QueryBase
 				sb.append(" OR " + partName);
 			}
 			String queryText = "name:(" + sb.toString() + ")";
-			System.out.println("QT[1] " + queryText);
+			System.out.println("QT[1-1] " + queryText);
 			SolrQuery query = new SolrQuery();
 			query.set("q", queryText);
 			
@@ -44,7 +44,7 @@ public class PartDocumentSearch extends QueryBase
 				sb.append(" OR " + partName);
 			}
 			String queryText = "name:(" + sb.toString() + ")";
-			System.out.println("QT[2] " + queryText);
+			System.out.println("QT[1-2] " + queryText);
 			SolrQuery query = new SolrQuery();
 			query.set("q", queryText);
 			
@@ -60,7 +60,7 @@ public class PartDocumentSearch extends QueryBase
 			}
 
 			String queryText = "{!join from=id to=designID}keywords:(" + sb.toString() + ")";
-			System.out.println("QT[3] " + queryText);
+			System.out.println("QT[1-3] " + queryText);
 
 			SolrQuery query = new SolrQuery();
 			query.set("q", queryText);
