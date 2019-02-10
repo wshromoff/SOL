@@ -29,8 +29,10 @@ public class SearchResultsServlet extends HttpServlet
 		StringBuffer sb = new StringBuffer();
 		for (String docID : query.getResultIDs())
 		{
+			String documentType = getDocumentType(docID);
 			String resultDocument = HTMLHelper.getTemplateHTML("/SearchResultDocument.html");
 			resultDocument = resultDocument.replace("[DOCUMENT_ID]", docID);
+			resultDocument = resultDocument.replace("[DOCUMENT_TYPE]", documentType);
 			sb.append(resultDocument);
 			
 		}
@@ -40,4 +42,13 @@ public class SearchResultsServlet extends HttpServlet
 
 	}
 
+	private String getDocumentType(String docID)
+	{
+		if (docID.startsWith("PR"))
+		{
+			return "1b";
+		}
+		
+		return "ba";
+	}
 }
