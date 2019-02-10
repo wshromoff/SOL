@@ -17,6 +17,7 @@ import com.jostens.jemm2.jdbc.helpers.PackageDatabaseHelper;
 import com.jostens.jemm2.jdbc.helpers.PartDatabaseHelper;
 import com.jostens.jemm2.pojo.AssetPackage;
 import com.jostens.jemm2.pojo.Customer;
+import com.jostens.jemm2.pojo.CustomerPackage;
 import com.jostens.jemm2.pojo.Part;
 import com.jostens.jemm2.web.HTMLHelper;
 
@@ -54,7 +55,11 @@ public class AssetDetailsServlet extends HttpServlet
 		{
 			responseHTML = getPackageDetailsHtml(c, databaseID, true);
 		}
-		
+		if (id.startsWith("CP_"))
+		{
+			responseHTML = getCustomerPackageDetailsHtml(c, databaseID, true);
+		}
+
 		ConnectionHelper.closeConnection(c);
 
 		response.getWriter().append(responseHTML);
@@ -198,7 +203,80 @@ public class AssetDetailsServlet extends HttpServlet
 			responseHTML = responseHTML.replace("[CS]", getNullSafeValue(aPackage.getColorScheme()));
 			
 			// Now get the Part details
-			String partHTML = getPartDetailsHtml(c, 1688, false);
+			String partHTML = getPartDetailsHtml(c, aPackage.getPartID(), false);
+			responseHTML = responseHTML.replace("[PART_DETAILS]", partHTML);
+			
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		String actions = "";
+		if (includeActions)
+		{
+			actions = HTMLHelper.getTemplateHTML("/DetailsActions.html");
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append("<button type=\"button\">Mark for Download</button>");
+			
+			actions = actions.replace("[BUTTONS]", sb.toString());
+			
+//			System.out.println("ACTIONS = " + actions);
+			
+		}
+		responseHTML = responseHTML.replace("[ACTIONS]", actions);
+
+//		System.out.println("RSP=" + responseHTML);
+		
+		return responseHTML;
+		
+	}
+
+	private String getCustomerPackageDetailsHtml(Connection c, int databaseID, boolean includeActions)
+	{
+		// Displaying details about a part
+		// Get the HTML template and replace marker location with resource HTML
+		String responseHTML = HTMLHelper.getTemplateHTML("/CustomerPackageDetails.html");
+
+		// Get Part
+		PackageDatabaseHelper helper = new PackageDatabaseHelper();
+		CustomerPackage aPackage = new CustomerPackage();
+		aPackage.setID(databaseID);
+		
+		// Populate design2 from database
+		try
+		{
+			helper.getCustomerPackage(c, aPackage);
+			responseHTML = responseHTML.replace("[ID]", databaseID + "");
+			responseHTML = responseHTML.replace("[PACKAGE_NAME]", aPackage.getName());
+			responseHTML = responseHTML.replace("[ABU]", getNullSafeValue(aPackage.getAffiliationByUse()));
+			responseHTML = responseHTML.replace("[HUC]", getNullSafeValue(aPackage.getHistoricUseColor()));
+			responseHTML = responseHTML.replace("[HUD]", getNullSafeValue(aPackage.getHistoricUseDesign()));
+			responseHTML = responseHTML.replace("[SLC]", getNullSafeValue(aPackage.getStatusLifeCycle()));
+			responseHTML = responseHTML.replace("[SA]", getNullSafeValue(aPackage.getStatusAvailability()));
+			responseHTML = responseHTML.replace("[BDU]", getNullSafeValue(aPackage.getBusinessDefaultUse()));
+			responseHTML = responseHTML.replace("[BAT]", getNullSafeValue(aPackage.getaPackage().getBrandAssetType()));
+			responseHTML = responseHTML.replace("[BCT]", getNullSafeValue(aPackage.getaPackage().getBaseColorTones()));
+			responseHTML = responseHTML.replace("[EC]", getNullSafeValue(aPackage.getaPackage().getEnhancementColor()));
+			responseHTML = responseHTML.replace("[C1]", getNullSafeValue(aPackage.getaPackage().getColor1()));
+			responseHTML = responseHTML.replace("[C2]", getNullSafeValue(aPackage.getaPackage().getColor2()));
+			responseHTML = responseHTML.replace("[C3]", getNullSafeValue(aPackage.getaPackage().getColor3()));
+			responseHTML = responseHTML.replace("[C4]", getNullSafeValue(aPackage.getaPackage().getColor4()));
+			responseHTML = responseHTML.replace("[C5]", getNullSafeValue(aPackage.getaPackage().getColor5()));
+			responseHTML = responseHTML.replace("[C6]", getNullSafeValue(aPackage.getaPackage().getColor6()));
+			responseHTML = responseHTML.replace("[C7]", getNullSafeValue(aPackage.getaPackage().getColor7()));
+			responseHTML = responseHTML.replace("[C8]", getNullSafeValue(aPackage.getaPackage().getColor8()));
+			responseHTML = responseHTML.replace("[C9]", getNullSafeValue(aPackage.getaPackage().getColor9()));
+			responseHTML = responseHTML.replace("[C10]", getNullSafeValue(aPackage.getaPackage().getColor10()));
+			responseHTML = responseHTML.replace("[BC]", getNullSafeValue(aPackage.getaPackage().getBaseColor()));
+			responseHTML = responseHTML.replace("[CS]", getNullSafeValue(aPackage.getaPackage().getColorScheme()));
+
+			// Now get the Customer details
+			String customerHTML = getCustomerDetailsHtml(c, aPackage.getCustomerID(), false);
+			responseHTML = responseHTML.replace("[CUSTOMER_DETAILS]", customerHTML);
+
+			// Now get the Part details
+			String partHTML = getPartDetailsHtml(c, aPackage.getaPackage().getPartID(), false);
 			responseHTML = responseHTML.replace("[PART_DETAILS]", partHTML);
 			
 		} catch (SQLException e)
