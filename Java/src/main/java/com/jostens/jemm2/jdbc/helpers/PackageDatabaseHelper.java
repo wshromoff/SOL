@@ -339,16 +339,17 @@ public class PackageDatabaseHelper
 		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt);
 		// Populate the columns
 		preparedInsertStatment.setInt(1, customerPackage.getID());
-		preparedInsertStatment.setInt(2, customerPackage.getPackageID());
-		preparedInsertStatment.setInt(3, customerPackage.getCustomerID());
-		preparedInsertStatment.setString(4, customerPackage.getAffiliationByUse());
-		preparedInsertStatment.setString(5, customerPackage.getHistoricUseColor());
-		preparedInsertStatment.setString(6, customerPackage.getHistoricUseDesign());
-		preparedInsertStatment.setString(7, customerPackage.getStatusLifeCycle());
-		preparedInsertStatment.setString(8, customerPackage.getStatusCataloging());
-		preparedInsertStatment.setString(9, customerPackage.getStatusAutomation());
-		preparedInsertStatment.setString(10, customerPackage.getStatusAvailability());
-		preparedInsertStatment.setString(11, customerPackage.getBusinessDefaultUse());
+		preparedInsertStatment.setString(2, customerPackage.getName());
+		preparedInsertStatment.setInt(3, customerPackage.getPackageID());
+		preparedInsertStatment.setInt(4, customerPackage.getCustomerID());
+		preparedInsertStatment.setString(5, customerPackage.getAffiliationByUse());
+		preparedInsertStatment.setString(6, customerPackage.getHistoricUseColor());
+		preparedInsertStatment.setString(7, customerPackage.getHistoricUseDesign());
+		preparedInsertStatment.setString(8, customerPackage.getStatusLifeCycle());
+		preparedInsertStatment.setString(9, customerPackage.getStatusCataloging());
+		preparedInsertStatment.setString(10, customerPackage.getStatusAutomation());
+		preparedInsertStatment.setString(11, customerPackage.getStatusAvailability());
+		preparedInsertStatment.setString(12, customerPackage.getBusinessDefaultUse());
 		preparedInsertStatment.executeUpdate();
 		preparedInsertStatment.close();
 			
@@ -421,16 +422,17 @@ public class PackageDatabaseHelper
 		ResultSet rs = preparedSelectStatment.executeQuery();
 		rs.next();
 		rs.getInt(1);
-		aPackage.setPackageID(rs.getInt(2));
-		aPackage.setCustomerID(rs.getInt(3));
-		aPackage.setAffiliationByUse(rs.getString(4));
-		aPackage.setHistoricUseColor(rs.getString(5));
-		aPackage.setHistoricUseDesign(rs.getString(6));
-		aPackage.setStatusLifeCycle(rs.getString(7));
-		aPackage.setStatusCataloging(rs.getString(8));
-		aPackage.setStatusAutomation(rs.getString(9));
-		aPackage.setStatusAvailability(rs.getString(10));
-		aPackage.setBusinessDefaultUse(rs.getString(11));
+		aPackage.setName(rs.getString(2));
+		aPackage.setPackageID(rs.getInt(3));
+		aPackage.setCustomerID(rs.getInt(4));
+		aPackage.setAffiliationByUse(rs.getString(5));
+		aPackage.setHistoricUseColor(rs.getString(6));
+		aPackage.setHistoricUseDesign(rs.getString(7));
+		aPackage.setStatusLifeCycle(rs.getString(8));
+		aPackage.setStatusCataloging(rs.getString(9));
+		aPackage.setStatusAutomation(rs.getString(10));
+		aPackage.setStatusAvailability(rs.getString(11));
+		aPackage.setBusinessDefaultUse(rs.getString(12));
 		rs.close();
 		preparedSelectStatment.close();
 		

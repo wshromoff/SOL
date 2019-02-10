@@ -93,6 +93,8 @@ public class AssetPackage
 			return;
 		}
 		setName(stringArr[0]);
+		// Set full name into customerPackage
+		customerPackage.setName(getName());
 		setBrandAssetType(emptyToNull(stringArr[1]));
 		setPartName(emptyToNull(stringArr[2]));
 		setFirstCustomerID(emptyToNull(stringArr[3]));

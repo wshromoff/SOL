@@ -77,7 +77,7 @@ public class PackageDatabaseHelperTest
 		helper.persistPackage(c, aPackage);		
 	}
 
-//	@Test
+	@Test
 	public void testImportPackage() throws SQLException
 	{
 		AssetPackage aPackage = new AssetPackage("MO076155_1045582_crest_vector_flat_2t_dbks_0x_svs_rds_bks_x_x_x_x_x_x_x.cdr|Crest|MO076155|1045582|US|School|Silver|Silver|Red|Black|||||||Silver, Red, Black|Announcement (Traditional)|Announcement (Traditional)|Complete (Publish-Ready)|Cataloged|||2|Black|Customer Default|true|true|true|true|");
@@ -117,11 +117,12 @@ public class PackageDatabaseHelperTest
 		
 	}
 
-	@Test
+//	@Test
 	public void testPersistCustomerPackage() throws SQLException
 	{
 		PackageDatabaseHelper helper = new PackageDatabaseHelper();
 		CustomerPackage customerPackage = new CustomerPackage();
+		customerPackage.setName("name");
 		customerPackage.setPackageID(23);
 		customerPackage.setCustomerID(432);
 		customerPackage.setAffiliationByUse("a");

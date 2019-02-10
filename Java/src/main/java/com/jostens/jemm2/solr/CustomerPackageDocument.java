@@ -7,6 +7,7 @@ public class CustomerPackageDocument extends SOLRBase
 	private String designID = null;
 	private String partID = null;
 	private String clientID = null;
+	private String packageID = null;
 	private String statusLifeCycle = null;
 	private String statusAvailability = null;
 	private String businessDefaultUse = null;
@@ -64,6 +65,15 @@ public class CustomerPackageDocument extends SOLRBase
 	public void setBusinessDefaultUse(String businessDefaultUse)
 	{
 		this.businessDefaultUse = businessDefaultUse;
+	}	
+	public String getPackageID()
+	{
+		return packageID;
+	}
+	@Field
+	public void setPackageID(String packageID)
+	{
+		this.packageID = packageID;
 	}
 	
 	public String getContentTypeFull()

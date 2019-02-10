@@ -8,6 +8,7 @@ public class CustomerPackage
 {
 
 	private int ID = 0;
+	private String name;
 	private int packageID;
 	private int customerID;
 	private String affiliationByUse;
@@ -28,6 +29,14 @@ public class CustomerPackage
 	public void setID(int iD)
 	{
 		ID = iD;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 	public int getPackageID()
 	{
@@ -127,6 +136,7 @@ public class CustomerPackage
 			return false;
 		}
 		
+		if (!Objects.equals(getName(), aCustomerPackage.getName())) { return false; }
 		if (!Objects.equals(getAffiliationByUse(), aCustomerPackage.getAffiliationByUse())) { return false; }
 		if (!Objects.equals(getHistoricUseColor(), aCustomerPackage.getHistoricUseColor())) { return false; }
 		if (!Objects.equals(getHistoricUseDesign(), aCustomerPackage.getHistoricUseDesign())) { return false; }
@@ -147,7 +157,8 @@ public class CustomerPackage
 	{
 		CustomerPackageDocument pd = new CustomerPackageDocument();
 		pd.setDatabaseID(getID());
-		pd.setName(getPackageID() + ":" + getCustomerID());
+		pd.setName(getName());
+		pd.setPackageID("PK_" + pd.getFormattedID(getPackageID()));
 		pd.setPartID("PR_" + pd.getFormattedID(getaPackage().getPartID()));
 		pd.setDesignID("DS_" + pd.getFormattedID(getaPackage().getDesignID()));
 		pd.setClientID("CU_" + pd.getFormattedID(getCustomerID()));
