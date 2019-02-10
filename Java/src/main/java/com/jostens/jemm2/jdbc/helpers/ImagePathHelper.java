@@ -28,7 +28,13 @@ public class ImagePathHelper
 			// Retrieving a part image
 			imagePath = getPartImagePath(c, id + "", imageType);
 		}
-		
+
+		if (databaseID.startsWith("CU"))
+		{
+			// Retrieving a customer image
+			imagePath = getCustomerImagePath(c, id + "", imageType);
+		}
+
 		if (imagePath == null)
 		{
 			return "INVALID";
@@ -52,6 +58,35 @@ public class ImagePathHelper
 		if (rowFound)
 		{
 			imagePath = rs.getString(1);
+		}
+
+		rs.close();
+		statement.close();
+
+		return imagePath;
+	}
+
+	private String getCustomerImagePath(Connection c, String id, String imageType) throws SQLException
+	{
+		// Get the Asset table column that represents the supplied imageType
+		String imageColumn = getImageColumn(imageType);
+
+		String imagePath = null;
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CUSTOMER_FOLDER_PATH);
+		selectStmt = selectStmt.replace("[CUSTOMERID]", id);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		// Multiple rows can be returned, so need to loop through all looking for a Customer Default
+		while (rs.next())
+		{
+			String businessDefaultUse = rs.getString(1);
+			imagePath = rs.getString(2);
+			
+			if ("Customer Default".equals(businessDefaultUse))
+			{
+				break;
+			}
 		}
 
 		rs.close();

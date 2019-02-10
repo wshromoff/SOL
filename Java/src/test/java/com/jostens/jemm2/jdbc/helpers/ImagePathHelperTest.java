@@ -29,13 +29,22 @@ public class ImagePathHelperTest
 		ConnectionHelper.closeConnection(c);
 	}
 
-	@Test
+//	@Test
 	public void testGetPartPath() throws SQLException
 	{
 		ImagePathHelper helper = new ImagePathHelper();
 		
 		String partPath = helper.getImagePath(c, "PR_003352", "1b");
 		System.out.println("Part Image Path = " + partPath);
+	}
+
+	@Test
+	public void testGetCustomerPath() throws SQLException
+	{
+		ImagePathHelper helper = new ImagePathHelper();
+		
+		String partPath = helper.getImagePath(c, "CU_000007", "ba");
+		System.out.println("Customer Image Path = " + partPath);
 	}
 
 }
