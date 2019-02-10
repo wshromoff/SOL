@@ -40,7 +40,7 @@ public class PackageDocumentSearchTest
 		assertEquals(1, query.getHitCount());
 	}
 
-	@Test
+//	@Test
 	public void test1Keyword()
 	{
 		
@@ -48,6 +48,17 @@ public class PackageDocumentSearchTest
 		query.performQuery();
 		
 		System.out.println("Hit Count = " + query.getHitCount());
+	}
+
+	@Test
+	public void test1CustomerPackage()
+	{
+		
+		query.setQuery("BR000509_1051616_crest_vector_flat_3t_dbks_0x_gds_bls_rds_brs_bks_x_x_x_x_x.cdr");
+		query.performQuery();
+		
+		System.out.println("Hit Count = " + query.getHitCount());
+		assertEquals(1, query.getHitCount());
 	}
 
 }

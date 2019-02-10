@@ -23,11 +23,11 @@ public class PackageDocumentSearch extends QueryBase
 		if (!packages.isEmpty())
 		{
 			// Perform packages query off the name by taking whatever was provided and adding a wild card
-			String packageName = packages.get(0);
+			String packageName = removeCustomerNumber(packages.get(0));
 			StringBuffer sb = new StringBuffer(packageName + "*");
 			for (int i = 1; i < packages.size(); i++)
 			{
-				packageName = packages.get(i);
+				packageName = removeCustomerNumber(packages.get(i));
 				sb.append(" " + packageName + "*");
 			}
 			String queryText = "name:(" + sb.toString() + ")";
@@ -58,4 +58,24 @@ public class PackageDocumentSearch extends QueryBase
 
 	}
 
+	/*
+	 * Remove customer number if supplied with a customer package name
+	 */
+	private String removeCustomerNumber(String packageName)
+	{
+		String[] segments = packageName.split("_");	// Split name into segments
+		if (segments.length < 2)
+		{
+			return packageName;	// Less than 2 segments couldn't be a client number
+		}
+		String customerID = segments[1];	// Look at 2nd item in name to determine if all numeric and if so it's a customer ID
+		String regex = "\\d+";
+		if (customerID.matches(regex))
+		{
+			// Found a customer number remove this from name and return
+			String toRemove = "_" + customerID;
+			return packageName.replace(toRemove, "");
+		}
+		return packageName;
+	}
 }
