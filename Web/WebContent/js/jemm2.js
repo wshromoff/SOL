@@ -273,10 +273,12 @@ function lockDet1()
 	if (hidedet1 == true)
 	{
 		hidedet1 = false;
+		document.getElementById('detailActions').style.display = 'block';
 	}
 	else
 	{
 		hidedet1 = true;
+		document.getElementById('detailActions').style.display = 'none';
 	}
 
 }
