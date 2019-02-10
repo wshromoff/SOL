@@ -23,6 +23,8 @@ public class SearchServlet extends HttpServlet
 //		System.out.println("Inside Search Get Servlet");
 		
 		SOLRQuery solrQuery = SOLRQuery.getActiveQuery();
+		solrQuery.setHitCountOnly(true);
+		solrQuery.performQuery();		
 		String searchHTML = getBuiltOutTemplate(solrQuery);
 		
 

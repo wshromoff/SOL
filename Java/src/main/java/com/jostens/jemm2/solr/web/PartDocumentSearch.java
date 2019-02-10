@@ -33,6 +33,40 @@ public class PartDocumentSearch extends QueryBase
 			
 			executeQuery(query);
 		}
+		if (!parts.isEmpty())
+		{
+			// Perform Part query off of first segment of name which is a part
+			String partName = parts.get(0);
+			StringBuffer sb = new StringBuffer(partName);
+			for (int i = 1; i < parts.size(); i++)
+			{
+				partName = getPartIDFromPackageName(parts.get(i));
+				sb.append(" OR " + partName);
+			}
+			String queryText = "name:(" + sb.toString() + ")";
+			System.out.println("QT[2] " + queryText);
+			SolrQuery query = new SolrQuery();
+			query.set("q", queryText);
+			
+			executeQuery(query);
+		}
+		
+		if (!keywords.isEmpty())
+		{
+			StringBuffer sb = new StringBuffer(keywords.get(0) + "*");
+			for (int i = 1; i < keywords.size(); i++)
+			{
+				sb.append(" AND " + keywords.get(i) + "*");
+			}
+
+			String queryText = "{!join from=id to=designID}keywords:(" + sb.toString() + ")";
+			System.out.println("QT[3] " + queryText);
+
+			SolrQuery query = new SolrQuery();
+			query.set("q", queryText);
+			
+			executeQuery(query);
+		}
 	}
 
 	private String getPartIDFromPackageName(String packageName)

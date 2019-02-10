@@ -53,6 +53,7 @@ public abstract class QueryBase
 		parts.clear();
 		customers.clear();
 		packages.clear();
+		hitCount = 0;
 		
 		if (tokens.isEmpty())
 		{
