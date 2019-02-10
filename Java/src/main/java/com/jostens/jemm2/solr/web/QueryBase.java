@@ -1,6 +1,7 @@
 package com.jostens.jemm2.solr.web;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -12,6 +13,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 
+import com.jostens.jemm2.jdbc.ConnectionHelper;
+import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.wassoftware.solr.ConnectToSolr;
 
 /**
@@ -41,6 +44,10 @@ public abstract class QueryBase
 
 	// Flag to indicate if hit count only should only be calculated
 	private boolean hitCountOnly = true;
+	
+	// Make a database connection available
+	protected Connection c = null;
+
 
 	/**
 	 * Entry point for a SOLR query.  This method will perform initialization and then call the
@@ -61,6 +68,10 @@ public abstract class QueryBase
 			return;
 		}
 
+		Jemm2Statements statements = new Jemm2Statements();
+		statements.initializeStatements();
+		c = ConnectionHelper.getJEMM2Connection();
+
 		try
 		{
 			connect = new ConnectToSolr();
@@ -77,6 +88,9 @@ public abstract class QueryBase
 		{
 			e.printStackTrace();
 		}
+		
+		ConnectionHelper.closeConnection(c);
+
 	}
 	
 	/*
@@ -152,7 +166,7 @@ public abstract class QueryBase
 	/**
 	 * Abstract method that extender document search classes must implement
 	 */
-	protected abstract void performDocumentQuery()  throws SolrServerException, IOException;
+	protected abstract void performDocumentQuery()  throws Exception;
 
 	public String getQuery()
 	{

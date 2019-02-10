@@ -52,6 +52,9 @@ public class Jemm2Statements extends Statements
 	public static String GET_PART_FOLDER_PATH = "GET_PART_FOLDER_PATH";
 	public static String GET_CUSTOMER_FOLDER_PATH = "GET_CUSTOMER_FOLDER_PATH";
 
+	// List all the names of Search statements SQL as static constants
+	public static String GET_CUSTOMER_FROM_PART = "GET_CUSTOMER_FROM_PART";
+	
 	/**
 	 * Method to return List of statement files to load.
 	 */
@@ -63,6 +66,7 @@ public class Jemm2Statements extends Statements
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/CustomerStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/PackageStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/ImageStatements.sql");
+		filePaths.add("/com/jostens/jemm2/jdbc/resources/SearchStatements.sql");
 		return filePaths;
 	}
 

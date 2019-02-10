@@ -1,9 +1,6 @@
 package com.jostens.jemm2.solr.web;
 
-import java.io.IOException;
-
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServerException;
 
 /**
  * Perform Part specific search.
@@ -14,7 +11,7 @@ public class PartDocumentSearch extends QueryBase
 {
 
 	@Override
-	protected void performDocumentQuery() throws SolrServerException, IOException
+	protected void performDocumentQuery() throws Exception
 	{
 		if (!packages.isEmpty())
 		{
