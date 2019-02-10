@@ -1,0 +1,167 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;\f2\fmodern\fcharset0 Courier;
+\f3\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;\red106\green62\blue62;\red42\green0\blue255;\red63\green127\blue95;
+\red127\green0\blue85;\red0\green0\blue192;\red0\green0\blue0;\red0\green0\blue0;\red38\green38\blue38;
+\red237\green237\blue237;}
+{\*\expandedcolortbl;;\csgenericrgb\c41569\c24314\c24314;\csgenericrgb\c16471\c0\c100000;\csgenericrgb\c24706\c49804\c37255;
+\csgenericrgb\c49804\c0\c33333;\csgenericrgb\c0\c0\c75294;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c0;\cssrgb\c20000\c20000\c20000;
+\cssrgb\c94510\c94510\c94510;}
+\margl1440\margr1440\vieww16580\viewh12980\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf0 	ID NUMBER NOT NULL ENABLE,\
+	NAME VARCHAR2(250 BYTE) NOT NULL ENABLE,\
+	IDENTIFIER VARCHAR2(300 BYTE),\
+	PARTID NUMBER NOT NULL ENABLE,\
+	FIRSTCUSTOMERID VARCHAR2(50 BYTE),			-- USED TO HELP FIND ASSETS IN CUSTOMER PROFILE\
+	BRAND_ASSET_TYPE VARCHAR2(100 BYTE),\
+	BASE_COLOR_TONES VARCHAR2(100 BYTE),\
+	ENHANCEMENT_COLOR VARCHAR2(100 BYTE),\
+	COLOR1 VARCHAR2(100 BYTE),\
+	COLOR2 VARCHAR2(100 BYTE),\
+	COLOR3 VARCHAR2(100 BYTE),\
+	COLOR4 VARCHAR2(100 BYTE),\
+	COLOR5 VARCHAR2(100 BYTE),\
+	COLOR6 VARCHAR2(100 BYTE),\
+	COLOR7 VARCHAR2(100 BYTE),\
+	COLOR8 VARCHAR2(100 BYTE),\
+	COLOR9 VARCHAR2(100 BYTE),\
+	COLOR10 VARCHAR2(100 BYTE),\
+	BASE_COLOR VARCHAR2(100 BYTE),\
+	COLOR_SCHEME VARCHAR2(100 BYTE),\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 ID, NAME, IDENTIFIER, PARTID, FIRSTCUSTOMERID, BRAND_ASSET_TYPE, BASE_COLOR_TONES, ENHANCEMENT_COLOR, COLOR1, COLOR2, COLOR3, COLOR4, COLOR5, COLOR6, COLOR7, COLOR8, COLOR9, COLOR10, BASE_COLOR, COLOR_SCHEME\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 		String \cf2 newName\cf0  = getName().replace(getFirstCustomerID() + \cf3 "_"\cf0 , \cf3 ""\cf0 );\
+		setName(\cf2 newName\cf0 );\
+\pard\pardeftab720\partightenfactor0
+\cf4 //		setColor1(emptyToNull(stringArr[4]));		//		Skip\cf0 \
+\cf4 //		setColor2(emptyToNull(stringArr[5]));		// Affiliation by use		<Customer>\cf0 \
+		setBaseColor(emptyToNull(\cf2 stringArr\cf0 [6]));\
+		setColor1(emptyToNull(\cf2 stringArr\cf0 [7]));\
+		setColor2(emptyToNull(\cf2 stringArr\cf0 [8]));\
+		setColor3(emptyToNull(\cf2 stringArr\cf0 [9]));\
+		setColor4(emptyToNull(\cf2 stringArr\cf0 [10]));\
+		setColor5(emptyToNull(\cf2 stringArr\cf0 [11]));\
+		setColor6(emptyToNull(\cf2 stringArr\cf0 [12]));\
+		setColor7(emptyToNull(\cf2 stringArr\cf0 [13]));\
+		setColor8(emptyToNull(\cf2 stringArr\cf0 [14]));\
+		setColor9(emptyToNull(\cf2 stringArr\cf0 [15]));\
+\cf4 //		setColor10(emptyToNull(stringArr[16]));		// Export missed color10\cf0 \
+		setColorScheme(emptyToNull(\cf2 stringArr\cf0 [16]));\
+\cf4 //		setMascot(emptyToNull(stringArr[17]));		// Historic use color		<Customer>\cf0 \
+\cf4 //		setMascot(emptyToNull(stringArr[18]));		// Historic use design		<Customer>\cf0 \
+\cf4 //		setMascot(emptyToNull(stringArr[19]));		// Status life cycle		<Customer>\cf0 \
+\cf4 //		setMascot(emptyToNull(stringArr[20]));		// Status Cataloging		<Customer>\cf0 \
+\cf4 //		setMascot(emptyToNull(stringArr[21]));		// Status Automation		<Customer>\cf0 \
+\cf4 //		setMascot(emptyToNull(stringArr[22]));		// Status Availability		<Customer>\cf0 \
+		setBaseColorTones(emptyToNull(\cf2 stringArr\cf0 [23]));\
+		setEnhancementColor(emptyToNull(\cf2 stringArr\cf0 [24]));\
+\
+\
+\
+\
+\
+	\cf5 private\cf0  String \cf6 affiliationByUse\cf0 ;\
+	\cf5 private\cf0  String \cf6 historicUseColor\cf0 ;\
+	\cf5 private\cf0  String \cf6 historicUseDesign\cf0 ;\
+	\cf5 private\cf0  String \cf6 statusLifeCycle\cf0 ;\
+	\cf5 private\cf0  String \cf6 statusCataloging\cf0 ;\
+	\cf5 private\cf0  String \cf6 statusAutomation\cf0 ;\
+	\cf5 private\cf0  String \cf6 statusAvailability\cf0 ;\
+	\cf5 private\cf0  String \cf6 businessDefaultUse\cf0 ;\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 	\cf5 private\cf0  \cf5 int\cf0  \cf6 ID\cf0  = 0;\
+	\cf5 private\cf0  String \cf6 name\cf0 ;\
+	\cf5 private\cf0  String \cf6 firstCustomerID\cf0 ;\
+	\cf5 private\cf0  String \cf6 \ul \ulc6 partName\cf0 \ulnone ;\
+	\cf5 private\cf0  \cf5 int\cf0  \cf6 partID\cf0  = 0;\
+	\cf5 private\cf0  String \cf6 brandAssetType\cf0 ;\
+	\cf5 private\cf0  String \cf6 baseColorTones\cf0 ;\
+	\cf5 private\cf0  String \cf6 enhancementColor\cf0 ;\
+	\cf5 private\cf0  String \cf6 color1\cf0 ;\
+	\cf5 private\cf0  String \cf6 color2\cf0 ;\
+	\cf5 private\cf0  String \cf6 color3\cf0 ;\
+	\cf5 private\cf0  String \cf6 color4\cf0 ;\
+	\cf5 private\cf0  String \cf6 color5\cf0 ;\
+	\cf5 private\cf0  String \cf6 color6\cf0 ;\
+	\cf5 private\cf0  String \cf6 color7\cf0 ;\
+	\cf5 private\cf0  String \cf6 color8\cf0 ;\
+	\cf5 private\cf0  String \cf6 color9\cf0 ;\
+	\cf5 private\cf0  String \cf6 color10\cf0 ;\
+	\cf5 private\cf0  String \cf6 baseColor\cf0 ;\
+	\cf5 private\cf0  String \cf6 colorScheme\cf0 ;\
+	\cf5 private\cf0  String \cf6 \ul \ulc6 identifier\cf0 \ulnone ;\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\
+\
+\{!join from=id to=designID\}keywords:(Shark*)\
+city:miami or mascot:Bulls or name:*River*\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 city:(miami or Bulls)\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f2\fs24 \cf7 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 "designID":"DS_000263",\
+\
+\
+contentType:Package\
+contentType:Customer\
+\
+Fq: contentType:Part\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf8 \outl0\strokewidth0 Fq: contentType:Package\cf7 \outl0\strokewidth0 \strokec7 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf7 \
+city:(Bulls* Duluth*) or state:(Bulls* Duluth*) or mascot:(Bulls* Duluth*) or name:(*Bulls* *Duluth*)\
+\
+name:(BR006786_mascot* BR019501*)\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \{!join from=id to=designID\}keywords:(Shark*)\
+\
+\
+Data Integrity\
+Search For: BR002363\
+Part returns expected Part object\
+But Package returns:\
+Package: 
+\f3\fs24 \cf9 \cb10 \expnd0\expndtw0\kerning0
+BR002363_mascot_vector_flat_1t_dx_0x_prs_wts_x_x_x_x_x_x_x_x.cdr. And part: BR019501\
+	BR002363_mascot_vector_flat_1t_dx_0x_bks_x_x_x_x_x_x_x_x_x.cdr  And Part: BR019501\
+\
+Image files are: Correct\
+Image_Path= DAM/7/84/BR002363_2432847_mascot_vector_flat_1t_dx_0x_bks_x_x_x_x_x_x_x_x_x_ba_2550.png\
+Image_Path= DAM/9/94/BR002363_1321949_mascot_vector_flat_1t_dx_0x_prs_wts_x_x_x_x_x_x_x_x_ba_2550.png\
+\
+In data load these are 2 packages found\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf0 \cb1 \kerning1\expnd0\expndtw0 BR002363_1321949_mascot_vector_flat_1t_dx_0x_prs_wts_x_x_x_x_x_x_x_x.cdr|\ul Mascot\ulnone |BR002363|1321949|US|School|Purple|Purple|White||||||||Purple, White|Announcement (Digital)|Announcement (Digital)|Complete (Publish-Ready)|Cataloged|||1||Customer Default|true|true|true|true|\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs24 \cf9 \cb10 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf0 \cb1 \kerning1\expnd0\expndtw0 BR002363_2432847_mascot_vector_flat_1t_dx_0x_bks_x_x_x_x_x_x_x_x_x.cdr|\ul Mascot\ulnone |BR002363|2432847|US|School|Black|Black|||||||||Black|Announcement (Digital)|Announcement (Digital),Spirit Scarf|Complete (Publish-Ready)|Cataloged|||1||Business Default (Generic)|false|true|true|true|\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs24 \cf9 \cb10 \expnd0\expndtw0\kerning0
+\
+\
+}

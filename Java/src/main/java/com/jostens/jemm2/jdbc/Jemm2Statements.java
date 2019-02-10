@@ -51,6 +51,8 @@ public class Jemm2Statements extends Statements
 	// List all the names of Image statements SQL statements as static constants
 	public static String GET_PART_FOLDER_PATH = "GET_PART_FOLDER_PATH";
 	public static String GET_CUSTOMER_FOLDER_PATH = "GET_CUSTOMER_FOLDER_PATH";
+	public static String GET_PACKAGE_FOLDER_PATH = "GET_PACKAGE_FOLDER_PATH";
+	public static String GET_CUSTOMER_PACKAGE_FOLDER_PATH = "GET_CUSTOMER_PACKAGE_FOLDER_PATH";
 
 	// List all the names of Search statements SQL as static constants
 	public static String GET_CUSTOMER_FROM_PART = "GET_CUSTOMER_FROM_PART";

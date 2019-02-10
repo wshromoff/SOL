@@ -13,6 +13,20 @@ inner join asset b on b.packageid = a.packageid
 where a.customerid = 7
 and b.isbestavailable = 1
 
+-- Build query to find path to image for Package
+
+select b.folder_path from package a
+inner join asset b on b.packageid = a.id
+where a.id = 9
+and b.isbestavailable = 1
+
+-- Build query to find path to image for Customer Package
+
+select a.business_default_use, b.folder_path from customer_package a
+inner join asset b on b.packageid = a.packageid
+where a.id = 9
+and b.isbestavailable = 1
+
 -- Find customer IDs from a PARTID
 select c.customerid from package a
 inner join customer_package b on b.packageid = a.id

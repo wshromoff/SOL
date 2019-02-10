@@ -46,20 +46,32 @@ public class CustomerPackageDocumentSearch extends QueryBase
 		}
 		if (!keywords.isEmpty())
 		{
-			StringBuffer sb = new StringBuffer(keywords.get(0) + "*");
-			for (int i = 1; i < keywords.size(); i++)
+			// Under 3 character keywords not included in search
+			StringBuffer sb = null;
+			for (String keyword : keywords)
 			{
-				sb.append(" AND " + keywords.get(i) + "*");
+				if (keyword.length() < 3)
+				{
+					continue;
+				}
+				if (sb == null)
+				{
+					sb = new StringBuffer(keyword + "*");
+					continue;
+				}
+				sb.append(" AND " + keyword + "*");
 			}
-
-			String queryText = "{!join from=id to=designID}keywords:(" + sb.toString() + ")";
-			System.out.println("QT[1-3] " + queryText);
-
-			SolrQuery query = new SolrQuery();
-			query.set("q", queryText);
-			query.setFilterQueries("contentType:CustomerPackage");
-			
-			executeQuery(query);
+			if (sb != null)
+			{
+				String queryText = "{!join from=id to=designID}keywords:(" + sb.toString() + ")";
+				System.out.println("QT[4-2] " + queryText);
+	
+				SolrQuery query = new SolrQuery();
+				query.set("q", queryText);
+				query.setFilterQueries("contentType:Package");
+				
+				executeQuery(query);
+			}
 		}
 
 	}

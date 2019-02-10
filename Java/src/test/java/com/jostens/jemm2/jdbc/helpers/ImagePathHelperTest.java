@@ -38,13 +38,31 @@ public class ImagePathHelperTest
 		System.out.println("Part Image Path = " + partPath);
 	}
 
-	@Test
+//	@Test
 	public void testGetCustomerPath() throws SQLException
 	{
 		ImagePathHelper helper = new ImagePathHelper();
 		
 		String partPath = helper.getImagePath(c, "CU_000007", "ba");
 		System.out.println("Customer Image Path = " + partPath);
+	}
+
+	@Test
+	public void testGetPackagePath() throws SQLException
+	{
+		ImagePathHelper helper = new ImagePathHelper();
+		
+		String partPath = helper.getImagePath(c, "PK_000260", "ba");
+		System.out.println("Package Image Path = " + partPath);
+	}
+
+//	@Test
+	public void testGetCustomerPackagePath() throws SQLException
+	{
+		ImagePathHelper helper = new ImagePathHelper();
+		
+		String partPath = helper.getImagePath(c, "CP_000260", "ba");
+		System.out.println("Customer Package Image Path = " + partPath);
 	}
 
 }
