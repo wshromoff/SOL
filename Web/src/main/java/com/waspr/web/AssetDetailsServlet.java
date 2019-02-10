@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.jdbc.helpers.CustomerDatabaseHelper;
 import com.jostens.jemm2.jdbc.helpers.PartDatabaseHelper;
+import com.jostens.jemm2.pojo.Customer;
 import com.jostens.jemm2.pojo.Part;
 import com.jostens.jemm2.web.HTMLHelper;
 
@@ -35,54 +37,98 @@ public class AssetDetailsServlet extends HttpServlet
 				
 		String id = request.getParameter("ID");
 		int databaseID = new Integer(id.substring(3)).intValue();
-//		System.out.println("In Details Servlet " + id);
+		System.out.println("In Details Servlet " + id);
 
 		String responseHTML = null;
 		if (id.startsWith("PR_"))
 		{
-			// Displaying details about a part
-			// Get the HTML template and replace marker location with resource HTML
-			responseHTML = HTMLHelper.getTemplateHTML("/PartDetails.html");
-
-			// Get Part
-			PartDatabaseHelper helper = new PartDatabaseHelper();
-			Part part = new Part();
-			part.setID(databaseID);
-			
-			// Populate design2 from database
-			try
-			{
-				helper.getPart(c, part);
-				responseHTML = responseHTML.replace("[ID]", databaseID + "");
-				responseHTML = responseHTML.replace("[PART_NAME]", part.getName());
-				responseHTML = responseHTML.replace("[KEYWORDS]", part.getDesign().getKeywordsForDisplay());
-				responseHTML = responseHTML.replace("[ASSET_TYPE]", part.getDesign().getBrandAssetType());
-				responseHTML = responseHTML.replace("[INTENT]", part.getDesign().getCreativeIntentDesign());
-				responseHTML = responseHTML.replace("[AFFILIATION]", part.getDesign().getAffiliationByDepiction());
-				responseHTML = responseHTML.replace("[FUNC_INTENT]", part.getDesign().getFunctionalIntent());
-				responseHTML = responseHTML.replace("[USABILITY]", part.getDesign().getExtentOfUsability());
-				responseHTML = responseHTML.replace("[DISP_NAME]", part.getDesign().getDisplayedName());
-				responseHTML = responseHTML.replace("[MASCOT]", part.getDesign().getDisplayedMascot());
-				responseHTML = responseHTML.replace("[MOTO]", part.getDesign().getDisplayedMotto());
-				responseHTML = responseHTML.replace("[INITIALS]", part.getDesign().getDisplayedInitials());
-				responseHTML = responseHTML.replace("[YEAR_DATE]", part.getDesign().getDisplayedYearDate());
-				responseHTML = responseHTML.replace("[INSCRIPTION]", part.getDesign().getDisplayedInscription());
-				responseHTML = responseHTML.replace("[SUBJECT]", part.getDesign().getMainSubject());
-				responseHTML = responseHTML.replace("[MULTIPLE]", part.getDesign().getMultipleMainSubject());
-				responseHTML = responseHTML.replace("[PORTION]", part.getDesign().getPortionMainSubject());
-				responseHTML = responseHTML.replace("[VIEW]", part.getDesign().getViewMainSubject());
-			} catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-
+			responseHTML = getPartDetailsHtml(c, databaseID);
+		}
+		if (id.startsWith("CU_"))
+		{
+			responseHTML = getCustomerDetailsHtml(c, databaseID);
 		}
 		
 		ConnectionHelper.closeConnection(c);
 
-		// TODO Auto-generated method stub
 		response.getWriter().append(responseHTML);
 	}
 
+	private String getPartDetailsHtml(Connection c, int databaseID)
+	{
+		// Displaying details about a part
+		// Get the HTML template and replace marker location with resource HTML
+		String responseHTML = HTMLHelper.getTemplateHTML("/PartDetails.html");
+
+		// Get Part
+		PartDatabaseHelper helper = new PartDatabaseHelper();
+		Part part = new Part();
+		part.setID(databaseID);
+		
+		// Populate design2 from database
+		try
+		{
+			helper.getPart(c, part);
+			responseHTML = responseHTML.replace("[ID]", databaseID + "");
+			responseHTML = responseHTML.replace("[PART_NAME]", part.getName());
+			responseHTML = responseHTML.replace("[KEYWORDS]", part.getDesign().getKeywordsForDisplay());
+			responseHTML = responseHTML.replace("[ASSET_TYPE]", part.getDesign().getBrandAssetType());
+			responseHTML = responseHTML.replace("[INTENT]", part.getDesign().getCreativeIntentDesign());
+			responseHTML = responseHTML.replace("[AFFILIATION]", part.getDesign().getAffiliationByDepiction());
+			responseHTML = responseHTML.replace("[FUNC_INTENT]", part.getDesign().getFunctionalIntent());
+			responseHTML = responseHTML.replace("[USABILITY]", part.getDesign().getExtentOfUsability());
+			responseHTML = responseHTML.replace("[DISP_NAME]", part.getDesign().getDisplayedName());
+			responseHTML = responseHTML.replace("[MASCOT]", part.getDesign().getDisplayedMascot());
+			responseHTML = responseHTML.replace("[MOTO]", part.getDesign().getDisplayedMotto());
+			responseHTML = responseHTML.replace("[INITIALS]", part.getDesign().getDisplayedInitials());
+			responseHTML = responseHTML.replace("[YEAR_DATE]", part.getDesign().getDisplayedYearDate());
+			responseHTML = responseHTML.replace("[INSCRIPTION]", part.getDesign().getDisplayedInscription());
+			responseHTML = responseHTML.replace("[SUBJECT]", part.getDesign().getMainSubject());
+			responseHTML = responseHTML.replace("[MULTIPLE]", part.getDesign().getMultipleMainSubject());
+			responseHTML = responseHTML.replace("[PORTION]", part.getDesign().getPortionMainSubject());
+			responseHTML = responseHTML.replace("[VIEW]", part.getDesign().getViewMainSubject());
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return responseHTML;
+		
+	}
+
+	private String getCustomerDetailsHtml(Connection c, int databaseID)
+	{
+		// Displaying details about a part
+		// Get the HTML template and replace marker location with resource HTML
+		String responseHTML = HTMLHelper.getTemplateHTML("/CustomerDetails.html");
+
+		// Get Part
+		CustomerDatabaseHelper helper = new CustomerDatabaseHelper();
+		Customer customer = new Customer();
+		customer.setID(databaseID);
+		
+		// Populate design2 from database
+		try
+		{
+			helper.getCustomer(c, customer);
+			responseHTML = responseHTML.replace("[ID]", databaseID + "");
+			responseHTML = responseHTML.replace("[CUSTOMER_NAME]", customer.getName());
+			responseHTML = responseHTML.replace("[NUMBER]", customer.getCustomerID());
+			responseHTML = responseHTML.replace("[CITY]", customer.getCity());
+			responseHTML = responseHTML.replace("[STATE]", customer.getState());
+			responseHTML = responseHTML.replace("[MASCOT]", customer.getMascot());
+			responseHTML = responseHTML.replace("[COLOR1]", customer.getColor1());
+			responseHTML = responseHTML.replace("[COLOR2]", customer.getColor2());
+			responseHTML = responseHTML.replace("[COLOR3]", customer.getColor3());
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		System.out.println("RSP=" + responseHTML);
+		
+		return responseHTML;
+		
+	}
 
 }
