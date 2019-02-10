@@ -457,8 +457,8 @@ public class AssetPackage
 		PackageDocument pd = new PackageDocument();
 		pd.setDatabaseID(getID());
 		pd.setName(getName());
-		pd.setPartID(getPartID() + "");
-		pd.setDesignID(getDesignID() + "");
+		pd.setPartID("PR_" + pd.getFormattedID(getPartID()));
+		pd.setDesignID("DS_" + pd.getFormattedID(getDesignID()));
 		pd.setBrandAssetType(getBrandAssetType());
 		
 		return pd;

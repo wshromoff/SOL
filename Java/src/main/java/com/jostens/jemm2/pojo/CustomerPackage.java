@@ -148,9 +148,9 @@ public class CustomerPackage
 		CustomerPackageDocument pd = new CustomerPackageDocument();
 		pd.setDatabaseID(getID());
 		pd.setName(getPackageID() + ":" + getCustomerID());
-		pd.setPartID(getaPackage().getPartID() + "");
-		pd.setDesignID(getaPackage().getDesignID() + "");
-		pd.setClientID(getCustomerID() + "");
+		pd.setPartID("PR_" + pd.getFormattedID(getaPackage().getPartID()));
+		pd.setDesignID("DS_" + pd.getFormattedID(getaPackage().getDesignID()));
+		pd.setClientID("CU_" + pd.getFormattedID(getCustomerID()));
 		pd.setStatusLifeCycle(getStatusLifeCycle());
 		pd.setStatusAvailability(getStatusAvailability());
 		pd.setBusinessDefaultUse(getBusinessDefaultUse());
