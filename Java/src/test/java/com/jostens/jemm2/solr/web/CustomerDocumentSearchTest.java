@@ -52,7 +52,7 @@ public class CustomerDocumentSearchTest
 		System.out.println("Documents = " + query.getResultIDs());
 		assertEquals(1, query.getHitCount());
 	}
-	@Test
+//	@Test
 	public void test1Part()
 	{
 		
@@ -62,6 +62,30 @@ public class CustomerDocumentSearchTest
 		System.out.println("Hit Count = " + query.getHitCount());
 		System.out.println("Documents = " + query.getResultIDs());
 		assertEquals(1, query.getHitCount());
+	}
+
+//	@Test
+	public void testMascot()
+	{
+		
+		query.setQuery("Bulls");
+		query.performQuery();
+		
+		System.out.println("Hit Count = " + query.getHitCount());
+		System.out.println("Documents = " + query.getResultIDs());
+		assertEquals(1, query.getHitCount());
+	}
+
+	@Test
+	public void testMascotCity()
+	{
+		
+		query.setQuery("Bulls Duluth");
+		query.performQuery();
+		
+		System.out.println("Hit Count = " + query.getHitCount());
+		System.out.println("Documents = " + query.getResultIDs());
+		assertEquals(4, query.getHitCount());
 	}
 
 }

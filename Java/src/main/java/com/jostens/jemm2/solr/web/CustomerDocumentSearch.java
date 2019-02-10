@@ -71,6 +71,43 @@ public class CustomerDocumentSearch extends QueryBase
 			executeQuery(query);
 		}
 
+		if (!keywords.isEmpty())
+		{
+			// Search city, state or mascot on customer documents
+			// Need to build 2 term strings, 1 with an * after each word and 1 with an * before/after
+			// Terms must be at least 4 characters long
+			StringBuffer sb1 = null;
+			StringBuffer sb2 = null;
+			for (String keyword : keywords)
+			{
+				if (keyword.length() < 4)
+				{
+					continue;
+				}
+				if (sb1 == null)
+				{
+					sb1 = new StringBuffer("(" + keyword + "*");
+					sb2 = new StringBuffer("(" + "*" + keyword + "*");
+					continue;
+				}
+				sb1.append(" " + keyword + "*");
+				sb2.append(" *" + keyword + "*");
+			}
+			if (sb1 != null)
+			{
+				sb1.append(")");
+				sb2.append(")");
+				
+				String queryText = "city:" + sb1.toString() + " or state:" + sb1.toString() + " or mascot:" + sb1.toString() + " or name:" + sb2.toString();
+				System.out.println("BIG QUERY = " + queryText);
+				
+				SolrQuery query = new SolrQuery();
+				query.set("q", queryText);
+				
+				executeQuery(query);
+
+			}
+		}
 	}
 
 	private List<String> getCustomersUsingPart(String partName) throws SQLException
