@@ -64,6 +64,7 @@ public class PartDocumentSearch extends QueryBase
 
 			SolrQuery query = new SolrQuery();
 			query.set("q", queryText);
+			query.setFilterQueries("contentType:Part");
 			
 			executeQuery(query);
 		}
