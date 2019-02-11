@@ -30,23 +30,38 @@
     font-weight: bold;
 }
 
+.remove {
+    display: block;
+    width: 135px;
+    height: 22px;
+    background: #4E9CAF;
+    padding: 1px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
 </STYLE>
 
 <table >
 <tr>
 	<td width='100px'>Type: Part</td>
-	<td width='500px'>Name: BR002364</td>
+	<td width='500px'>Name: BR002364&nbsp;&nbsp;&nbsp;</td>
+	<td width='150px'>[BUTTON]</td>
 </tr>
 </table>
 <table >
 <tr>
 	<td width='200px'>Format: 
-		<select name="cars" style="width: 150px;">
-    		<option value="original">Original</option>
-    		<option value="PNGWatermark">PNG Watermark</option>
+		<select id="PR_000009_format" style="width: 150px;" onchange="selectChanged('PR_000009_format')">
+    		<option value="1">Original</option>
+    		<option value="2">PNG Watermark</option>
   		</select>
 	</td>
-	<td width='100px'><a class="button" href="image?id=PR_000009&type=ba" download id="PR_000009">Download</a></td>
+	<td width='100px'>
+		<a class="button" href="image?id=PR_000009&type=ba&1" download id="PR_000009">Download</a>
+	</td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
@@ -54,23 +69,13 @@
 </table>
 
 <label>
-  <input type="radio" name="test" value="PR_000009&type=1b"  onclick="imageClicked('PR_000009&type=1b')">
+  <input type="radio" name="PR_000009" onclick="imageClicked('PR_000009&type=1b')">
 	<img src="image?id=PR_000009&type=1b" width="160px" height="160px"/>
 </label>
 
 <label>
-  <input type="radio" name="test" value="PR_000009&type=ba"  onclick="imageClicked('PR_000009&type=ba')">
+  <input type="radio" name="PR_000009"  onclick="imageClicked('PR_000009&type=ba')">
 	<img src="image?id=PR_000009&type=ba" width="160px" height="160px" />
 </label>
 <br><br>
 <hr>
-
-
-<a href="image?id=PR_000009&type=ba" download >Click here to download</a>
-
-<img src="image?id=PR_000009&type=1b" width="160px" height="160px" />&nbsp;&nbsp;&nbsp;<a href="image?id=PR_000009&type=ba" download >Download Original</a>
-
-<!-- <a href="/images/myw3schoolsimage.jpg" download> -->
-<!--   <img src="/images/myw3schoolsimage.jpg" alt="W3Schools" width="154" height="142"> -->
-<!-- </a> -->
-

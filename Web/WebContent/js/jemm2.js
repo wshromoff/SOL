@@ -391,12 +391,58 @@ function displayDownloads()
 function imageClicked(targetButton)
 {
 	var splitArray = targetButton.split("&");
-//	$('#summaryCount').html(splitArray[0]);
-//	$('#content').html(splitArray[1]);
-//	displayCount("#resultCount", splitArray[0]);
 
-	alert(splitArray[0]);
+//	alert ("Hello ");
+//	alert (splitArray[0] + "_format");
+	// Get current value of format selection dropdown
+	var e = document.getElementById(splitArray[0] + "_format");
+	var format = e.options[e.selectedIndex].value;
+//	alert(format);
+
+//	alert(splitArray[0]);
 	document.getElementById(splitArray[0]).style.display = 'block';
-	document.getElementById(splitArray[0]).href = "image?id=" + targetButton;
+	document.getElementById(splitArray[0]).href = "image?id=" + targetButton + "&format=" + format;
 }
 
+function selectChanged(selectID)
+{
+	var splitArray = selectID.split("_");
+
+	// Get current value of format selection dropdown
+	var e = document.getElementById(selectID);
+	var format = e.options[e.selectedIndex].value;
+
+	var buttonID = splitArray[0] + "_" + splitArray[1];
+	var href = document.getElementById(buttonID).getAttribute("href");
+	splitArray = href.split("&");
+
+
+	var newHref = splitArray[0] + "&" + splitArray[1] + "&format=" + format;
+//	document.getElementById(splitArray[0]).style.display = 'block';
+	document.getElementById(buttonID).href = newHref;
+}
+
+function removeDownload(documentID)
+{
+	$.ajax({
+		url : 'download',
+		type : 'post',
+		data : {
+			document: documentID
+//			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+//			$('#content').html(splitArray[1]);
+			displayCount("#downloadCount", splitArray[0]);
+			
+//			document.getElementById("downloadBTN").innerHTML = splitArray[1];
+		}
+	});
+	
+	if (selected == 'downloads')
+	{
+		displayDownloads();
+	}
+}

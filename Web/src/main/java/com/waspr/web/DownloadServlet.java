@@ -30,12 +30,30 @@ public class DownloadServlet extends HttpServlet
 		System.out.println("INSIDE Download SERVLET (GET): ");
 
 		String downloadHTML = HTMLHelper.getTemplateHTML("/Downloads.html");
-//
-//		Jemm2Statements statements = new Jemm2Statements();
-//		statements.initializeStatements();
-//		Connection c = ConnectionHelper.getJEMM2Connection();
-//
-//		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+		
+
+		Jemm2Statements statements = new Jemm2Statements();
+		statements.initializeStatements();
+		Connection c = ConnectionHelper.getJEMM2Connection();
+
+		downloadHTML = downloadHTML.replace("[BUTTON]", getDownloadButton(c, "PR_001438"));
+
+		// Get documentIDs marked for download
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+		try
+		{
+			List<String> documentIDs = dbHelper.getAllActions(c, ActionsDatabaseHelper.DOWNLOAD);
+			// Now for all these documentIDs, build a StringBuffer of HTML using DownloadHTML for
+			// each document ID.  This StringBuffer will be placed into the Downloads.html
+			StringBuffer sb = new StringBuffer();
+			for (String documentID : documentIDs)
+			{
+				
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
 //
 //		int bookmarkCount = 0;
 //		List<String> documentIDs = new ArrayList<String>();
@@ -63,7 +81,7 @@ public class DownloadServlet extends HttpServlet
 //
 //		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENTS]", sb.toString());
 //
-//		ConnectionHelper.closeConnection(c);
+		ConnectionHelper.closeConnection(c);
 //		
 //		if (bookmarkCount == 0)
 //		{
@@ -82,6 +100,35 @@ public class DownloadServlet extends HttpServlet
 		}
 		
 		return "ba";
+	}
+
+	private String getDownloadButton(Connection c, String documentID)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("<button class=\"remove\" id=\"downloadBTN\" onclick=\"removeDownload('" + documentID + "'); return false;\">");
+		// Find button Text
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+		String buttonText = "";
+		try
+		{
+			boolean isDocumentBookmarked = dbHelper.isDocumentForAction(c, documentID, ActionsDatabaseHelper.DOWNLOAD);
+			if (isDocumentBookmarked)
+			{
+				buttonText = "Remove Download";
+			}
+			else
+			{
+				buttonText = "Download Asset";
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		sb.append(buttonText);
+		sb.append("</button>&nbsp;&nbsp;&nbsp;");
+//		System.out.println("BUTTON=" + sb.toString());
+		return sb.toString();
 	}
 
 

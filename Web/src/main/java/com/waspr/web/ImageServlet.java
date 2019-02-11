@@ -38,11 +38,12 @@ public class ImageServlet extends HttpServlet
 		statements.initializeStatements();
 		Connection c = ConnectionHelper.getJEMM2Connection();
 
-		System.out.println("Inside Image Servlet");
+		System.out.println("Inside Image Servlet " + request.getRequestURI());
 		
 		String id = request.getParameter("id");
 		String type = request.getParameter("type");
-		System.out.println("ImageServlet=" + id + ":" + type);
+		String format = request.getParameter("format");		// Value selected for format dropdown list
+		System.out.println("ImageServlet=" + id + ":" + type + ":" + format);
 		
 		String filePath = "";
 		
