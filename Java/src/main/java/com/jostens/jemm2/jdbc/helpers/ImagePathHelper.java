@@ -86,14 +86,20 @@ public class ImagePathHelper
 		String imagePath = null;
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CUSTOMER_FOLDER_PATH);
 		selectStmt = selectStmt.replace("[CUSTOMERID]", id);
-		
+
 		Statement statement = c.createStatement();
 		ResultSet rs = statement.executeQuery(selectStmt);
 
-		boolean rowFound = rs.next();
-		if (rowFound)
+		// Multiple rows can be returned, so need to loop through all looking for a Customer Default
+		while (rs.next())
 		{
-			imagePath = rs.getString(1);
+			String businessDefaultUse = rs.getString(1);
+			imagePath = rs.getString(2);
+			
+			if ("Customer Default".equals(businessDefaultUse))
+			{
+				break;
+			}
 		}
 
 		rs.close();

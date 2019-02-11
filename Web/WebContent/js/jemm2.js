@@ -282,3 +282,10 @@ function lockDet1()
 	}
 
 }
+
+
+// Function for handling bookmarks
+function bookmark(documentID)
+{
+	alert(documentID);
+}

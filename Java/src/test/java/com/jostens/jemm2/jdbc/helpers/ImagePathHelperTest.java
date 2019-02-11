@@ -38,7 +38,7 @@ public class ImagePathHelperTest
 		System.out.println("Part Image Path = " + partPath);
 	}
 
-//	@Test
+	@Test
 	public void testGetCustomerPath() throws SQLException
 	{
 		ImagePathHelper helper = new ImagePathHelper();
@@ -47,7 +47,7 @@ public class ImagePathHelperTest
 		System.out.println("Customer Image Path = " + partPath);
 	}
 
-	@Test
+//	@Test
 	public void testGetPackagePath() throws SQLException
 	{
 		ImagePathHelper helper = new ImagePathHelper();

@@ -45,19 +45,19 @@ public class AssetDetailsServlet extends HttpServlet
 		String responseHTML = null;
 		if (id.startsWith("PR_"))
 		{
-			responseHTML = getPartDetailsHtml(c, databaseID, true);
+			responseHTML = getPartDetailsHtml(c, id, databaseID, true);
 		}
 		if (id.startsWith("CU_"))
 		{
-			responseHTML = getCustomerDetailsHtml(c, databaseID, true);
+			responseHTML = getCustomerDetailsHtml(c, id, databaseID, true);
 		}
 		if (id.startsWith("PK_"))
 		{
-			responseHTML = getPackageDetailsHtml(c, databaseID, true);
+			responseHTML = getPackageDetailsHtml(c, id, databaseID, true);
 		}
 		if (id.startsWith("CP_"))
 		{
-			responseHTML = getCustomerPackageDetailsHtml(c, databaseID, true);
+			responseHTML = getCustomerPackageDetailsHtml(c, id, databaseID, true);
 		}
 
 		ConnectionHelper.closeConnection(c);
@@ -65,7 +65,7 @@ public class AssetDetailsServlet extends HttpServlet
 		response.getWriter().append(responseHTML);
 	}
 
-	private String getPartDetailsHtml(Connection c, int databaseID, boolean includeActions)
+	private String getPartDetailsHtml(Connection c, String documentID, int databaseID, boolean includeActions)
 	{
 		// Displaying details about a part
 		// Get the HTML template and replace marker location with resource HTML
@@ -109,7 +109,8 @@ public class AssetDetailsServlet extends HttpServlet
 			actions = HTMLHelper.getTemplateHTML("/DetailsActions.html");
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<button type=\"button\">Mark for Download</button>");
+//			sb.append("<button type=\"button\">Mark for Download</button>");
+			sb.append(getBookmarkButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 
@@ -121,7 +122,7 @@ public class AssetDetailsServlet extends HttpServlet
 		
 	}
 
-	private String getCustomerDetailsHtml(Connection c, int databaseID, boolean includeActions)
+	private String getCustomerDetailsHtml(Connection c, String documentID, int databaseID, boolean includeActions)
 	{
 		// Displaying details about a part
 		// Get the HTML template and replace marker location with resource HTML
@@ -156,20 +157,30 @@ public class AssetDetailsServlet extends HttpServlet
 			actions = HTMLHelper.getTemplateHTML("/DetailsActions.html");
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<button type=\"button\">Mark for Download</button>");
+//			sb.append("<button type=\"button\">Mark for Download</button>");
+			sb.append(getBookmarkButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 			
 		}
 		responseHTML = responseHTML.replace("[ACTIONS]", actions);
 
-//		System.out.println("RSP=" + responseHTML);
+		System.out.println("RSP=" + responseHTML);
 		
 		return responseHTML;
 		
 	}
+	
+	private String getBookmarkButton(Connection c, String documentID)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("<button onclick=\"bookmark('" + documentID + "'); return false;\">");
+		sb.append("Bookmark Asset");
+		sb.append("</button>&nbsp;&nbsp;&nbsp;");
+		return sb.toString();
+	}
 
-	private String getPackageDetailsHtml(Connection c, int databaseID, boolean includeActions)
+	private String getPackageDetailsHtml(Connection c, String documentID, int databaseID, boolean includeActions)
 	{
 		// Displaying details about a part
 		// Get the HTML template and replace marker location with resource HTML
@@ -203,7 +214,7 @@ public class AssetDetailsServlet extends HttpServlet
 			responseHTML = responseHTML.replace("[CS]", getNullSafeValue(aPackage.getColorScheme()));
 			
 			// Now get the Part details
-			String partHTML = getPartDetailsHtml(c, aPackage.getPartID(), false);
+			String partHTML = getPartDetailsHtml(c, documentID, aPackage.getPartID(), false);
 			responseHTML = responseHTML.replace("[PART_DETAILS]", partHTML);
 			
 		} catch (SQLException e)
@@ -217,7 +228,8 @@ public class AssetDetailsServlet extends HttpServlet
 			actions = HTMLHelper.getTemplateHTML("/DetailsActions.html");
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<button type=\"button\">Mark for Download</button>");
+//			sb.append("<button type=\"button\">Mark for Download</button>");
+			sb.append(getBookmarkButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 			
@@ -232,7 +244,7 @@ public class AssetDetailsServlet extends HttpServlet
 		
 	}
 
-	private String getCustomerPackageDetailsHtml(Connection c, int databaseID, boolean includeActions)
+	private String getCustomerPackageDetailsHtml(Connection c, String documentID, int databaseID, boolean includeActions)
 	{
 		// Displaying details about a part
 		// Get the HTML template and replace marker location with resource HTML
@@ -272,11 +284,11 @@ public class AssetDetailsServlet extends HttpServlet
 			responseHTML = responseHTML.replace("[CS]", getNullSafeValue(aPackage.getaPackage().getColorScheme()));
 
 			// Now get the Customer details
-			String customerHTML = getCustomerDetailsHtml(c, aPackage.getCustomerID(), false);
+			String customerHTML = getCustomerDetailsHtml(c, documentID, aPackage.getCustomerID(), false);
 			responseHTML = responseHTML.replace("[CUSTOMER_DETAILS]", customerHTML);
 
 			// Now get the Part details
-			String partHTML = getPartDetailsHtml(c, aPackage.getaPackage().getPartID(), false);
+			String partHTML = getPartDetailsHtml(c, documentID, aPackage.getaPackage().getPartID(), false);
 			responseHTML = responseHTML.replace("[PART_DETAILS]", partHTML);
 			
 		} catch (SQLException e)
@@ -290,7 +302,8 @@ public class AssetDetailsServlet extends HttpServlet
 			actions = HTMLHelper.getTemplateHTML("/DetailsActions.html");
 			
 			StringBuffer sb = new StringBuffer();
-			sb.append("<button type=\"button\">Mark for Download</button>");
+//			sb.append("<button type=\"button\">Mark for Download</button>");
+			sb.append(getBookmarkButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 			
