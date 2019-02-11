@@ -10,7 +10,7 @@ $(document).ready(function()
 {
 //			alert("WHATUP");
 //			loadData();
-	totalsInterval = setInterval(getTabTotals, 150000);
+	totalsInterval = setInterval(getTabTotals, 30000);
 		});
 
 // getTabTotals - Generates all the tab totals and displays their values
@@ -22,6 +22,7 @@ function getTabTotals()
 			var splitArray = responseText.split(",");
 			displayCount("#summaryCount", splitArray[0]);
 			displayCount("#resultCount", splitArray[1]);
+			displayCount("#bookmarkCount", splitArray[2]);
 		}
 	});
 

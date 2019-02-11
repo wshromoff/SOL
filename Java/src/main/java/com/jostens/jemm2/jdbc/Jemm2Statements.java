@@ -56,6 +56,12 @@ public class Jemm2Statements extends Statements
 
 	// List all the names of Search statements SQL as static constants
 	public static String GET_CUSTOMER_FROM_PART = "GET_CUSTOMER_FROM_PART";
+
+	// List all statements related to bookmarks
+	public static String GET_BOOKMARK_COUNT = "GET_BOOKMARK_COUNT";
+	public static String INSERT_BOOKMARK = "INSERT_BOOKMARK";
+	public static String GET_BOOKMARK_DOCUMENTID = "GET_BOOKMARK_DOCUMENTID";
+	public static String DELETE_BOOKMARK = "DELETE_BOOKMARK";
 	
 	/**
 	 * Method to return List of statement files to load.
@@ -69,6 +75,7 @@ public class Jemm2Statements extends Statements
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/PackageStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/ImageStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/SearchStatements.sql");
+		filePaths.add("/com/jostens/jemm2/jdbc/resources/BookmarkStatements.sql");
 		return filePaths;
 	}
 

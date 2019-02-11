@@ -32,7 +32,7 @@ public class SummaryServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		System.out.println("Inside Summary Servlet");
+//		System.out.println("Inside Summary Servlet");
 		
 		// Get the HTML template and replace marker location with resource HTML
 		String dashboardHTML = HTMLHelper.getTemplateHTML("/Dashboard.html");

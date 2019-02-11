@@ -1,6 +1,8 @@
 package com.waspr.web;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jostens.jemm2.jdbc.ConnectionHelper;
+import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.jdbc.helpers.BookmarkDatabaseHelper;
 import com.jostens.jemm2.solr.web.DocumentCounts;
 import com.jostens.jemm2.solr.web.SOLRQuery;
 
@@ -26,6 +31,10 @@ public class TabsTotals extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 //		System.out.println("Inside tab totals Servlet");
+		Jemm2Statements statements = new Jemm2Statements();
+		statements.initializeStatements();
+		Connection c = ConnectionHelper.getJEMM2Connection();
+
 		
 		// Get the current SOLR document counts and take the delta count as documents changed today
 		DocumentCounts helper = new DocumentCounts();
@@ -35,7 +44,20 @@ public class TabsTotals extends HttpServlet
 		// Get the most recent query count
 		long searchResultsValue = SOLRQuery.getActiveQuery().getHitCount();
 
-		response.getWriter().append(dashboardValue + "," + searchResultsValue);
+		// Get bookmark count
+		BookmarkDatabaseHelper bmHelper = new BookmarkDatabaseHelper();
+		int bookmarkCount = 0;
+		try
+		{
+			bookmarkCount = bmHelper.getBookmarkCount(c);
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		ConnectionHelper.closeConnection(c);
+
+		response.getWriter().append(dashboardValue + "," + searchResultsValue + "," + bookmarkCount);
 
 	}
 
