@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
-import com.jostens.jemm2.jdbc.helpers.BookmarkDatabaseHelper;
+import com.jostens.jemm2.jdbc.helpers.ActionsDatabaseHelper;
 import com.jostens.jemm2.solr.web.DocumentCounts;
 import com.jostens.jemm2.solr.web.SOLRQuery;
 
@@ -45,11 +45,11 @@ public class TabsTotals extends HttpServlet
 		long searchResultsValue = SOLRQuery.getActiveQuery().getHitCount();
 
 		// Get bookmark count
-		BookmarkDatabaseHelper bmHelper = new BookmarkDatabaseHelper();
+		ActionsDatabaseHelper bmHelper = new ActionsDatabaseHelper();
 		int bookmarkCount = 0;
 		try
 		{
-			bookmarkCount = bmHelper.getBookmarkCount(c);
+			bookmarkCount = bmHelper.getActionCount(c, ActionsDatabaseHelper.BOOKMARK);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();

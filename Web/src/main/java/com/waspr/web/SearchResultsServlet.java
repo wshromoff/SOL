@@ -38,7 +38,12 @@ public class SearchResultsServlet extends HttpServlet
 		}
 
 		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENTS]", sb.toString());
-		
+
+		if (query.getResultIDs().isEmpty())
+		{
+			dashboardHTML = "";
+		}
+
 		System.out.println("DashboardHTML:" + dashboardHTML);
 		response.getWriter().append(dashboardHTML);
 

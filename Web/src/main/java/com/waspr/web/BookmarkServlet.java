@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
-import com.jostens.jemm2.jdbc.helpers.BookmarkDatabaseHelper;
+import com.jostens.jemm2.jdbc.helpers.ActionsDatabaseHelper;
 import com.jostens.jemm2.web.HTMLHelper;
 
 @WebServlet("/bookmark")
@@ -35,20 +35,20 @@ public class BookmarkServlet extends HttpServlet
 		statements.initializeStatements();
 		Connection c = ConnectionHelper.getJEMM2Connection();
 
-		BookmarkDatabaseHelper dbHelper = new BookmarkDatabaseHelper();
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
 
 		int bookmarkCount = 0;
 		List<String> documentIDs = new ArrayList<String>();
 		try
 		{
-			documentIDs = dbHelper.getAllBookmarks(c);
-			bookmarkCount = dbHelper.getBookmarkCount(c);
+			documentIDs = dbHelper.getAllActions(c, ActionsDatabaseHelper.BOOKMARK);
+			bookmarkCount = dbHelper.getActionCount(c, ActionsDatabaseHelper.BOOKMARK);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		
-		System.out.println("IDs=" + documentIDs);
+//		System.out.println("IDs=" + documentIDs);
 		// Build up all the search result document TD cells
 		StringBuffer sb = new StringBuffer();
 		for (String docID : documentIDs)
@@ -64,6 +64,11 @@ public class BookmarkServlet extends HttpServlet
 		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENTS]", sb.toString());
 
 		ConnectionHelper.closeConnection(c);
+		
+		if (bookmarkCount == 0)
+		{
+			dashboardHTML = "";
+		}
 
 		System.out.println("DashboardHTML:" + dashboardHTML);
 		response.getWriter().append(bookmarkCount + "," + dashboardHTML);
@@ -93,22 +98,22 @@ public class BookmarkServlet extends HttpServlet
 		int bookmarkCount = 0;
 		String buttonText = "";
 		
-		BookmarkDatabaseHelper dbHelper = new BookmarkDatabaseHelper();
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
 		try
 		{
-			boolean isDocumentBookmarked = dbHelper.isDocumentBookmarked(c, documentID);
+			boolean isDocumentBookmarked = dbHelper.isDocumentForAction(c, documentID, ActionsDatabaseHelper.BOOKMARK);
 			if (isDocumentBookmarked)
 			{
 				// Document is bookmarked, so like a toggle remove the bookmark
-				dbHelper.deleteBookmark(c, documentID);
+				dbHelper.deleteAction(c, documentID, ActionsDatabaseHelper.BOOKMARK);
 				buttonText = "Bookmark Asset";
 			}
 			else
 			{
-				dbHelper.addBookmark(c, documentID);
+				dbHelper.addAction(c, documentID, ActionsDatabaseHelper.BOOKMARK);
 				buttonText = "Remove Bookmark";
 			}
-			bookmarkCount = dbHelper.getBookmarkCount(c);
+			bookmarkCount = dbHelper.getActionCount(c, ActionsDatabaseHelper.BOOKMARK);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();

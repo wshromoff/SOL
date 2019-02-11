@@ -54,6 +54,7 @@ function clearSelected()
 
 function setSelected()
 {
+	hidedet1 = true;
 	if (selected != null)
 	{
 		document.getElementById(selected).className = "active";
@@ -308,7 +309,6 @@ function bookmark(documentID)
 	
 	if (selected == 'bookmarks')
 	{
-		alert("BOOM");
 		displayBookmarks();
 	}
 }
