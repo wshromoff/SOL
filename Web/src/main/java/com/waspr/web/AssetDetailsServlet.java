@@ -223,6 +223,7 @@ public class AssetDetailsServlet extends HttpServlet
 			StringBuffer sb = new StringBuffer();
 //			sb.append("<button type=\"button\">Mark for Download</button>");
 			sb.append(getBookmarkButton(c, documentID));
+			sb.append(getDownloadButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 			
@@ -297,6 +298,7 @@ public class AssetDetailsServlet extends HttpServlet
 			StringBuffer sb = new StringBuffer();
 //			sb.append("<button type=\"button\">Mark for Download</button>");
 			sb.append(getBookmarkButton(c, documentID));
+			sb.append(getDownloadButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 			

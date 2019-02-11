@@ -29,7 +29,7 @@ public class DownloadServlet extends HttpServlet
 	{
 		System.out.println("INSIDE Download SERVLET (GET): ");
 
-//		String dashboardHTML = HTMLHelper.getTemplateHTML("/SearchResults.html");
+		String downloadHTML = HTMLHelper.getTemplateHTML("/Downloads.html");
 //
 //		Jemm2Statements statements = new Jemm2Statements();
 //		statements.initializeStatements();
@@ -71,7 +71,7 @@ public class DownloadServlet extends HttpServlet
 //		}
 //
 //		System.out.println("DashboardHTML:" + dashboardHTML);
-		response.getWriter().append(0 + "," + "HELLO");
+		response.getWriter().append(0 + "," + downloadHTML);
 	}
 	
 	private String getDocumentType(String docID)
