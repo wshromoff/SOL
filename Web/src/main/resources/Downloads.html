@@ -1,5 +1,70 @@
 
-HELLO  <BR><BR>
+<STYLE>
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 2px solid #f00;
+}
+
+.button {
+    display: none;
+    width: 85px;
+    height: 20px;
+    background: #4E9CAF;
+    padding: 1px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+</STYLE>
+
+<table >
+<tr>
+	<td width='100px'>Type: Part</td>
+	<td width='500px'>Name: BR002364</td>
+</tr>
+</table>
+<table >
+<tr>
+	<td width='200px'>Format: 
+		<select name="cars" style="width: 150px;">
+    		<option value="original">Original</option>
+    		<option value="PNGWatermark">PNG Watermark</option>
+  		</select>
+	</td>
+	<td width='100px'><a class="button" href="image?id=PR_000009&type=ba" download id="PR_000009">Download</a></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+</tr>
+</table>
+
+<label>
+  <input type="radio" name="test" value="PR_000009&type=1b"  onclick="imageClicked('PR_000009&type=1b')">
+	<img src="image?id=PR_000009&type=1b" width="160px" height="160px"/>
+</label>
+
+<label>
+  <input type="radio" name="test" value="PR_000009&type=ba"  onclick="imageClicked('PR_000009&type=ba')">
+	<img src="image?id=PR_000009&type=ba" width="160px" height="160px" />
+</label>
+<br><br>
+<hr>
+
 
 <a href="image?id=PR_000009&type=ba" download >Click here to download</a>
 

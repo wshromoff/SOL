@@ -388,4 +388,15 @@ function displayDownloads()
 	});
 }
 
+function imageClicked(targetButton)
+{
+	var splitArray = targetButton.split("&");
+//	$('#summaryCount').html(splitArray[0]);
+//	$('#content').html(splitArray[1]);
+//	displayCount("#resultCount", splitArray[0]);
+
+	alert(splitArray[0]);
+	document.getElementById(splitArray[0]).style.display = 'block';
+	document.getElementById(splitArray[0]).href = "image?id=" + targetButton;
+}
 
