@@ -62,6 +62,7 @@ public class Jemm2Statements extends Statements
 	public static String INSERT_BOOKMARK = "INSERT_BOOKMARK";
 	public static String GET_BOOKMARK_DOCUMENTID = "GET_BOOKMARK_DOCUMENTID";
 	public static String DELETE_BOOKMARK = "DELETE_BOOKMARK";
+	public static String GET_ALL_BOOKMARKS = "GET_ALL_BOOKMARKS";
 	
 	/**
 	 * Method to return List of statement files to load.

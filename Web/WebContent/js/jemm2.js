@@ -286,7 +286,7 @@ function lockDet1()
 }
 
 
-// Function for handling bookmarks
+// Function for adding/removing handling bookmarks
 function bookmark(documentID)
 {
 	$.ajax({
@@ -305,5 +305,35 @@ function bookmark(documentID)
 			document.getElementById("bookmarkBTN").innerHTML = splitArray[1];
 		}
 	});
-
+	
+	if (selected == 'bookmarks')
+	{
+		alert("BOOM");
+		displayBookmarks();
+	}
 }
+//Function for adding/removing handling bookmarks
+function displayBookmarks()
+{
+	clearSelected();
+	selected = "bookmarks";
+	setSelected();
+	
+	$.ajax({
+		url : 'bookmark',
+//		type : 'post',
+		data : {
+//			document: documentID
+//			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+			$('#content').html(splitArray[1]);
+			displayCount("#bookmarkCount", splitArray[0]);
+			
+//			document.getElementById("bookmarkBTN").innerHTML = splitArray[1];
+		}
+	});
+}
+

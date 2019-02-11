@@ -2,6 +2,7 @@ package com.jostens.jemm2.jdbc.helpers;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -43,7 +44,7 @@ public class BookmarkDatabaseHelperTest
 		helper.addBookmark(c, "BR_12345");
 	}
 
-	@Test
+//	@Test
 	public void testIsBookmarked() throws SQLException
 	{
 		BookmarkDatabaseHelper helper = new BookmarkDatabaseHelper();
@@ -56,6 +57,14 @@ public class BookmarkDatabaseHelperTest
 	{
 		BookmarkDatabaseHelper helper = new BookmarkDatabaseHelper();
 		helper.deleteBookmark(c, "BR_12345");
+	}
+
+	@Test
+	public void testGetAllBookmarks() throws SQLException
+	{
+		BookmarkDatabaseHelper helper = new BookmarkDatabaseHelper();
+		List<String> documentIDs = helper.getAllBookmarks(c);
+		System.out.println("Bookmarks = " + documentIDs);
 	}
 
 }

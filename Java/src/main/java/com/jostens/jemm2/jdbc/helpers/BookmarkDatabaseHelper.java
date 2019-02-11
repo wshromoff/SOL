@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 
@@ -93,5 +95,29 @@ public class BookmarkDatabaseHelper
 		c.commit();
 
 	}
+
+	/**
+	 * Return document ID for all bookmarks
+	 * @throws SQLException 
+	 */
+	public List<String> getAllBookmarks(Connection c) throws SQLException
+	{
+		List<String> documentIDs = new ArrayList<String>();
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_BOOKMARKS);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			String documentID = rs.getString(1);
+			documentIDs.add(documentID);
+		}
+
+		rs.close();
+		statement.close();
+
+		return documentIDs;
+	}
+
 
 }
