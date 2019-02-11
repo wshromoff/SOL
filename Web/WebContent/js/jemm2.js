@@ -24,6 +24,7 @@ function getTabTotals()
 			displayCount("#summaryCount", splitArray[0]);
 			displayCount("#resultCount", splitArray[1]);
 			displayCount("#bookmarkCount", splitArray[2]);
+			displayCount("#downloadCount", splitArray[3]);
 		}
 	});
 
@@ -336,4 +337,55 @@ function displayBookmarks()
 		}
 	});
 }
+
+//Function for adding/removing handling downloads
+function download(documentID)
+{
+	$.ajax({
+		url : 'download',
+		type : 'post',
+		data : {
+			document: documentID
+//			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+//			$('#content').html(splitArray[1]);
+			displayCount("#downloadCount", splitArray[0]);
+			
+			document.getElementById("downloadBTN").innerHTML = splitArray[1];
+		}
+	});
+	
+	if (selected == 'downloads')
+	{
+		displayDownloads();
+	}
+}
+//Function for adding/removing handling bookmarks
+function displayDownloads()
+{
+	clearSelected();
+	selected = "downloads";
+	setSelected();
+	
+	$.ajax({
+		url : 'download',
+//		type : 'post',
+		data : {
+//			document: documentID
+//			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+			$('#content').html(splitArray[1]);
+			displayCount("#downloadCount", splitArray[0]);
+			
+//			document.getElementById("bookmarkBTN").innerHTML = splitArray[1];
+		}
+	});
+}
+
 

@@ -21,6 +21,7 @@ public class ActionsDatabaseHelper
 {
 	// Static constants defining available actions
 	public static String BOOKMARK = "Bookmark";
+	public static String DOWNLOAD = "Download";
 
 	/**
 	 * Get the current count of specified Actions

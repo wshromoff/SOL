@@ -47,9 +47,11 @@ public class TabsTotals extends HttpServlet
 		// Get bookmark count
 		ActionsDatabaseHelper bmHelper = new ActionsDatabaseHelper();
 		int bookmarkCount = 0;
+		int downloadCount = 0;
 		try
 		{
 			bookmarkCount = bmHelper.getActionCount(c, ActionsDatabaseHelper.BOOKMARK);
+			downloadCount = bmHelper.getActionCount(c, ActionsDatabaseHelper.DOWNLOAD);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -57,7 +59,7 @@ public class TabsTotals extends HttpServlet
 
 		ConnectionHelper.closeConnection(c);
 
-		response.getWriter().append(dashboardValue + "," + searchResultsValue + "," + bookmarkCount);
+		response.getWriter().append(dashboardValue + "," + searchResultsValue + "," + bookmarkCount + "," + downloadCount);
 
 	}
 

@@ -112,6 +112,7 @@ public class AssetDetailsServlet extends HttpServlet
 			StringBuffer sb = new StringBuffer();
 //			sb.append("<button type=\"button\">Mark for Download</button>");
 			sb.append(getBookmarkButton(c, documentID));
+			sb.append(getDownloadButton(c, documentID));
 			
 			actions = actions.replace("[BUTTONS]", sb.toString());
 
@@ -172,34 +173,6 @@ public class AssetDetailsServlet extends HttpServlet
 		
 	}
 	
-	private String getBookmarkButton(Connection c, String documentID)
-	{
-		StringBuffer sb = new StringBuffer();
-		sb.append("<button id=\"bookmarkBTN\" onclick=\"bookmark('" + documentID + "'); return false;\">");
-		// Find button Text
-		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
-		String buttonText = "";
-		try
-		{
-			boolean isDocumentBookmarked = dbHelper.isDocumentForAction(c, documentID, ActionsDatabaseHelper.BOOKMARK);
-			if (isDocumentBookmarked)
-			{
-				buttonText = "Remove Bookmark";
-			}
-			else
-			{
-				buttonText = "Bookmark Asset";
-			}
-		} catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-
-		sb.append(buttonText);
-		sb.append("</button>&nbsp;&nbsp;&nbsp;");
-		return sb.toString();
-	}
-
 	private String getPackageDetailsHtml(Connection c, String documentID, int databaseID, boolean includeActions)
 	{
 		// Displaying details about a part
@@ -346,4 +319,62 @@ public class AssetDetailsServlet extends HttpServlet
 		}
 		return value;
 	}
+	
+	private String getBookmarkButton(Connection c, String documentID)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("<button id=\"bookmarkBTN\" onclick=\"bookmark('" + documentID + "'); return false;\">");
+		// Find button Text
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+		String buttonText = "";
+		try
+		{
+			boolean isDocumentBookmarked = dbHelper.isDocumentForAction(c, documentID, ActionsDatabaseHelper.BOOKMARK);
+			if (isDocumentBookmarked)
+			{
+				buttonText = "Remove Bookmark";
+			}
+			else
+			{
+				buttonText = "Bookmark Asset";
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		sb.append(buttonText);
+		sb.append("</button>&nbsp;&nbsp;&nbsp;");
+		return sb.toString();
+	}
+
+	private String getDownloadButton(Connection c, String documentID)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("<button id=\"downloadBTN\" onclick=\"download('" + documentID + "'); return false;\">");
+		// Find button Text
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+		String buttonText = "";
+		try
+		{
+			boolean isDocumentBookmarked = dbHelper.isDocumentForAction(c, documentID, ActionsDatabaseHelper.DOWNLOAD);
+			if (isDocumentBookmarked)
+			{
+				buttonText = "Remove Download";
+			}
+			else
+			{
+				buttonText = "Download Asset";
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		sb.append(buttonText);
+		sb.append("</button>&nbsp;&nbsp;&nbsp;");
+		return sb.toString();
+	}
+
+
 }
