@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
+import com.jostens.jemm2.jdbc.helpers.BookmarkDatabaseHelper;
 import com.jostens.jemm2.jdbc.helpers.CustomerDatabaseHelper;
 import com.jostens.jemm2.jdbc.helpers.PackageDatabaseHelper;
 import com.jostens.jemm2.jdbc.helpers.PartDatabaseHelper;
@@ -174,8 +175,27 @@ public class AssetDetailsServlet extends HttpServlet
 	private String getBookmarkButton(Connection c, String documentID)
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("<button onclick=\"bookmark('" + documentID + "'); return false;\">");
-		sb.append("Bookmark Asset");
+		sb.append("<button id=\"bookmarkBTN\" onclick=\"bookmark('" + documentID + "'); return false;\">");
+		// Find button Text
+		BookmarkDatabaseHelper dbHelper = new BookmarkDatabaseHelper();
+		String buttonText = "";
+		try
+		{
+			boolean isDocumentBookmarked = dbHelper.isDocumentBookmarked(c, documentID);
+			if (isDocumentBookmarked)
+			{
+				buttonText = "Remove Bookmark";
+			}
+			else
+			{
+				buttonText = "Bookmark Asset";
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		sb.append(buttonText);
 		sb.append("</button>&nbsp;&nbsp;&nbsp;");
 		return sb.toString();
 	}

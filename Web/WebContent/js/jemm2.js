@@ -8,6 +8,7 @@ var tabInterval = null;
 
 $(document).ready(function()
 {
+	getTabTotals();
 //			alert("WHATUP");
 //			loadData();
 	totalsInterval = setInterval(getTabTotals, 30000);
@@ -288,5 +289,21 @@ function lockDet1()
 // Function for handling bookmarks
 function bookmark(documentID)
 {
-	alert(documentID);
+	$.ajax({
+		url : 'bookmark',
+		type : 'post',
+		data : {
+			document: documentID
+//			query : $('#jemmSearch').val()
+		},
+		success : function(responseText) {
+			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+//			$('#content').html(splitArray[1]);
+			displayCount("#bookmarkCount", splitArray[0]);
+			
+			document.getElementById("bookmarkBTN").innerHTML = splitArray[1];
+		}
+	});
+
 }
