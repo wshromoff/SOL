@@ -68,7 +68,7 @@ public class CustomerPackageDocumentSearch extends QueryBase
 	
 				SolrQuery query = new SolrQuery();
 				query.set("q", queryText);
-				query.setFilterQueries("contentType:Package");
+				query.setFilterQueries("contentType:CustomerPackage");
 				
 				executeQuery(query);
 			}
