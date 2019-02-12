@@ -3,7 +3,6 @@ package com.waspr.web;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.jostens.jemm2.jdbc.ConnectionHelper;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 import com.jostens.jemm2.jdbc.helpers.ActionsDatabaseHelper;
+import com.jostens.jemm2.jdbc.helpers.PackageDatabaseHelper;
+import com.jostens.jemm2.pojo.Asset;
+import com.jostens.jemm2.pojo.AssetPackage;
+import com.jostens.jemm2.pojo.CustomerPackage;
 import com.jostens.jemm2.web.HTMLHelper;
 
 @WebServlet("/download")
@@ -163,7 +166,7 @@ public class DownloadServlet extends HttpServlet
 		}
 
 		sb.append(buttonText);
-		sb.append("</button>&nbsp;&nbsp;&nbsp;");
+		sb.append("</button>");
 //		System.out.println("BUTTON=" + sb.toString());
 		return sb.toString();
 	}
@@ -251,6 +254,10 @@ public class DownloadServlet extends HttpServlet
 				downloadDocumentHTML = downloadDocumentHTML.replace("[BUTTON]", getDownloadButton(c, documentID));
 				downloadDocumentHTML = downloadDocumentHTML.replace("[DOCUMENT_ID]", documentID);
 
+				// Get the HTML for all the images this part or package contains
+				String assetHTML = getAssetHTML(c, documentID);
+				downloadDocumentHTML = downloadDocumentHTML.replace("[IMAGES]", assetHTML);
+				
 				sb.append(downloadDocumentHTML.toString());
 			}
 			
@@ -262,5 +269,94 @@ public class DownloadServlet extends HttpServlet
 		}
 		ConnectionHelper.closeConnection(c);
 		return downloadCount + "," + sb.toString();
+	}
+	
+	private String getAssetHTML(Connection c, String documentID) throws SQLException
+	{
+		StringBuffer sb = new StringBuffer();
+		if (documentID.startsWith("PR"))
+		{	// A part, so need a single document for 1b part
+			String assetHTML = getAssetHTML(documentID, "1b");
+			sb.append(assetHTML);
+		}
+		else if (documentID.startsWith("PK"))
+		{
+			// This is a package, so could have multiple assets
+			PackageDatabaseHelper dbHelper = new PackageDatabaseHelper();
+			AssetPackage aPackage = new AssetPackage();
+			aPackage.setID(Integer.parseInt(documentID.substring(3)));
+			dbHelper.getPackage(c, aPackage);
+			System.out.println("ASSET COUNT = " + aPackage.getAssets().size());
+			if (isAssetOfType(aPackage.getAssets(), "ba"))
+			{
+				sb.append(getAssetHTML(documentID, "ba"));
+			}
+			if (isAssetOfType(aPackage.getAssets(), "1b"))
+			{
+				sb.append(getAssetHTML(documentID, "1b"));
+			}
+			if (isAssetOfType(aPackage.getAssets(), "1g"))
+			{
+				sb.append(getAssetHTML(documentID, "1g"));
+			}
+			if (isAssetOfType(aPackage.getAssets(), "1s"))
+			{
+				sb.append(getAssetHTML(documentID, "1s"));
+			}
+		}
+		else if (documentID.startsWith("CP"))
+		{
+			// This is a Customer package, so could have multiple assets
+			PackageDatabaseHelper dbHelper = new PackageDatabaseHelper();
+			CustomerPackage aPackage = new CustomerPackage();
+			aPackage.setID(Integer.parseInt(documentID.substring(3)));
+			dbHelper.getCustomerPackage(c, aPackage);
+			System.out.println("ASSET COUNT = " + aPackage.getaPackage().getAssets().size());
+			if (isAssetOfType(aPackage.getaPackage().getAssets(), "ba"))
+			{
+				sb.append(getAssetHTML(documentID, "ba"));
+			}
+			if (isAssetOfType(aPackage.getaPackage().getAssets(), "1b"))
+			{
+				sb.append(getAssetHTML(documentID, "1b"));
+			}
+			if (isAssetOfType(aPackage.getaPackage().getAssets(), "1g"))
+			{
+				sb.append(getAssetHTML(documentID, "1g"));
+			}
+			if (isAssetOfType(aPackage.getaPackage().getAssets(), "1s"))
+			{
+				sb.append(getAssetHTML(documentID, "1s"));
+			}
+		}
+
+		return sb.toString();
+	}
+	
+	private boolean isAssetOfType(List<Asset> assets, String type)
+	{
+		for (Asset asset : assets)
+		{
+			if (asset.getName().contains("_" + type))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private String getAssetHTML(String documentID, String type)
+	{
+//		String documentHTML = "<label><input type=\"radio\" name=\"PR_000009\" onclick=\"imageClicked('PR_000009&type=1b')\">" + 
+//				"	<img src=\"image?id=PR_000009&type=1b\" width=\"160px\" height=\"160px\"/></label>";
+		String documentHTML = "<label><input type=\"radio\" name=\"[DOCUMENT_ID]\" onclick=\"imageClicked('[DOCUMENT_TYPE]')\">" + 
+				"	<img src=\"image?id=[DOCUMENT_TYPE]\" width=\"160px\" height=\"160px\"/></label>";
+		
+		String documentType = documentID + "&type=" + type;
+		
+		documentHTML = documentHTML.replace("[DOCUMENT_ID]", documentID);
+		documentHTML = documentHTML.replace("[DOCUMENT_TYPE]", documentType);
+		
+		return documentHTML;
 	}
 }

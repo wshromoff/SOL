@@ -36,7 +36,7 @@
     height: 22px;
     background: #4E9CAF;
     padding: 1px;
-    text-align: center;
+    text-align: bottom;
     border-radius: 5px;
     color: white;
     font-weight: bold;
@@ -46,40 +46,3 @@
 
 [DOWNLOAD_DOCUMENTS]
 
-<hr>
-
-<table >
-<tr>
-	<td width='100px'>Type: Part</td>
-	<td width='500px'>Name: BR002364&nbsp;&nbsp;&nbsp;</td>
-	<td width='150px'>[BUTTON]</td>
-</tr>
-</table>
-<table >
-<tr>
-	<td width='200px'>Format: 
-		<select id="PR_000009_format" style="width: 150px;" onchange="selectChanged('PR_000009_format')">
-    		<option value="1">Original</option>
-    		<option value="2">PNG Watermark</option>
-  		</select>
-	</td>
-	<td width='100px'>
-		<a class="button" href="image?id=PR_000009&type=ba&1" download id="PR_000009">Download</a>
-	</td>
-</tr>
-<tr>
-	<td>&nbsp;</td>
-</tr>
-</table>
-
-<label>
-  <input type="radio" name="PR_000009" onclick="imageClicked('PR_000009&type=1b')">
-	<img src="image?id=PR_000009&type=1b" width="160px" height="160px"/>
-</label>
-
-<label>
-  <input type="radio" name="PR_000009"  onclick="imageClicked('PR_000009&type=ba')">
-	<img src="image?id=PR_000009&type=ba" width="160px" height="160px" />
-</label>
-<br>
-<hr>
