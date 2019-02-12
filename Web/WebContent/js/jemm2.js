@@ -316,6 +316,7 @@ function bookmark(documentID)
 //Function for adding/removing handling bookmarks
 function displayBookmarks()
 {
+	clearTabInterval();
 	clearSelected();
 	selected = "bookmarks";
 	setSelected();
@@ -367,6 +368,7 @@ function download(documentID)
 //Function for adding/removing handling bookmarks
 function displayDownloads()
 {
+	clearTabInterval();
 	clearSelected();
 	selected = "downloads";
 	setSelected();
@@ -447,4 +449,35 @@ function removeDownload(documentID)
 	{
 //		displayDownloads();
 	}
+}
+
+function displayLogs()
+{
+	clearTabInterval();
+	tabInterval = setInterval(displayLogs, 5000);
+//	alert("HELLO " + selected);
+	clearSelected();
+	selected = "logs";
+	setSelected();
+//	document.getElementById(selected).className = "active";
+//	alert("HELLO");
+//	document.getElementById("logging").className = "global";
+//	$('#content').html("WOW");
+	// Make ajax call for current work assets
+	$.ajax({
+		url : 'logs',
+//		data : {
+//			userName : $('#userName').val()
+//		},
+		success : function(responseText) {
+			$('#content').html(responseText);
+//			var splitArray = responseText.split(",");
+//			$('#summaryCount').html(splitArray[0]);
+//			$('#content').html(splitArray[1]);
+//			alert(splitArray[0]);
+//			alert(splitArray[1]);
+//			displayCount("#summaryCount", splitArray[0]);
+		}
+	});
+	
 }
