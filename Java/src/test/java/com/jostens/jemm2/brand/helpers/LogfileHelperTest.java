@@ -35,7 +35,7 @@ public class LogfileHelperTest
 		}
 	}
 
-	@Test
+//	@Test
 	public void readAutomationLogContinuous() throws IOException
 	{
 		// Continuously read the automation log file with a 5 second sleep between
@@ -61,6 +61,25 @@ public class LogfileHelperTest
 			{
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {}
+		}
+	}
+
+	@Test
+	public void tailOneLogThenOther() throws IOException
+	{
+		LogfileHelper helper = LogfileHelper.getActiveLogHelper();
+		List<String> logLines = helper.tailSelectedLog();
+		System.out.println("-- Automation Log --");
+		for (String line : logLines)
+		{
+			System.out.println(line);
+		}
+		helper.setExceptionLog(true);
+		logLines = helper.tailSelectedLog();
+		System.out.println("-- Exception Log --");
+		for (String line : logLines)
+		{
+			System.out.println(line);
 		}
 	}
 

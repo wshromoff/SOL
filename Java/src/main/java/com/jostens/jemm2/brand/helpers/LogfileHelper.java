@@ -20,6 +20,40 @@ public class LogfileHelper
 	private String AUTOMATION_LOG = "AutomationLog.txt";
 	private String EXCEPTION_LOG = "ExceptionLog.txt";
 	
+	// Which log is selected
+	private boolean automationLog = true;
+	private boolean exceptionLog = false;
+
+	// This static instance holds the users selected information for controlling log display
+	private static LogfileHelper activeLogHelper = null;
+
+	// Return the log file helper with currently set log file
+	public static LogfileHelper getActiveLogHelper()
+	{
+		if (activeLogHelper == null)
+		{
+			activeLogHelper = new LogfileHelper();
+		}
+		return activeLogHelper;
+	}
+	
+	/**
+	 * Return up MAX_LINES of text from the currently selected log from the bottom of the file upwards.
+	 * Effectively trying to do a tail of the file.
+	 * @throws IOException 
+	 */
+	public List<String> tailSelectedLog() throws IOException
+	{
+		if (automationLog)
+		{
+			return tailAutomationLog();
+		}
+		else
+		{
+			return tailExceptionLog();
+		}
+	}
+	
 	/**
 	 * Return up MAX_LINES of text from the automation log from the bottom of the file upwards.
 	 * Effectively trying to do a tail of the file.
@@ -62,5 +96,25 @@ public class LogfileHelper
 
 		return fileLines;
 	}
+
+	public boolean isAutomationLog()
+	{
+		return automationLog;
+	}
+	public void setAutomationLog(boolean automationLog)
+	{
+		this.automationLog = automationLog;
+		this.exceptionLog = !automationLog;
+	}
+	public boolean isExceptionLog()
+	{
+		return exceptionLog;
+	}
+	public void setExceptionLog(boolean exceptionLog)
+	{
+		this.exceptionLog = exceptionLog;
+		this.automationLog = !exceptionLog;
+	}
+
 	
 }
