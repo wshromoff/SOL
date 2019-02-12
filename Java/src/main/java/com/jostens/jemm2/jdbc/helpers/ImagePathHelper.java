@@ -111,11 +111,12 @@ public class ImagePathHelper
 	private String getPackageImagePath(Connection c, String id, String imageType) throws SQLException
 	{
 		// Get the Asset table column that represents the supplied imageType
-//		String imageColumn = getImageColumn(imageType);
+		String imageColumn = getImageColumn(imageType);
 
 		String imagePath = null;
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_PACKAGE_FOLDER_PATH);
 		selectStmt = selectStmt.replace("[PACKAGEID]", id);
+		selectStmt = selectStmt.replace("[IMAGECOLOR]", imageColumn);
 		
 		Statement statement = c.createStatement();
 		ResultSet rs = statement.executeQuery(selectStmt);
@@ -135,11 +136,12 @@ public class ImagePathHelper
 	private String getCustomerPackageImagePath(Connection c, String id, String imageType) throws SQLException
 	{
 		// Get the Asset table column that represents the supplied imageType
-//		String imageColumn = getImageColumn(imageType);
+		String imageColumn = getImageColumn(imageType);
 
 		String imagePath = null;
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CUSTOMER_PACKAGE_FOLDER_PATH);
 		selectStmt = selectStmt.replace("[CUSTOMER_PACKAGEID]", id);
+		selectStmt = selectStmt.replace("[IMAGECOLOR]", imageColumn);
 		
 		Statement statement = c.createStatement();
 		ResultSet rs = statement.executeQuery(selectStmt);
