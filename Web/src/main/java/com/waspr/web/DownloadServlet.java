@@ -176,7 +176,8 @@ public class DownloadServlet extends HttpServlet
 	{
 		// Get form parameters
 		String documentID = request.getParameter("document");
-		System.out.println("INSIDE Download SERVLET (POST): " + documentID);
+		String source = request.getParameter("source");
+		System.out.println("INSIDE Download SERVLET (POST): " + documentID + " : " + source);
 		
 		Jemm2Statements statements = new Jemm2Statements();
 		statements.initializeStatements();
@@ -208,15 +209,22 @@ public class DownloadServlet extends HttpServlet
 		
 		ConnectionHelper.closeConnection(c);
 
-		String downloadHTML = HTMLHelper.getTemplateHTML("/Downloads.html");
-
-		String documentHTML = getDocumentHTML();
-		int i = documentHTML.indexOf(",");
-		String documentCount = documentHTML.substring(0, i);
-		String documentText = documentHTML.substring(i+1);
-		downloadHTML = downloadHTML.replace("[DOWNLOAD_DOCUMENTS]", documentText);
-
-		response.getWriter().append(documentCount + "," + downloadHTML);
+		if ("remove".equals(source)) 
+		{		// From remove download on downloads page
+			String downloadHTML = HTMLHelper.getTemplateHTML("/Downloads.html");
+	
+			String documentHTML = getDocumentHTML();
+			int i = documentHTML.indexOf(",");
+			String documentCount = documentHTML.substring(0, i);
+			String documentText = documentHTML.substring(i+1);
+			downloadHTML = downloadHTML.replace("[DOWNLOAD_DOCUMENTS]", documentText);
+			response.getWriter().append(documentCount + "," + downloadHTML);
+		}
+		else
+		{
+			// Search results page
+			response.getWriter().append(downloadCount + "," + buttonText);
+		}
 
 
 	}

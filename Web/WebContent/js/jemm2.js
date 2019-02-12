@@ -345,7 +345,8 @@ function download(documentID)
 		url : 'download',
 		type : 'post',
 		data : {
-			document: documentID
+			document: documentID,
+			source: 'results'
 //			query : $('#jemmSearch').val()
 		},
 		success : function(responseText) {
@@ -428,7 +429,8 @@ function removeDownload(documentID)
 		url : 'download',
 		type : 'post',
 		data : {
-			document: documentID
+			document: documentID,
+			source: 'remove'
 //			query : $('#jemmSearch').val()
 		},
 		success : function(responseText) {
