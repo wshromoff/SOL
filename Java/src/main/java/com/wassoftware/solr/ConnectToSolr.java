@@ -6,12 +6,14 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 
+import com.jostens.jemm2.JEMM2Constants;
+
 public class ConnectToSolr
 {
 
 	public HttpSolrClient makeConnection() throws SolrServerException, IOException
 	{
-		String urlString = "http://localhost:8983/solr/jemm2";
+		String urlString = JEMM2Constants.SOLR_URL;
 		HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
 		solr.setParser(new XMLResponseParser());
 		

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.jostens.jemm2.JEMM2Constants;
+
 /**
  * Get/return a JEMM2 connection
  */
@@ -21,12 +23,12 @@ public class ConnectionHelper
 //			String username = "xt11781";
 //			String password = "Tigers30";
 
-			String url = "jdbc:oracle:thin:@devapps:1521/orcl";
-			String username = "jemm2";
-			String password = "Jostens01.";
+//			String url = "jdbc:oracle:thin:@devapps:1521/orcl";
+//			String username = "jemm2";
+//			String password = "Jostens01.";
 
 
-			conn = DriverManager.getConnection(url, username, password);
+			conn = DriverManager.getConnection(JEMM2Constants.DB_URL, JEMM2Constants.DB_USER, JEMM2Constants.DB_PASSWORD);
 			conn.setAutoCommit(false);		// All connections require a user to commit the transaction
 			
 	
