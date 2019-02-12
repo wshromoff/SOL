@@ -71,7 +71,7 @@ public class DesignHelper
 		for (Design design : designs)
 		{
 			i++;
-//			System.out.println("" + i);
+			System.out.println("" + i);
 			dbHelper.persistDesign(c, design);
 		}
 	}

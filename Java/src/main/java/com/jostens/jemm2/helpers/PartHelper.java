@@ -58,7 +58,7 @@ public class PartHelper
 		for (Part part : parts)
 		{
 			i++;
-//			System.out.println("" + i);
+			System.out.println("" + i);
 			dbHelper.persistPart(c, part);
 		}
 	}

@@ -58,7 +58,7 @@ public class CustomerHelper
 		for (Customer customer : customers)
 		{
 			i++;
-//			System.out.println("" + i);
+			System.out.println("" + i);
 			dbHelper.persistCustomer(c, customer);
 		}
 	}
