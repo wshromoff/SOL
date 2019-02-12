@@ -30,30 +30,51 @@ public class DownloadServlet extends HttpServlet
 		System.out.println("INSIDE Download SERVLET (GET): ");
 
 		String downloadHTML = HTMLHelper.getTemplateHTML("/Downloads.html");
-		
 
-		Jemm2Statements statements = new Jemm2Statements();
-		statements.initializeStatements();
-		Connection c = ConnectionHelper.getJEMM2Connection();
+		String documentHTML = getDocumentHTML();
+		int i = documentHTML.indexOf(",");
+		String documentCount = documentHTML.substring(0, i);
+		String documentText = documentHTML.substring(i+1);
 
-		downloadHTML = downloadHTML.replace("[BUTTON]", getDownloadButton(c, "PR_001438"));
+//		Jemm2Statements statements = new Jemm2Statements();
+//		statements.initializeStatements();
+//		Connection c = ConnectionHelper.getJEMM2Connection();
+//
+////		downloadHTML = downloadHTML.replace("[BUTTON]", getDownloadButton(c, "PR_001438"));
+//
+//		// Get documentIDs marked for download
+//		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+//		StringBuffer sb = new StringBuffer();
+//		int downloadCount = 0;
+//		try
+//		{
+//			List<String> documentIDNamess = dbHelper.getAllActionsWithName(c, ActionsDatabaseHelper.DOWNLOAD);
+//			// Now for all these documentIDs, build a StringBuffer of HTML using DownloadHTML for
+//			// each document ID.  This StringBuffer will be placed into the Downloads.html
+//			for (String documentIDName : documentIDNamess)
+//			{
+//				int i = documentIDName.indexOf("|");
+//				String documentID = documentIDName.substring(0, i);
+//				String name = documentIDName.substring(i + 1);
+//				
+//				String downloadDocumentHTML = HTMLHelper.getTemplateHTML("/DownloadDocument.html");
+//				
+//				downloadDocumentHTML = downloadDocumentHTML.replace("[TYPE]", getDocumentName(documentID));
+//				downloadDocumentHTML = downloadDocumentHTML.replace("[NAME]", name);
+//				downloadDocumentHTML = downloadDocumentHTML.replace("[BUTTON]", getDownloadButton(c, documentID));
+//				downloadDocumentHTML = downloadDocumentHTML.replace("[DOCUMENT_ID]", documentID);
+//
+//				sb.append(downloadDocumentHTML.toString());
+//			}
+//			
+//			downloadCount = dbHelper.getActionCount(c, ActionsDatabaseHelper.DOWNLOAD);
+//
+//		} catch (SQLException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		ConnectionHelper.closeConnection(c);
 
-		// Get documentIDs marked for download
-		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
-		try
-		{
-			List<String> documentIDs = dbHelper.getAllActions(c, ActionsDatabaseHelper.DOWNLOAD);
-			// Now for all these documentIDs, build a StringBuffer of HTML using DownloadHTML for
-			// each document ID.  This StringBuffer will be placed into the Downloads.html
-			StringBuffer sb = new StringBuffer();
-			for (String documentID : documentIDs)
-			{
-				
-			}
-		} catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
 //
 //		int bookmarkCount = 0;
 //		List<String> documentIDs = new ArrayList<String>();
@@ -81,7 +102,6 @@ public class DownloadServlet extends HttpServlet
 //
 //		dashboardHTML = dashboardHTML.replace("[RESULT_DOCUMENTS]", sb.toString());
 //
-		ConnectionHelper.closeConnection(c);
 //		
 //		if (bookmarkCount == 0)
 //		{
@@ -89,7 +109,10 @@ public class DownloadServlet extends HttpServlet
 //		}
 //
 //		System.out.println("DashboardHTML:" + dashboardHTML);
-		response.getWriter().append(0 + "," + downloadHTML);
+		downloadHTML = downloadHTML.replace("[DOWNLOAD_DOCUMENTS]", documentText);
+		
+
+		response.getWriter().append(documentCount + "," + downloadHTML);
 	}
 	
 	private String getDocumentType(String docID)
@@ -100,6 +123,20 @@ public class DownloadServlet extends HttpServlet
 		}
 		
 		return "ba";
+	}
+
+	private String getDocumentName(String docID)
+	{
+		if (docID.startsWith("PR"))
+		{
+			return "Part";
+		}
+		if (docID.startsWith("PK"))
+		{
+			return "Package";
+		}
+		
+		return "Customer Package";
 	}
 
 	private String getDownloadButton(Connection c, String documentID)
@@ -168,9 +205,62 @@ public class DownloadServlet extends HttpServlet
 		
 		ConnectionHelper.closeConnection(c);
 
-		response.getWriter().append(downloadCount + "," + buttonText);
+		String downloadHTML = HTMLHelper.getTemplateHTML("/Downloads.html");
+
+		String documentHTML = getDocumentHTML();
+		int i = documentHTML.indexOf(",");
+		String documentCount = documentHTML.substring(0, i);
+		String documentText = documentHTML.substring(i+1);
+		downloadHTML = downloadHTML.replace("[DOWNLOAD_DOCUMENTS]", documentText);
+
+		response.getWriter().append(documentCount + "," + downloadHTML);
 
 
 	}
 
+	/*
+	 * Method to build the document HTML for the download page
+	 */
+	private String getDocumentHTML()
+	{
+		Jemm2Statements statements = new Jemm2Statements();
+		statements.initializeStatements();
+		Connection c = ConnectionHelper.getJEMM2Connection();
+
+//		downloadHTML = downloadHTML.replace("[BUTTON]", getDownloadButton(c, "PR_001438"));
+
+		// Get documentIDs marked for download
+		ActionsDatabaseHelper dbHelper = new ActionsDatabaseHelper();
+		StringBuffer sb = new StringBuffer();
+		int downloadCount = 0;
+		try
+		{
+			List<String> documentIDNamess = dbHelper.getAllActionsWithName(c, ActionsDatabaseHelper.DOWNLOAD);
+			// Now for all these documentIDs, build a StringBuffer of HTML using DownloadHTML for
+			// each document ID.  This StringBuffer will be placed into the Downloads.html
+			for (String documentIDName : documentIDNamess)
+			{
+				int i = documentIDName.indexOf("|");
+				String documentID = documentIDName.substring(0, i);
+				String name = documentIDName.substring(i + 1);
+				
+				String downloadDocumentHTML = HTMLHelper.getTemplateHTML("/DownloadDocument.html");
+				
+				downloadDocumentHTML = downloadDocumentHTML.replace("[TYPE]", getDocumentName(documentID));
+				downloadDocumentHTML = downloadDocumentHTML.replace("[NAME]", name);
+				downloadDocumentHTML = downloadDocumentHTML.replace("[BUTTON]", getDownloadButton(c, documentID));
+				downloadDocumentHTML = downloadDocumentHTML.replace("[DOCUMENT_ID]", documentID);
+
+				sb.append(downloadDocumentHTML.toString());
+			}
+			
+			downloadCount = dbHelper.getActionCount(c, ActionsDatabaseHelper.DOWNLOAD);
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		ConnectionHelper.closeConnection(c);
+		return downloadCount + "," + sb.toString();
+	}
 }

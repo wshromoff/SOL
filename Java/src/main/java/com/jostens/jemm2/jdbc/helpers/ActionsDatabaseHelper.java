@@ -159,5 +159,30 @@ public class ActionsDatabaseHelper
 		return documentIDs;
 	}
 
+	/**
+	 * Return all document IDs with Name for an action
+	 * @throws SQLException 
+	 */
+	public List<String> getAllActionsWithName(Connection c, String action) throws SQLException
+	{
+		List<String> documentIDs = new ArrayList<String>();
+		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_ALL_ACTIONS);
+		selectStmt = selectStmt.replace("[ACTION]", action);
+		
+		Statement statement = c.createStatement();
+		ResultSet rs = statement.executeQuery(selectStmt);
+		while (rs.next())
+		{
+			String documentID = rs.getString(1);
+			String name = rs.getString(2);
+			documentIDs.add(documentID + "|" + name);
+		}
+
+		rs.close();
+		statement.close();
+
+		return documentIDs;
+	}
+
 
 }

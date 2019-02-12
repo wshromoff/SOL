@@ -434,7 +434,7 @@ function removeDownload(documentID)
 		success : function(responseText) {
 			var splitArray = responseText.split(",");
 //			$('#summaryCount').html(splitArray[0]);
-//			$('#content').html(splitArray[1]);
+			$('#content').html(splitArray[1]);
 			displayCount("#downloadCount", splitArray[0]);
 			
 //			document.getElementById("downloadBTN").innerHTML = splitArray[1];
@@ -443,6 +443,6 @@ function removeDownload(documentID)
 	
 	if (selected == 'downloads')
 	{
-		displayDownloads();
+//		displayDownloads();
 	}
 }
