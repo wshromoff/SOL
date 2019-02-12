@@ -52,7 +52,7 @@ public class ImageServlet extends HttpServlet
 		
 		try
 		{
-			filePath = helper.getImagePath(c, id, type);
+			filePath = JEMM2Constants.ROOT_DAM_PATH + helper.getImagePath(c, id, type);
 			System.out.println("Image_Path= " + filePath);
 		} catch (SQLException e)
 		{
