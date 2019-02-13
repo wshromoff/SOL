@@ -65,11 +65,11 @@ public class PackageDatabaseHelper
 		{
 			customerID = rs.getInt(1);
 		}
-		else
-		{
-			// Need to insert a keyword and keep the ID
-			customerID = getNextPackageSequence(c);
-		}
+//		else
+//		{
+//			// Need to insert a keyword and keep the ID
+//			customerID = getNextPackageSequence(c);
+//		}
 
 		rs.close();
 		statement.close();
