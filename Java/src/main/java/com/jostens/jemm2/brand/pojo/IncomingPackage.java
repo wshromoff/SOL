@@ -1,7 +1,9 @@
 package com.jostens.jemm2.brand.pojo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  * Object that represents an incoming package being processed by automations
@@ -11,7 +13,9 @@ public class IncomingPackage
 	private int ID = 0;
 	private String name;
 	private String statusAutomation;
+	private String error;
 	private List<IncomingAsset> assets = new ArrayList<IncomingAsset>();
+	private Map<String, String> metadata = new HashMap<String, String>();
 	
 	public int getID()
 	{
@@ -36,6 +40,15 @@ public class IncomingPackage
 	public void setStatusAutomation(String statusAutomation)
 	{
 		this.statusAutomation = statusAutomation;
+	}
+
+	public String getError()
+	{
+		return error;
+	}
+	public void setError(String error)
+	{
+		this.error = error;
 	}
 	public List<IncomingAsset> getAssets()
 	{
@@ -75,4 +88,17 @@ public class IncomingPackage
 		}
 		return sb.toString();
 	}
+	public Map<String, String> getMetadata()
+	{
+		return metadata;
+	}
+	public void setMetadata(Map<String, String> metadata)
+	{
+		this.metadata = metadata;
+	}
+	public void addMetadata(String key, String value)
+	{
+		getMetadata().put(key, value);
+	}
+	
 }

@@ -63,7 +63,10 @@ public class Jemm2Statements extends Statements
 	public static String IS_DOCUMENT_ACTION = "IS_DOCUMENT_ACTION";
 	public static String DELETE_ACTION = "DELETE_ACTION";
 	public static String GET_ALL_ACTIONS = "GET_ALL_ACTIONS";
-	
+
+	// List all statements related to automations
+	public static String GET_INCOMING_PACKAGE_ID_NAME = "GET_INCOMING_PACKAGE_ID_NAME";
+
 	/**
 	 * Method to return List of statement files to load.
 	 */
@@ -77,6 +80,7 @@ public class Jemm2Statements extends Statements
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/ImageStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/SearchStatements.sql");
 		filePaths.add("/com/jostens/jemm2/jdbc/resources/ActionStatements.sql");
+		filePaths.add("/com/jostens/jemm2/jdbc/resources/AutomationStatements.sql");
 		return filePaths;
 	}
 
