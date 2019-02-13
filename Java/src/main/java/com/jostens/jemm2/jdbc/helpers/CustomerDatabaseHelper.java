@@ -74,7 +74,7 @@ public class CustomerDatabaseHelper
 	 */
 	public Customer persistCustomer(Connection c, Customer customer) throws SQLException
 	{
-		// Get this customer ID and add to supplied customer object
+		// Get this customer table ID and add to supplied customer object
 		int customerID = getCustomerID(c, customer.getCustomerID());
 		if (customerID == 0)
 		{
