@@ -21,6 +21,10 @@ public class IncomingPackage
 	{
 		return ID;
 	}
+	public String getIDasString()
+	{
+		return ID + "";
+	}
 	public void setID(int iD)
 	{
 		ID = iD;
