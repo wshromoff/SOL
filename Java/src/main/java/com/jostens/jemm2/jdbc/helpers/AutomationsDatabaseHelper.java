@@ -1,10 +1,12 @@
 package com.jostens.jemm2.jdbc.helpers;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.jostens.jemm2.brand.pojo.IncomingPackage;
 import com.jostens.jemm2.jdbc.Jemm2Statements;
 
 public class AutomationsDatabaseHelper
@@ -57,6 +59,46 @@ public class AutomationsDatabaseHelper
 		statement.close();
 		
 		return incomingID;
+	}
+
+	/**
+	 * Persist the supplied IncomingPackage
+	 * @throws SQLException 
+	 */
+	public void persistIncomingPackage(Connection c, IncomingPackage aPackage) throws SQLException
+	{
+		// Get this package ID and add to supplied package object
+		int packageID = getIncomingPackageIDByName(c, aPackage.getName());
+		if (packageID == 0)
+		{
+			packageID = getNextIncomingPackageSequence(c);
+		}
+		aPackage.setID(packageID);
+		
+		// Try to delete the ID from the customer table
+		String deleteStmt = Jemm2Statements.getStatement(Jemm2Statements.DELETE_INCOMING_PACKAGE);
+
+		PreparedStatement preparedDeleteStatment = c.prepareStatement(deleteStmt);
+		// Populate the columns
+		preparedDeleteStatment.setInt(1, aPackage.getID());
+		preparedDeleteStatment.executeUpdate();
+		preparedDeleteStatment.close();
+		
+		// Update the design and keywords for the design
+		String insertStmt = Jemm2Statements.getStatement(Jemm2Statements.INSERT_INCOMING_PACKAGE);
+
+		PreparedStatement preparedInsertStatment = c.prepareStatement(insertStmt.toString());
+		// Populate the columns
+		preparedInsertStatment.setInt(1, packageID);
+		preparedInsertStatment.setString(2, aPackage.getName());
+		preparedInsertStatment.setInt(3, aPackage.getRevision());
+		preparedInsertStatment.setString(4, aPackage.getStatusAutomation());
+		preparedInsertStatment.setString(5, aPackage.getError());
+		preparedInsertStatment.executeUpdate();
+		preparedInsertStatment.close();
+		
+		c.commit();
+		
 	}
 
 }

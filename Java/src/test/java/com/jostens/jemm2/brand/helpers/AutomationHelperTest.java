@@ -1,6 +1,7 @@
 package com.jostens.jemm2.brand.helpers;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -23,7 +24,7 @@ public class AutomationHelperTest
 		Jemm2Statements statements = new Jemm2Statements();
 		statements.initializeStatements();
 		c = ConnectionHelper.getJEMM2Connection();
-		
+
 		helper = new AutomationHelper();
 		helper.setConnection(c);
 	}
@@ -35,7 +36,7 @@ public class AutomationHelperTest
 	}
 
 
-	@Test
+//	@Test
 	public void testGetIncomingPackagesFromUpload()
 	{
 		List<IncomingPackage> packages = helper.getIncomingPackagesFromUpload();
@@ -43,6 +44,18 @@ public class AutomationHelperTest
 		{
 			System.out.println(aPackage.toString());
 		}
+	}
+
+	@Test
+	public void testersistIncomingPackage() throws SQLException
+	{
+		IncomingPackage aPackage = new IncomingPackage();
+		aPackage.setName("name");
+		aPackage.setRevision(3);
+		aPackage.setStatusAutomation("FS_COMPLETE MD_COMPLETE ");
+		
+		helper.persistIncomingPackage(aPackage);
+		System.out.println("New Package ID = " + aPackage.getID());
 	}
 
 }

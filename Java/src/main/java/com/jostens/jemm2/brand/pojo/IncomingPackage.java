@@ -12,6 +12,7 @@ public class IncomingPackage
 {
 	private int ID = 0;
 	private String name;
+	private int revision = 0;
 	private String statusAutomation;
 	private String error;
 	private List<IncomingAsset> assets = new ArrayList<IncomingAsset>();
@@ -103,6 +104,14 @@ public class IncomingPackage
 	public void addMetadata(String key, String value)
 	{
 		getMetadata().put(key, value);
+	}
+	public int getRevision()
+	{
+		return revision;
+	}
+	public void setRevision(int revision)
+	{
+		this.revision = revision;
 	}
 	
 }

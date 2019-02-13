@@ -66,6 +66,8 @@ public class Jemm2Statements extends Statements
 
 	// List all statements related to automations
 	public static String GET_INCOMING_PACKAGE_ID_NAME = "GET_INCOMING_PACKAGE_ID_NAME";
+	public static String INSERT_INCOMING_PACKAGE = "INSERT_INCOMING_PACKAGE";
+	public static String DELETE_INCOMING_PACKAGE = "DELETE_INCOMING_PACKAGE";
 
 	/**
 	 * Method to return List of statement files to load.

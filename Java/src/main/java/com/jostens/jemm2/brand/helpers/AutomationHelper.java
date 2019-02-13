@@ -93,4 +93,14 @@ public class AutomationHelper
 		int id = dbHelper.getIncomingPackageIDByName(c, incomingName);
 		return id;
 	}
+	
+	/**
+	 * Pesist the provided package
+	 * @throws SQLException 
+	 */
+	public void persistIncomingPackage(IncomingPackage aPackage) throws SQLException
+	{
+		dbHelper.persistIncomingPackage(c, aPackage);
+	}
+	
 }
