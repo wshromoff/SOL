@@ -16,7 +16,7 @@ public class CustomerDatabaseHelper
 
 	/**
 	 * For the provided Customer Number search the customer table and return its ID if found or
-	 * get the next sequence # and return
+	 * 0 to indicate not yet in the database.
 	 * @throws SQLException 
 	 */
 	public int getCustomerID(Connection c, String customerNumber) throws SQLException
@@ -32,11 +32,11 @@ public class CustomerDatabaseHelper
 		{
 			customerID = rs.getInt(1);
 		}
-		else
-		{
-			// Need to insert a keyword and keep the ID
-			customerID = getNextCustomerSequence(c);
-		}
+//		else
+//		{
+//			// Need to insert a keyword and keep the ID
+//			customerID = getNextCustomerSequence(c);
+//		}
 
 		rs.close();
 		statement.close();
@@ -76,6 +76,10 @@ public class CustomerDatabaseHelper
 	{
 		// Get this customer ID and add to supplied customer object
 		int customerID = getCustomerID(c, customer.getCustomerID());
+		if (customerID == 0)
+		{
+			customerID = getNextCustomerSequence(c);
+		}
 		customer.setID(customerID);
 		
 		// Try to delete the ID from the customer table

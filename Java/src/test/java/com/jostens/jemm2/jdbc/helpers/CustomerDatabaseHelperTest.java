@@ -42,13 +42,13 @@ public class CustomerDatabaseHelperTest
 	}
 
 //	@Test
-	public void testGetPartID() throws SQLException
+	public void testGetCustomerID() throws SQLException
 	{
 		CustomerDatabaseHelper helper = new CustomerDatabaseHelper();
 		int customerId = helper.getCustomerID(c, "23456");
-		System.out.println("Part Value = " + customerId);
+		System.out.println("Customer ID Value = " + customerId);
 		customerId = helper.getCustomerID(c, "23332");
-		System.out.println("Part Value = " + customerId);
+		System.out.println("Customer ID Value = " + customerId);
 	}
 
 //	@Test

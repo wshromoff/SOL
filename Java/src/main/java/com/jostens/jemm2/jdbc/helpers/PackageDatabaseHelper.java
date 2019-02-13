@@ -126,6 +126,10 @@ public class PackageDatabaseHelper
 			
 			CustomerDatabaseHelper cdHelper = new CustomerDatabaseHelper();
 			int customerID = cdHelper.getCustomerID(c, aPackage.getFirstCustomerID());
+			if (customerID == 0)
+			{
+				customerID = cdHelper.getNextCustomerSequence(c);
+			}
 			customerPackage.setCustomerID(customerID);
 		}
 		
