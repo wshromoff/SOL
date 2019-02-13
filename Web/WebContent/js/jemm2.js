@@ -481,3 +481,20 @@ function displayLogs()
 	});
 	
 }
+
+function selectLog()
+{
+	var logSelected = document.querySelector('input[name="selectLog"]:checked').value;
+//	alert(logSelected);
+	
+	$.ajax({
+		url : 'logs',
+		type : 'post',
+		data : {
+			log : logSelected
+		},
+		success : function(responseText) {
+			$('#content').html(responseText);
+		}
+	});
+}

@@ -116,5 +116,16 @@ public class LogfileHelper
 		this.automationLog = !exceptionLog;
 	}
 
+	public void setLogFile(String logFile)
+	{
+		if ("automation".equals(logFile))
+		{
+			setAutomationLog(true);
+		}
+		if ("exception".equals(logFile))
+		{
+			setExceptionLog(true);
+		}
+	}
 	
 }
