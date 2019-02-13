@@ -3,6 +3,7 @@ package com.jostens.jemm2.brand.helpers;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +81,16 @@ public class AutomationHelper
 		}
 		
 		return packages;
+	}
+	
+	/**
+	 * Get passed a package name, check the incoming_package table for if this package has been previously processed.
+	 * Return the ID of the table entry or 0 if not persisted
+	 * @throws SQLException 
+	 */
+	public int getIncomingIDForName(String incomingName) throws SQLException
+	{
+		int id = dbHelper.getIncomingPackageIDByName(c, incomingName);
+		return id;
 	}
 }
