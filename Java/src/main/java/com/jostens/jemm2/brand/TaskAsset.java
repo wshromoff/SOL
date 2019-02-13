@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jostens.jemm2.brand.pojo.IncomingPackage;
+
 /**
  * Represets an asset as it progresses through TaskGroup processing.
  */
@@ -53,6 +55,13 @@ public class TaskAsset extends BaseAsset
 
 	// Tasks need to perform actions if a PART is found, the following is the GUID of the PART referenced by this asset
 	private String partGUID = null;
+
+	// Create a TaskAsset from a aPackage
+	public TaskAsset(IncomingPackage aPackage)
+	{
+		this(aPackage.getName(), aPackage.getIDasString());		
+		newAsset = true;
+	}
 
 	// Create a TaskAsset from a BaseAsset
 	public TaskAsset(BaseAsset asset)
@@ -274,7 +283,8 @@ public class TaskAsset extends BaseAsset
 		{
 			return "ERROR Path/";
 		}
-		return getFolder().getFolderType() + "/" + getFolderName() + "/" + getAssetName();
+		return getAssetName();
+//		return getFolder().getFolderType() + "/" + getFolderName() + "/" + getAssetName();
 	}
 	
 	/*
