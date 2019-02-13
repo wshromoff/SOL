@@ -23,7 +23,7 @@ public class AutomationHelper
 	private AutomationsDatabaseHelper dbHelper = new AutomationsDatabaseHelper();
 	private Connection c = null;
 	
-	public AutomationHelper(Connection c)
+	public void setConnection(Connection c)
 	{
 		this.c = c;
 	}

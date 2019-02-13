@@ -24,7 +24,8 @@ public class AutomationHelperTest
 		statements.initializeStatements();
 		c = ConnectionHelper.getJEMM2Connection();
 		
-		helper = new AutomationHelper(c);
+		helper = new AutomationHelper();
+		helper.setConnection(c);
 	}
 
 	@AfterClass
