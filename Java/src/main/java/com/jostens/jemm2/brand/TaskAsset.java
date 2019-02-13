@@ -279,10 +279,10 @@ public class TaskAsset extends BaseAsset
 	}
 	public String getPathInformation()
 	{
-		if (getFolder() == null)
-		{
-			return "ERROR Path/";
-		}
+//		if (getFolder() == null)
+//		{
+//			return "ERROR Path/";
+//		}
 		return getAssetName();
 //		return getFolder().getFolderType() + "/" + getFolderName() + "/" + getAssetName();
 	}

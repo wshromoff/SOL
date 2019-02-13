@@ -112,7 +112,6 @@ public class AutomationsDatabaseHelper
 		String selectStmt = Jemm2Statements.getStatement(Jemm2Statements.GET_CURRENT_REVISION);
 		selectStmt = selectStmt.replace("[PACKAGEID]", aPackage.getID() + "");
 
-		System.out.println("STMT=" + selectStmt);
 		Statement statement = c.createStatement();
 		ResultSet rs = statement.executeQuery(selectStmt);
 		boolean rowFound = rs.next();
