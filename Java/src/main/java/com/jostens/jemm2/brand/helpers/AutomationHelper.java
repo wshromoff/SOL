@@ -102,5 +102,14 @@ public class AutomationHelper
 	{
 		dbHelper.persistIncomingPackage(c, aPackage);
 	}
+
+	/**
+	 * Get current revision of the package
+	 * @throws SQLException 
+	 */
+	public int getCurrentRevision(IncomingPackage aPackage) throws SQLException
+	{
+		return dbHelper.getCurrentRevision(c, aPackage);
+	}
 	
 }

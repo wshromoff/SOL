@@ -46,7 +46,7 @@ public class AutomationHelperTest
 		}
 	}
 
-	@Test
+//	@Test
 	public void testersistIncomingPackage() throws SQLException
 	{
 		IncomingPackage aPackage = new IncomingPackage();
@@ -56,6 +56,16 @@ public class AutomationHelperTest
 		
 		helper.persistIncomingPackage(aPackage);
 		System.out.println("New Package ID = " + aPackage.getID());
+	}
+
+	@Test
+	public void testGetCurrentRevision() throws SQLException
+	{
+		IncomingPackage aPackage = new IncomingPackage();
+		aPackage.setID(23);
+		
+		int revision = helper.getCurrentRevision(aPackage);
+		System.out.println("New Package ID = " + revision);
 	}
 
 }
