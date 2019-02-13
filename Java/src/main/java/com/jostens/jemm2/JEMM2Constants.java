@@ -31,6 +31,6 @@ public class JEMM2Constants
 //	public static String DB_PASSWORD = "Jostens02.";
 //	public static String SOLR_URL = "http://owbswjddam05:8983/solr/jemm2";	
 //	public static String UPLOAD_PATH = "//owbsajpvf26/dam_prd_hotfolder01/Java/16_2/WadeTest/Upload";
-//	public static String LOG_PATH = "/Users/wadeshromoff/assets/Upload/";	
+//	public static String LOG_PATH = "//owbsajpvf26/dam_prd_hotfolder01/Java/16_2/WadeTest/logs/";	
 	
 }

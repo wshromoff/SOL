@@ -49,7 +49,7 @@ public class LogfileHelperTest
 				break;
 			}
 			LogfileHelper helper = new LogfileHelper();
-			List<String> logLines = helper.tailExceptionLog();
+			List<String> logLines = helper.tailAutomationLog();
 
 			System.out.println("  ------------ ");
 			for (String line : logLines)
