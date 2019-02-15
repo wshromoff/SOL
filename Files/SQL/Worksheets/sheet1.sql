@@ -13,6 +13,12 @@ inner join keyword b on b.id = a.keyword_id
 group by b.keyword
 order by count(*) desc;
 
+-- Show descending packageid count usage
+select packageid, count(*) from customer_package
+group by packageid
+order by count(*) desc;
+
+
 -- Show descending designid count usage
 select designid, count(*) from part
 group by designid
@@ -48,8 +54,4 @@ select mascot, count(*) from customer
 group by mascot
 order by count(*) desc;
 
--- Show descending packageid count usage
-select packageid, count(*) from customer_package
-group by packageid
-order by count(*) desc;
 

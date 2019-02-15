@@ -1,0 +1,8 @@
+
+
+customerID:2683273
+
+<delete><query>id:CU_003368</query></delete>
+<delete><query>id:CP_006012</query></delete>
+
+contentType:Customer
