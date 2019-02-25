@@ -210,7 +210,8 @@ ul
 
 #header #solr
 {
-  background-image: url( ../img/mediabin_icon.png );
+/*   background-image: url( ../img/mediabin_icon.png ); */
+  background-image: url( ../img/JEM_Manager_Logo.svg );
   background-size: contain;
   display: block;
   height: 78px;
