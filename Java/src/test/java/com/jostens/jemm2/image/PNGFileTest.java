@@ -70,7 +70,7 @@ public class PNGFileTest
 		PNGFileChunk chunk2 = pngFile.getNextChunk(8 + chunk1.getChunkSize());
 	}
 	
-	@Test
+//	@Test
 	public void testGetAllChunks() throws IOException
 	{
 		pngFile.getAllChunks();
@@ -84,5 +84,13 @@ public class PNGFileTest
 		boolean validCRC = pngFile.validateCRC(chunk2);
 		System.out.println("VALID CRC = " + validCRC);
 	}
-	
+
+	@Test
+	public void testGetALLCRCBytes() throws IOException
+	{
+		pngFile.getAllChunks();
+		String allCRC = pngFile.getALLCRCBytes();
+		System.out.println("ALLCRC = " + allCRC);
+	}
+
 }

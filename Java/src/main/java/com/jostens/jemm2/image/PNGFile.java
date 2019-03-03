@@ -3,8 +3,11 @@ package com.jostens.jemm2.image;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.zip.CRC32;
 
 public class PNGFile
@@ -13,6 +16,10 @@ public class PNGFile
 	private byte[] imageAsBytes = null;
 	// Flag indicating if png file Signature
 	private boolean pngSignature = false;
+	// All the chunks for this image
+	private List<PNGFileChunk> chunks = new ArrayList<PNGFileChunk>();
+	// Flag to indicate if this entire file is valid based on CRC check
+	private boolean pngFileValid = true;
 	
 	public PNGFile()
 	{
@@ -23,6 +30,7 @@ public class PNGFile
     {
     	if (input == null)
     	{
+      		pngFileValid = false;		// File stream not valid so mark this entire file as invalid
     		System.out.println("Invalid PNG File Stream");
     		return;
     	}
@@ -32,9 +40,12 @@ public class PNGFile
     	pngSignature = isValidSignature();
     	if (!pngSignature)
     	{
+      		pngFileValid = false;		// Signature not valid so mark this entire file as invalid
     		System.out.println("Invalid PNG Signature");
     		return;
     	}
+    	// Load all the chunks
+    	getAllChunks();
     	
     }
     
@@ -88,6 +99,10 @@ public class PNGFile
       	
       	// Validate CRC
       	boolean validCRC = validateCRC(chunk);
+      	if (!validCRC)
+      	{
+      		pngFileValid = false;		// A CRC check failed so mark this entire file as invalid
+      	}
       	chunk.setValidCRC(validCRC);
     	System.out.println("Sizes = " + start + " : " + chunk.getChunkSize() + " : " + imageAsBytes.length + " : " + validCRC);
     	
@@ -113,7 +128,7 @@ public class PNGFile
     
     public void getAllChunks()
     {
-    	int chunkCount = 1;
+//    	int chunkCount = 1;
     	int offset = 8;
     	while (true)
     	{
@@ -123,12 +138,14 @@ public class PNGFile
     		{
     			break;		// IEND Chunk
     		}
-    		if (chunkCount == 1 && !aChunk.isIHDR())
+    		if (chunks.isEmpty() && !aChunk.isIHDR())
     		{
+          		pngFileValid = false;		// First chunk not header so mark this entire file as invalid
     			System.out.println("First CHUNK is not a Header");
     			return;
     		}
-    		chunkCount++;
+    		chunks.add(aChunk);
+//    		chunkCount++;
     		offset += aChunk.getChunkSize();
     		if (offset >= imageAsBytes.length)
     		{
@@ -161,5 +178,25 @@ public class PNGFile
 			System.out.println(i+1 + " : " + array[start + i]);
 		}
 	}
-    
+
+	public boolean isPngFileValid()
+	{
+		return pngFileValid;
+	}
+
+	/**
+	 * Get String of all Chunk CRC's concatenated together.  If 2 png's have this match they would be identical
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String getALLCRCBytes() throws UnsupportedEncodingException
+	{
+		StringBuffer sb = new StringBuffer();
+		for (PNGFileChunk chunk : chunks)
+		{
+			String s = new String(chunk.getCrc(), 0, 4, "UTF-8");
+			sb.append(s);
+//			sb.append(chunk.getCrc());
+		}
+		return sb.toString();
+	}
 }
