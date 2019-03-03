@@ -1,6 +1,9 @@
 package com.jostens.jemm2.image;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -26,7 +29,21 @@ public class PNGFile
 		
 	}
 
-    public PNGFile(InputStream input) throws IOException
+	public PNGFile(String fileName) throws IOException
+	{
+		String imagePath = "/Users/wadeshromoff/assets/Upload/" + fileName;
+		File aFile = new File(imagePath);
+		if (!aFile.isFile())
+		{
+			System.out.println("Cannot find file: " + fileName);
+		}
+
+		InputStream iStream = new FileInputStream(imagePath);
+		loadImage(iStream);
+		
+	}
+
+    public void loadImage(InputStream input) throws IOException
     {
     	if (input == null)
     	{

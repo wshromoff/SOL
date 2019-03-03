@@ -85,12 +85,27 @@ public class PNGFileTest
 		System.out.println("VALID CRC = " + validCRC);
 	}
 
-	@Test
+//	@Test
 	public void testGetALLCRCBytes() throws IOException
 	{
 		pngFile.getAllChunks();
 		String allCRC = pngFile.getALLCRCBytes();
 		System.out.println("ALLCRC = " + allCRC);
 	}
+	
+//	@Test
+	public void testCallConstructor() throws IOException
+	{
+		PNGFile pngFile = new PNGFile("BR000860_2683273_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_1b_2550.png");
+		assertTrue(pngFile.isPngFileValid());
+	}
+
+	@Test
+	public void testInvalidSVGConstructor() throws IOException
+	{
+		PNGFile pngFile = new PNGFile("BR000860_2683273_mascot_vector_flat_2t_dx_0x_gds_wts_bks_x_x_x_x_x_x_x_1b.svg");
+		assertFalse(pngFile.isPngFileValid());
+	}
+
 
 }
