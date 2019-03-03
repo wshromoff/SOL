@@ -739,8 +739,10 @@ public class PNGDecoder {
     private void openChunk() throws IOException {
         readFully(buffer, 0, 8);
         chunkLength = readInt(buffer, 0);
+        System.out.println("Chunk Length = " + chunkLength);
         chunkType = readInt(buffer, 4);
-        chunkRemaining = chunkLength;
+        System.out.println("Chunk Type = " + chunkType);
+       chunkRemaining = chunkLength;
         crc.reset();
         crc.update(buffer, 4, 4);   // only chunkType
     }

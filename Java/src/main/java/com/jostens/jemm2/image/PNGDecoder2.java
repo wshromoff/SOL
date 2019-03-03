@@ -21,6 +21,8 @@ import java.util.zip.InflaterInputStream;
 
 import javax.swing.JFrame;
 
+// Found here: http://www.java2s.com/Code/Java/2D-Graphics-GUI/PNGfileformatdecoder.htm
+
 public class PNGDecoder2 {
   public static void main(String[] args) throws Exception {
     String name = "logo.png";
