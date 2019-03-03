@@ -70,21 +70,48 @@ public class PNGFile
     	// First 4 bytes make up the length
     	chunk.setLength(Arrays.copyOfRange(imageAsBytes, start, start + 4));
 //    	displayBytes(chunk.getLength(), 0, 4);
-    	System.out.println("Chunk length is = " + chunk.getIntLength());
+//    	System.out.println("Chunk length is = " + chunk.getIntLength());
     	// Next 4 bytes make up the type
     	chunk.setType(Arrays.copyOfRange(imageAsBytes, start + 4, start + 8));
     	int dataLength = chunk.getIntLength();
-    	System.out.println("DATALENGTH = " + dataLength);
+//    	System.out.println("DATALENGTH = " + dataLength);
     	// Datalength is the data for this chunk
     	chunk.setData(Arrays.copyOfRange(imageAsBytes, start + 8, start + 8 + dataLength));
     	// Next 4 bytes make up the CRC
-    	System.out.println("SIZE=" + imageAsBytes.length);
-       	System.out.println("1=" + start + 8 + dataLength);
-      	System.out.println("2=" + start + 8 + dataLength + 4);
+//    	System.out.println("SIZE=" + imageAsBytes.length);
+//       	System.out.println("1=" + (start + 8 + dataLength));
+//      	System.out.println("2=" + (start + 8 + dataLength + 4));
       	        	chunk.setCrc(Arrays.copyOfRange(imageAsBytes, start + 8 + dataLength, start + 8 + dataLength + 4));
-    	displayBytes(chunk.getCrc(), 0, 4);
+//    	displayBytes(chunk.getCrc(), 0, 4);
+    	System.out.println("Sizes = " + start + " : " + chunk.getChunkSize() + " : " + imageAsBytes.length);
     	
     	return chunk;
+    }
+    
+    public void getAllChunks()
+    {
+    	int chunkCount = 1;
+    	int offset = 8;
+    	while (true)
+    	{
+    		PNGFileChunk aChunk = getNextChunk(offset);
+//    		if (aChunk.getChunkSize() == 12)
+    		if (aChunk.isIEND())
+    		{
+    			break;		// IEND Chunk
+    		}
+    		if (chunkCount == 1 && !aChunk.isIHDR())
+    		{
+    			System.out.println("First CHUNK is not a Header");
+    			return;
+    		}
+    		chunkCount++;
+    		offset += aChunk.getChunkSize();
+    		if (offset >= imageAsBytes.length)
+    		{
+    			break;
+    		}
+    	}
     }
 
 

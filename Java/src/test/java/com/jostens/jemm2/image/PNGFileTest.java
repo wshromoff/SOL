@@ -47,7 +47,7 @@ public class PNGFileTest
 		assertTrue(pngFile.isValidSignature());
 	}
 
-	@Test
+//	@Test
 	public void testDisplayBytes() throws IOException
 	{
 		pngFile.displayBytes(0, 8);		// Display signature
@@ -63,9 +63,17 @@ public class PNGFileTest
 		pngFile.displayBytes(33, 4);		// Display 2nd chunk SIZE
 	}
 
-	@Test
+//	@Test
 	public void testGetFirstChunk() throws IOException
 	{
-		pngFile.getNextChunk(8);
+		PNGFileChunk chunk1 = pngFile.getNextChunk(8);
+		PNGFileChunk chunk2 = pngFile.getNextChunk(8 + chunk1.getChunkSize());
 	}
+	
+	@Test
+	public void testGetAllChunks() throws IOException
+	{
+		pngFile.getAllChunks();
+	}
+	
 }

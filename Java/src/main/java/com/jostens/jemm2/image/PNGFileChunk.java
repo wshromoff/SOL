@@ -46,5 +46,45 @@ public class PNGFileChunk
 	{
 		return ByteBuffer.wrap(length, 0, 4).getInt();
 	}
-	
+	public int getIntCrc()
+	{
+		return ByteBuffer.wrap(crc, 0, 4).getInt();
+	}
+
+	public int getChunkSize()
+	{
+		return getIntLength() + 12;
+	}
+
+    private byte[] IHDR = {73, 72, 68, 82};
+    private byte[] IEND = {73, 69, 78, 68};
+
+//    private static final int IHDR = 0x49484452;
+//    private static final int IEND = 0x49454E44;
+
+	public boolean isIHDR()
+	{
+        for(int i = 0; i < IHDR.length; i++)
+        {
+            if(type[i] != IHDR[i])
+            {
+                return false;
+            }
+        }
+        return true;
+		
+	}
+	public boolean isIEND()
+	{
+        for(int i = 0; i < IEND.length; i++)
+        {
+            if(type[i] != IEND[i])
+            {
+                return false;
+            }
+        }
+        return true;
+		
+	}
+
 }
