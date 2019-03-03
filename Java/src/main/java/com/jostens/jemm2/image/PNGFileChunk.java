@@ -8,6 +8,7 @@ public class PNGFileChunk
 	private byte[] type;
 	private byte[] data;
 	private byte[] crc;
+	private boolean validCRC = false;
 	
 	public byte[] getLength()
 	{
@@ -83,8 +84,15 @@ public class PNGFileChunk
                 return false;
             }
         }
-        return true;
-		
+        return true;		
 	}
-
+	
+	public boolean isValidCRC()
+	{
+		return validCRC;
+	}
+	public void setValidCRC(boolean validCRC)
+	{
+		this.validCRC = validCRC;
+	}
 }

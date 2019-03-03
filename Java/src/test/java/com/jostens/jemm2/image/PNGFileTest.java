@@ -76,4 +76,13 @@ public class PNGFileTest
 		pngFile.getAllChunks();
 	}
 	
+//	@Test
+	public void testValidateCrc() throws IOException
+	{
+		PNGFileChunk chunk1 = pngFile.getNextChunk(8);
+		PNGFileChunk chunk2 = pngFile.getNextChunk(8 + chunk1.getChunkSize());
+		boolean validCRC = pngFile.validateCRC(chunk2);
+		System.out.println("VALID CRC = " + validCRC);
+	}
+	
 }

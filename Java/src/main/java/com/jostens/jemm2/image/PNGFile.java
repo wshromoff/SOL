@@ -3,7 +3,9 @@ package com.jostens.jemm2.image;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.zip.CRC32;
 
 public class PNGFile
 {
@@ -83,9 +85,30 @@ public class PNGFile
 //      	System.out.println("2=" + (start + 8 + dataLength + 4));
       	        	chunk.setCrc(Arrays.copyOfRange(imageAsBytes, start + 8 + dataLength, start + 8 + dataLength + 4));
 //    	displayBytes(chunk.getCrc(), 0, 4);
-    	System.out.println("Sizes = " + start + " : " + chunk.getChunkSize() + " : " + imageAsBytes.length);
+      	
+      	// Validate CRC
+      	boolean validCRC = validateCRC(chunk);
+      	chunk.setValidCRC(validCRC);
+    	System.out.println("Sizes = " + start + " : " + chunk.getChunkSize() + " : " + imageAsBytes.length + " : " + validCRC);
     	
     	return chunk;
+    }
+    
+    public boolean validateCRC(PNGFileChunk aChunk)
+    {
+    	// Take CRC value from the chunk and convert to int
+    	int crc = ByteBuffer.wrap(aChunk.getCrc(), 0, 4).getInt();
+        long chunkCRC = crc & 0x00000000ffffffffL; // Make it unsigned.
+//        System.out.println("Chunk CRC = " + chunkCRC);
+
+    	
+        CRC32 crc32 = new CRC32();
+        crc32.update(aChunk.getType());
+        crc32.update(aChunk.getData());
+        long calculatedCRC = crc32.getValue();
+        
+//        System.out.println("Calculated CRC = " + calculatedCRC);
+        return chunkCRC == calculatedCRC;
     }
     
     public void getAllChunks()
