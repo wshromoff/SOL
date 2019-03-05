@@ -43,6 +43,11 @@ public class PNGFile
 		
 	}
 
+	public PNGFile(InputStream input) throws IOException
+	{
+		loadImage(input);
+	}
+	
     public void loadImage(InputStream input) throws IOException
     {
     	if (input == null)
@@ -121,7 +126,7 @@ public class PNGFile
       		pngFileValid = false;		// A CRC check failed so mark this entire file as invalid
       	}
       	chunk.setValidCRC(validCRC);
-    	System.out.println("Sizes = " + start + " : " + chunk.getChunkSize() + " : " + imageAsBytes.length + " : " + validCRC);
+//    	System.out.println("Sizes = " + start + " : " + chunk.getChunkSize() + " : " + imageAsBytes.length + " : " + validCRC);
     	
     	return chunk;
     }
