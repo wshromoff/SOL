@@ -22,8 +22,23 @@ public class PNGFileCompareTest
 		showResults(pngCompare);
 	}
 
+//	@Test
+	public void test1FileInvalidFormat() throws IOException
+	{
+		PNGFile file1 = new PNGFile("svg1.svg");
+		PNGFile file2 = new PNGFile("png2.png");
+		
+		PNGFileCompare pngCompare = new PNGFileCompare();
+		pngCompare.setFile1(file1);
+		pngCompare.setFile2(file2);
+		
+		pngCompare.compare();
+		showResults(pngCompare);
 
-	@Test
+	}
+
+
+//	@Test
 	public void test2IdenticalFiles() throws IOException
 	{
 		PNGFile file1 = new PNGFile("png1.png");
@@ -38,9 +53,24 @@ public class PNGFileCompareTest
 
 	}
 
+	@Test
+	public void testBadSizeFiles() throws IOException
+	{
+		PNGFile file1 = new PNGFile("png1.png");
+		PNGFile file2 = new PNGFile("png3.png");
+		
+		PNGFileCompare pngCompare = new PNGFileCompare();
+		pngCompare.setFile1(file1);
+		pngCompare.setFile2(file2);
+		
+		pngCompare.compare();
+		showResults(pngCompare);
+
+	}
+
 	private void showResults(PNGFileCompare pngCompare)
 	{
-		System.out.println("\n                     PNG Compare Results\n");
+		System.out.println("\n                                                         PNG Compare Results\n");
 		System.out.printf("Files Compare Equal: " + pngCompare.isFilesMatch() + "\n");
 		System.out.printf("Comparison Reason: " + pngCompare.getFinalVerdict() + "\n\n");
 		

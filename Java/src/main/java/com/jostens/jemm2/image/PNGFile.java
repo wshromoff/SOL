@@ -221,4 +221,16 @@ public class PNGFile
 		}
 		return sb.toString();
 	}
+	
+	public int getImageSize()
+	{
+		return imageAsBytes.length;
+	}
+
+	public List<PNGFileChunk> getChunks()
+	{
+		return chunks;
+	}
+	
+	
 }
