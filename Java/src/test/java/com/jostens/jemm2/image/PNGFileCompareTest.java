@@ -53,11 +53,26 @@ public class PNGFileCompareTest
 
 	}
 
-	@Test
+//	@Test
 	public void testBadSizeFiles() throws IOException
 	{
 		PNGFile file1 = new PNGFile("png1.png");
 		PNGFile file2 = new PNGFile("png3.png");
+		
+		PNGFileCompare pngCompare = new PNGFileCompare();
+		pngCompare.setFile1(file1);
+		pngCompare.setFile2(file2);
+		
+		pngCompare.compare();
+		showResults(pngCompare);
+
+	}
+
+	@Test
+	public void testFiles_2() throws IOException
+	{
+		PNGFile file1 = new PNGFile("png3a.png");
+		PNGFile file2 = new PNGFile("png3a2.png");
 		
 		PNGFileCompare pngCompare = new PNGFileCompare();
 		pngCompare.setFile1(file1);
@@ -87,6 +102,7 @@ public class PNGFileCompareTest
 	
 	private void displayResult(String aResult)
 	{
+//		System.out.println("ARESULT=" + aResult);
 		StringTokenizer st = new StringTokenizer(aResult, "|");
 		String test = st.nextToken();
 		String file1 = st.nextToken();

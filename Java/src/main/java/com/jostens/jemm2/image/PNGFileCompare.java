@@ -1,5 +1,6 @@
 package com.jostens.jemm2.image;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -36,8 +37,18 @@ public class PNGFileCompare
 			addCompareResult("File is valid PNG format", file1.isValidSignature() + "", file2.isValidSignature() + "", false);
 			return;
 		}
-		addCompareResult("File is valid PNG format", "true", "true", true);
+		addCompareResult("File is valid PNG Signature", "true", "true", true);
 		
+		// Compare for valid format
+		if (!file1.isPngFileValid() || !file2.isPngFileValid())
+		{
+			filesMatch = false;
+			finalVerdict = "One or both files does not Validate";
+			addCompareResult("File passes file format validations", file1.isPngFileValid() + "", file2.isPngFileValid() + "", false);
+			return;
+		}
+		addCompareResult("File passes file format validations", "true", "true", true);
+
 		// Compare file sizes and are they within a 10 byte difference
 		int file1Size = file1.getImageSize();
 		int file2Size = file2.getImageSize();
@@ -52,27 +63,27 @@ public class PNGFileCompare
 		}
 		if (sizesMatch)
 		{
-			addCompareResult("File Sizes", file1Size + "", file2Size + "", true);			
+			addCompareResult("File Size", file1Size + "", file2Size + "", true);			
 		}
 		else
 		{
-			addCompareResult("File Sizes", file1Size + "", file2Size + "", false);
+			addCompareResult("File Size", file1Size + "", file2Size + "", false);
 			finalVerdict = "File size difference exceeds tollerence";
 		}
 
 		// Compare chunk counts
 		List<PNGFileChunk> file1Chunks = file1.getChunks();
 		List<PNGFileChunk> file2Chunks = file2.getChunks();
-		boolean chunksMatch = true;
-		if ((file1Chunks.size() >= file2Chunks.size()) && (file2Chunks.size() + 2 < file1Chunks.size()))
-		{
-			chunksMatch = false;
-		}
-		if ((file2Chunks.size() >= file1Chunks.size()) && (file1Chunks.size() + 2 < file2Chunks.size()))
-		{
-			chunksMatch = false;
-		}
-		if (chunksMatch)
+//		boolean chunksMatch = true;
+//		if ((file1Chunks.size() >= file2Chunks.size()) && (file2Chunks.size() + 2 < file1Chunks.size()))
+//		{
+//			chunksMatch = false;
+//		}
+//		if ((file2Chunks.size() >= file1Chunks.size()) && (file1Chunks.size() + 2 < file2Chunks.size()))
+//		{
+//			chunksMatch = false;
+//		}
+		if (file1Chunks.size() == file2Chunks.size())
 		{
 			addCompareResult("Chunk Count", file1Chunks.size() + "", file2Chunks.size() + "", true);			
 		}
@@ -81,6 +92,63 @@ public class PNGFileCompare
 			addCompareResult("Chunk Count", file1Chunks.size() + "", file2Chunks.size() + "", false);
 			finalVerdict = "Chunk count difference exceeds tollerence";
 		}
+		
+		
+		addCompareResult(" ", " ", " ", true);
+		// Display each chunk size
+		int maxChunks = file1Chunks.size();
+		if (file2Chunks.size() > maxChunks)
+		{
+			maxChunks = file2Chunks.size();
+		}
+		for (int i = 0; i < maxChunks; i++)
+		{
+			String chunk1Display = "NA";
+			String chunk2Display = "NA";
+			int chunk1Size = 0;
+			int chunk2Size = 0;
+			if (i < file1Chunks.size())
+			{
+				PNGFileChunk chunk1 = file1Chunks.get(i);
+				chunk1Size = chunk1.getIntLength();
+				chunk1Display = chunk1Size + "";
+			}
+			if (i < file2Chunks.size())
+			{
+				PNGFileChunk chunk2 = file2Chunks.get(i);
+				chunk2Size = chunk2.getIntLength();
+				chunk2Display = chunk2Size + "";
+			}
+//			PNGFileChunk chunk2 = file2Chunks.get(i);
+//			int chunk1Size = chunk1.getIntLength();
+//			int chunk2Size = chunk2.getIntLength();
+			boolean sizeMatch = chunk1Size == chunk2Size;
+			addCompareResult("Chunk " + (i+1) + " Size", chunk1Display, chunk2Display, sizeMatch);
+
+//			if (!sizeMatch)
+//			{
+//				try
+//				{
+//					for(byte c : chunk1.getData()) {
+//					    System.out.format("%d ", c);
+//					}
+//					System.out.println();
+//					for(byte c : chunk2.getData()) {
+//					    System.out.format("%d ", c);
+//					}
+//					System.out.println();
+//					String chunk1Data = new String(chunk1.getData(), 0, chunk1Size);
+//					String chunk2Data = new String(chunk2.getData(), 0, chunk2Size, "UTF-8");
+//					System.out.println("[" + (i+1) + "]" + chunk1Data);
+//					System.out.println("[" + (i+1) + "]" + chunk2Data);
+//				} catch (UnsupportedEncodingException e)
+//				{
+//					e.printStackTrace();
+//				}
+//
+//			}
+		}
+
 	}
 	public void setFile1(PNGFile file1)
 	{
