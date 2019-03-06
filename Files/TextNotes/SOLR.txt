@@ -56,5 +56,14 @@ Query based on multiple keywords
 Linking queries:
 http://<code>hostname:8983/solr/select?q=*:*&fq={!join+from=bookId+to=id}authorId:{!join+from=authorId+to=authorId}author.name:Rowling
 
+Installing SOLR as a Windows Service ------
+Need nssm software ---  https://nssm.cc/download  --- Version 2.24
+Open a command prompt on server VM and change to win64 folder, and enter the command
+
+nssm64.exe install "Solr7" <PATH_To_SOLR.CMD> "start -f -p 8983"
+
+Example:
+nssm64.exe install "Solr7" C:\search\solr-5.3.1\bin\solr.cmd "start -f -p 8983"
+
 
 
