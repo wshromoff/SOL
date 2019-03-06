@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.CRC32;
 
+import com.jostens.jemm2.JEMM2Constants;
+
 public class PNGFile
 {
 	// Image as an array of bytes
@@ -31,7 +33,7 @@ public class PNGFile
 
 	public PNGFile(String fileName) throws IOException
 	{
-		String imagePath = "/Users/wadeshromoff/assets/Upload/" + fileName;
+		String imagePath = JEMM2Constants.COMPARE_PATH + fileName;
 		File aFile = new File(imagePath);
 		if (!aFile.isFile())
 		{

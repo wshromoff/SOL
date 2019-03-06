@@ -90,7 +90,7 @@ public class PNGFileCompare
 		else
 		{
 			addCompareResult("Chunk Count", file1Chunks.size() + "", file2Chunks.size() + "", false);
-			finalVerdict = "Chunk count difference exceeds tollerence";
+			finalVerdict = "Chunk counts don't match";
 		}
 		
 		

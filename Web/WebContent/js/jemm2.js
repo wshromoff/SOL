@@ -531,21 +531,24 @@ function comparePNGS()
 
 	function performCompare()
 	{
-		alert("HI");
-		var e = document.getElementById("file1").value;
+//		alert("HI");
+		var file1 = document.getElementById("file1").value;
+		var file2 = document.getElementById("file2").value;
 //		var format = e.options[e.selectedIndex].value;
 
 //		var file1 = document.querySelector('input[name="selectLog"]:checked').value;
-		alert(e);
+//		alert(file1);
+//		alert(file2);
 		
-//		$.ajax({
-//			url : 'logs',
-//			type : 'post',
-//			data : {
-//				log : logSelected
-//			},
-//			success : function(responseText) {
-//				$('#content').html(responseText);
-//			}
-//		});
+		$.ajax({
+			url : 'compare',
+			type : 'post',
+			data : {
+				f1 : file1,
+				f2 : file2
+			},
+			success : function(responseText) {
+				$('#content').html(responseText);
+			}
+		});
 	}
