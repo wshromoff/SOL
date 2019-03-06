@@ -12,7 +12,7 @@ public class PNGFileCompare
 	private PNGFile file2 = null;
 
 	private boolean filesMatch = true;
-	private String finalVerdict = "Files were found to be identical";
+	private String finalVerdict = null;
 	private StringBuffer compareResults = new StringBuffer();
 	
 	public void compare()
@@ -21,7 +21,7 @@ public class PNGFileCompare
 		if (file1 == null || file2 == null)
 		{
 			filesMatch = false;
-			finalVerdict = "One or both files are null";
+			setFinalVerdict("One or both files are null");
 			boolean file1Null = (file1 == null);
 			boolean file2Null = (file2 == null);
 			addCompareResult("File is NULL", file1Null + "", file2Null + "", false);
@@ -33,7 +33,7 @@ public class PNGFileCompare
 		if (!file1.isValidSignature() || !file2.isValidSignature())
 		{
 			filesMatch = false;
-			finalVerdict = "One or both files is not a PNG File";
+			setFinalVerdict("One or both files is not a PNG File");
 			addCompareResult("File is valid PNG format", file1.isValidSignature() + "", file2.isValidSignature() + "", false);
 			return;
 		}
@@ -43,7 +43,7 @@ public class PNGFileCompare
 		if (!file1.isPngFileValid() || !file2.isPngFileValid())
 		{
 			filesMatch = false;
-			finalVerdict = "One or both files does not Validate";
+			setFinalVerdict("One or both files does not Validate");
 			addCompareResult("File passes file format validations", file1.isPngFileValid() + "", file2.isPngFileValid() + "", false);
 			return;
 		}
@@ -68,7 +68,8 @@ public class PNGFileCompare
 		else
 		{
 			addCompareResult("File Size", file1Size + "", file2Size + "", false);
-			finalVerdict = "File size difference exceeds tollerence";
+			setFinalVerdict("File size difference exceeds tollerence");
+			filesMatch = false;
 		}
 
 		// Compare chunk counts
@@ -90,7 +91,8 @@ public class PNGFileCompare
 		else
 		{
 			addCompareResult("Chunk Count", file1Chunks.size() + "", file2Chunks.size() + "", false);
-			finalVerdict = "Chunk counts don't match";
+			setFinalVerdict("Chunk counts don't match");
+			filesMatch = false;
 		}
 		
 		
@@ -147,8 +149,18 @@ public class PNGFileCompare
 //				}
 //
 //			}
+			
+			setFinalVerdict("Files were found to be identical");
 		}
-
+	}
+	
+	private void setFinalVerdict(String verdict)
+	{
+		if (finalVerdict != null)
+		{
+			return;		// Can only set once
+		}
+		finalVerdict = verdict;
 	}
 	public void setFile1(PNGFile file1)
 	{

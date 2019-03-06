@@ -1,6 +1,7 @@
 package com.waspr.web;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +28,9 @@ public class CompareServlet extends HttpServlet
 //		LogfileHelper helper = LogfileHelper.getActiveLogHelper();
 //		String logfileHTML = getBuiltOutTemplate(helper);
 
-		String logfileHTML = HTMLHelper.getTemplateHTML("/CompareFile.html");
+		String comparefileHTML = HTMLHelper.getTemplateHTML("/CompareFile.html");
 
-		response.getWriter().append(logfileHTML);
+		response.getWriter().append(comparefileHTML);
 
 	}
 
@@ -56,6 +57,43 @@ public class CompareServlet extends HttpServlet
 		compare.setFile1(png1);
 		compare.setFile2(png2);
 		compare.compare();
+
+		String comparefileHTML = HTMLHelper.getTemplateHTML("/CompareFile.html");
+		String comparefileResultsHTML = HTMLHelper.getTemplateHTML("/CompareFileResults.html");
+
+		comparefileResultsHTML = comparefileResultsHTML.replace("[File1]", file1);
+		comparefileResultsHTML = comparefileResultsHTML.replace("[File2]", file2);
+		comparefileResultsHTML = comparefileResultsHTML.replace("[EQUAL]", compare.isFilesMatch() + "");
+		comparefileResultsHTML = comparefileResultsHTML.replace("[REASON]", compare.getFinalVerdict());
+
+		StringBuffer sb = new StringBuffer();
+		String compareResults = compare.getCompareResults();
+		StringTokenizer st = new StringTokenizer(compareResults, "<BR>");
+		while (st.hasMoreTokens())
+		{
+			String result = st.nextToken();
+//			System.out.println("-->" + result);
+			
+			StringTokenizer st2 = new StringTokenizer(result, "|");
+			String testToken = st2.nextToken();
+			String file1Token = st2.nextToken();
+			String file2Token = st2.nextToken();
+			String successToken = st2.nextToken();
+
+			String compareResultsRowHTML = HTMLHelper.getTemplateHTML("/CompareResultsRow.html");
+			compareResultsRowHTML = compareResultsRowHTML.replace("[TEST]", testToken);
+			compareResultsRowHTML = compareResultsRowHTML.replace("[FILE1]", file1Token);
+			compareResultsRowHTML = compareResultsRowHTML.replace("[FILE2]", file2Token);
+			compareResultsRowHTML = compareResultsRowHTML.replace("[SUCCESS]", successToken);
+			
+			sb.append(compareResultsRowHTML);
+
+		}
+
+		comparefileResultsHTML = comparefileResultsHTML.replace("[RESULTS_ROWS]", sb.toString());
+
+
+		response.getWriter().append(comparefileHTML + comparefileResultsHTML);
 
 		System.out.println("Files Match: " + compare.isFilesMatch());
 		System.out.println("Reason: " + compare.getFinalVerdict());
