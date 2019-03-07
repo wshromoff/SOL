@@ -51,6 +51,7 @@ public class CDRFile
         while (entry != null) 
         {
         	String entryName = entry.getName();
+//        	System.out.println("ENTRYNAME=" + entryName);
         	if (entryName.contains("thumbnails"))
         	{
         		// Only process thumbnails
@@ -79,8 +80,22 @@ public class CDRFile
             entry = zipIn.getNextEntry();
         }
     }
+
+    /*
+     * Convert thumbnail and all pages to jpg
+     */
+    public void convertAllImagesToJPG() throws Exception
+    {
+    	convertToJPG(thumbnail);
+    	for (String pagePath : pages)
+    	{
+    		convertToJPG(pagePath);
+    	}
+    }
     
-    public void convertToJPG() throws MagickException, IOException, InterruptedException, IM4JavaException
+    
+    
+    public void convertToJPG(String bmpPath) throws MagickException, IOException, InterruptedException, IM4JavaException
     {
 //    	ImageInfo info = new ImageInfo(thumbnail);
 //        //Create MagickImage that converts format
@@ -93,9 +108,10 @@ public class CDRFile
 //        //Write JPG file
 //        magick_converter.writeImage(info);
     	ConvertCmd cmd = new ConvertCmd();
-    	cmd.setSearchPath("/Users/wadeshromoff/documents/WAS_Software/ImageMagick-7.0.8/bin");
+    	cmd.setSearchPath(JEMM2Constants.IMAGEMGK_PATH);
 
-    	String outputfile = thumbnail.replace(".bmp", ".jpg");
+    	System.out.println("-->" + bmpPath);
+    	String outputPath = bmpPath.replace(".bmp", ".jpg");
     	// create the operation, add images and operators/options
     	IMOperation op = new IMOperation();
 //    	op.addImage(thumbnail);
@@ -103,12 +119,19 @@ public class CDRFile
 //    	op.addImage(outputfile);
     	
     	// Page 3
-    	op.addImage("/Users/wadeshromoff/assets/Upload/page2.bmp");
+    	op.addImage(bmpPath);
 //    	op.resize(1400,900);
-    	op.addImage("/Users/wadeshromoff/assets/Upload/page2.jpg");
+    	op.addImage(outputPath);
    	
 
     	// execute the operation
     	cmd.run(op);
     }
+
+	public List<String> getPages()
+	{
+		return pages;
+	}
+    
+    
 }

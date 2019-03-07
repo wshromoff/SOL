@@ -19,10 +19,10 @@ public class CDRFileTest
 	}
 
 	@Test
-	public void testConvertToJPG() throws IOException, MagickException, InterruptedException, IM4JavaException
+	public void testConvertToJPG() throws Exception
 	{
-		CDRFile cdr = new CDRFile("cdr1.cdr");
-		cdr.convertToJPG();
+		CDRFile cdr = new CDRFile("cdr2.cdr");
+		cdr.convertAllImagesToJPG();
 	}
 
 }

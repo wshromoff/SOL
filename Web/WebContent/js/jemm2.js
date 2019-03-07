@@ -582,3 +582,25 @@ function comparePNGS()
 			}
 		});
 	}
+
+	function showCDR()
+	{
+//		alert("HI");
+		var file1 = document.getElementById("cdr").value;
+//		var format = e.options[e.selectedIndex].value;
+
+//		var file1 = document.querySelector('input[name="selectLog"]:checked').value;
+//		alert(file1);
+//		alert(file2);
+		
+		$.ajax({
+			url : 'cdr',
+			type : 'post',
+			data : {
+				f1 : file1
+			},
+			success : function(responseText) {
+				$('#content').html(responseText);
+			}
+		});
+	}
