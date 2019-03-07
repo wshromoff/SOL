@@ -1,0 +1,28 @@
+
+<script language="javascript">
+    var imgs = ["image?id=page2&type=jpg", "image?id=page3&type=jpg", "image?id=thumbnail&type=jpg"];
+
+    function changeImage() {
+        document.getElementById("imgClickAndChange").src = imgs[0];
+        imgs.push(imgs.shift())
+    }
+</script>
+
+HELLO <BR><BR>
+
+
+<img src="image?id=page2&type=jpg" width="120px" height="120px" />
+<img src="image?id=page3&type=jpg" width="120px" height="120px" />
+<img src="image?id=thumbnail&type=jpg" width="170px" height="170px" />
+
+<BR><BR>
+
+BYE
+
+        <img alt="slideshow" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" id="imgClickAndChange" onclick="changeImage()" width="120px" height="120px"/>
+
+<div class="container">
+    <div id="slideshow">
+        <img alt="slideshow" src="image?id=page2&type=jpg" id="imgClickAndChange" onclick="changeImage()" width="120px" height="120px"/>
+    </div>
+</div>

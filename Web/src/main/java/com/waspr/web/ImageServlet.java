@@ -44,7 +44,26 @@ public class ImageServlet extends HttpServlet
 		String type = request.getParameter("type");
 		String format = request.getParameter("format");		// Value selected for format dropdown list
 		System.out.println("ImageServlet=" + id + ":" + type + ":" + format);
-		
+
+	if ("jpg".equals(type))
+	{
+		System.out.println(" JPG !!!!");
+		// Doing a .cdr .jpg image
+		if (c != null)
+		{
+	       ConnectionHelper.closeConnection(c);
+		}
+
+	       String filePath = JEMM2Constants.COMPARE_PATH + id + ".jpg";
+	       System.out.println("FP=" + filePath);
+	       File file = new File(filePath);
+	       FileInputStream fis = new FileInputStream(file);
+	       BufferedImage bi = ImageIO.read(fis);
+	       OutputStream os = response.getOutputStream();
+	       ImageIO.write(bi, "jpeg", os);
+	       return;
+
+	}
 		String filePath = "";
 		
 		// Use image path helper to get full path to .png image to use

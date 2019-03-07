@@ -552,3 +552,33 @@ function comparePNGS()
 			}
 		});
 	}
+
+	function CDR()
+	{
+		clearTabInterval();
+//		tabInterval = setInterval(displayLogs, 5000);
+//		alert("HELLO " + selected);
+		clearSelected();
+		selected = "cdr";
+		setSelected();
+//		document.getElementById(selected).className = "active";
+//		alert("HELLO");
+//		document.getElementById("logging").className = "global";
+//		$('#content').html("WOW");
+		// Make ajax call for current work assets
+		$.ajax({
+			url : 'cdr',
+//			data : {
+//				userName : $('#userName').val()
+//			},
+			success : function(responseText) {
+				$('#content').html(responseText);
+//				var splitArray = responseText.split(",");
+//				$('#summaryCount').html(splitArray[0]);
+//				$('#content').html(splitArray[1]);
+//				alert(splitArray[0]);
+//				alert(splitArray[1]);
+//				displayCount("#summaryCount", splitArray[0]);
+			}
+		});
+	}
