@@ -1,7 +1,6 @@
 package com.waspr.web;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.im4java.core.IM4JavaException;
-
 import com.jostens.jemm2.image.CDRFile;
-import com.jostens.jemm2.image.PNGFile;
-import com.jostens.jemm2.image.PNGFileCompare;
 import com.jostens.jemm2.web.HTMLHelper;
-
-import magick.MagickException;
 
 @WebServlet("/cdr")
 public class CDRServlet extends HttpServlet
@@ -83,25 +76,35 @@ public class CDRServlet extends HttpServlet
 		String emptyImage = "\"data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\"";
 
 		// Build list 1 for book
+		int pageCount = cdr.getPages().size();
 		sb.setLength(0);
-		for (int k = 1; k <= cdr.getPages().size(); k++)
+		int page = 2;
+		while (page <= pageCount)
+//		for (int k = 2; k <= cdr.getPages().size(); k += 2)
 		{
-			String aPage = "\"image?id=page" + k + "&type=jpg\"";
+			String aPage = "\"image?id=page" + page + "&type=jpg\"";
 			sb.append(aPage + ", ");
+			page += 2;
 		}
 		sb.append(emptyImage);
 //		System.out.println("-->" + sb.toString());
 		cdrImagesHTML = cdrImagesHTML.replace("[IMAGES1]", sb.toString());
-		System.out.println("-->" + cdrImagesHTML);
+//		System.out.println("-->" + cdrImagesHTML);
 
 		// Build list 2 for book
 		sb.setLength(0);
-		for (int k = 2; k <= cdr.getPages().size(); k++)
+		page = 3;
+		while (page <= pageCount)
+//		for (int k = 3; k <= cdr.getPages().size(); k += 2)
 		{
-			String aPage = "\"image?id=page" + k + "&type=jpg\"";
+			String aPage = "\"image?id=page" + page + "&type=jpg\"";
 			sb.append(aPage + ", ");
+			page += 2;
 		}
-		sb.append(emptyImage + ", ");
+		if ((pageCount % 2) == 0)
+		{
+			sb.append(emptyImage + ", ");
+		}
 		sb.append("\"image?id=page1&type=jpg\"");
 //		System.out.println("-->" + sb.toString());
 		cdrImagesHTML = cdrImagesHTML.replace("[IMAGES2]", sb.toString());
@@ -110,55 +113,6 @@ public class CDRServlet extends HttpServlet
 		
 		response.getWriter().append(cdrFileHTML + cdrImagesHTML);
 		
-//		// Open the file objects
-//		PNGFile png1 = new PNGFile(file1);
-//		PNGFile png2 = new PNGFile(file2);
-//		
-//		PNGFileCompare compare = new PNGFileCompare();
-//		compare.setFile1(png1);
-//		compare.setFile2(png2);
-//		compare.compare();
-//
-//		String comparefileHTML = HTMLHelper.getTemplateHTML("/CompareFile.html");
-//		String comparefileResultsHTML = HTMLHelper.getTemplateHTML("/CompareFileResults.html");
-//
-//		comparefileResultsHTML = comparefileResultsHTML.replace("[File1]", file1);
-//		comparefileResultsHTML = comparefileResultsHTML.replace("[File2]", file2);
-//		comparefileResultsHTML = comparefileResultsHTML.replace("[EQUAL]", compare.isFilesMatch() + "");
-//		comparefileResultsHTML = comparefileResultsHTML.replace("[REASON]", compare.getFinalVerdict());
-//
-//		StringBuffer sb = new StringBuffer();
-//		String compareResults = compare.getCompareResults();
-//		StringTokenizer st = new StringTokenizer(compareResults, "<BR>");
-//		while (st.hasMoreTokens())
-//		{
-//			String result = st.nextToken();
-////			System.out.println("-->" + result);
-//			
-//			StringTokenizer st2 = new StringTokenizer(result, "|");
-//			String testToken = st2.nextToken();
-//			String file1Token = st2.nextToken();
-//			String file2Token = st2.nextToken();
-//			String successToken = st2.nextToken();
-//
-//			String compareResultsRowHTML = HTMLHelper.getTemplateHTML("/CompareResultsRow.html");
-//			compareResultsRowHTML = compareResultsRowHTML.replace("[TEST]", testToken);
-//			compareResultsRowHTML = compareResultsRowHTML.replace("[FILE1]", file1Token);
-//			compareResultsRowHTML = compareResultsRowHTML.replace("[FILE2]", file2Token);
-//			compareResultsRowHTML = compareResultsRowHTML.replace("[SUCCESS]", successToken);
-//			
-//			sb.append(compareResultsRowHTML);
-//
-//		}
-//
-//		comparefileResultsHTML = comparefileResultsHTML.replace("[RESULTS_ROWS]", sb.toString());
-//
-//
-//		response.getWriter().append(comparefileHTML + comparefileResultsHTML);
-//
-//		System.out.println("Files Match: " + compare.isFilesMatch());
-//		System.out.println("Reason: " + compare.getFinalVerdict());
-
 	}
 
 }
