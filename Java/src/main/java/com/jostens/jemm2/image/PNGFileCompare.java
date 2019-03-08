@@ -116,14 +116,14 @@ public class PNGFileCompare
 				PNGFileChunk chunk1 = file1Chunks.get(i);
 				chunk1Size = chunk1.getIntLength();
 				chunk1CRC = chunk1.getIntCrc() & 0x00000000ffffffffL;
-				chunk1Display = chunk1Size + ":" + chunk1CRC;
+				chunk1Display = chunk1Size + " " + chunk1CRC;
 			}
 			if (i < file2Chunks.size())
 			{
 				PNGFileChunk chunk2 = file2Chunks.get(i);
 				chunk2Size = chunk2.getIntLength();
 				chunk2CRC = chunk2.getIntCrc() & 0x00000000ffffffffL;
-				chunk2Display = chunk2Size + ":" + chunk2CRC;
+				chunk2Display = chunk2Size + " " + chunk2CRC;
 			}
 //			PNGFileChunk chunk2 = file2Chunks.get(i);
 //			int chunk1Size = chunk1.getIntLength();
