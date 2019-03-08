@@ -21,8 +21,8 @@ public class JEMM2Constants
 //	public static String UPLOAD_PATH = "/Users/wadeshromoff/assets/Upload";
 //	// Log file reading of automation log & exception log
 //	public static String LOG_PATH = "/Users/wadeshromoff/assets/Upload/";	
-	public static String COMPARE_PATH = "/Users/wadeshromoff/assets/Upload/";	
-	public static String IMAGEMGK_PATH = "/Users/wadeshromoff/documents/WAS_Software/ImageMagick-7.0.8/bin/";	
+//	public static String COMPARE_PATH = "/Users/wadeshromoff/assets/Upload/";	
+//	public static String IMAGEMGK_PATH = "/Users/wadeshromoff/documents/WAS_Software/ImageMagick-7.0.8/bin/";	
 	
 	
 	public static String ROOT_DAM_PATH = "//owbsajpvf23/es_tst_mediabin01/Integration/";
@@ -33,7 +33,7 @@ public class JEMM2Constants
 	public static String SOLR_URL = "http://owbswjddam05:8983/solr/jemm2";	
 	public static String UPLOAD_PATH = "//owbsajpvf26/dam_prd_hotfolder01/Java/16_2/WadeTest/Upload";
 	public static String LOG_PATH = "//owbsajpvf26/dam_prd_hotfolder01/Java/16_2/WadeTest/logs/";	
-//	public static String COMPARE_PATH = "//egnsw2kfp1/public/shromow/compare/";	
-//	public static String IMAGEMGK_PATH = "/Users/wadeshromoff/documents/WAS_Software/ImageMagick-7.0.8/bin/";	
+	public static String COMPARE_PATH = "//egnsw2kfp1/public/shromow/compare/";	
+	public static String IMAGEMGK_PATH = "E:/Wade/ImageMagick-7.0.8/";	
 	
 }
