@@ -1,0 +1,1 @@
+export DYLD_LIBRARY_PATH="/Users/wadeshromoff/Documents/WAS_Software/ImageMagick-7.0.8/lib/"
