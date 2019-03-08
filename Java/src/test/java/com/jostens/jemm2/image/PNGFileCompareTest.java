@@ -53,7 +53,7 @@ public class PNGFileCompareTest
 
 	}
 
-//	@Test
+	@Test
 	public void testBadSizeFiles() throws IOException
 	{
 		PNGFile file1 = new PNGFile("png1.png");
@@ -68,7 +68,7 @@ public class PNGFileCompareTest
 
 	}
 
-	@Test
+//	@Test
 	public void testFiles_2() throws IOException
 	{
 		PNGFile file1 = new PNGFile("png3a.png");

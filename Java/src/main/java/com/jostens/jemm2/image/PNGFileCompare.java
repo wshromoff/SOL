@@ -109,22 +109,26 @@ public class PNGFileCompare
 			String chunk2Display = "NA";
 			int chunk1Size = 0;
 			int chunk2Size = 0;
+			long chunk1CRC = 0;
+			long chunk2CRC = 0;
 			if (i < file1Chunks.size())
 			{
 				PNGFileChunk chunk1 = file1Chunks.get(i);
 				chunk1Size = chunk1.getIntLength();
-				chunk1Display = chunk1Size + "";
+				chunk1CRC = chunk1.getIntCrc() & 0x00000000ffffffffL;
+				chunk1Display = chunk1Size + ":" + chunk1CRC;
 			}
 			if (i < file2Chunks.size())
 			{
 				PNGFileChunk chunk2 = file2Chunks.get(i);
 				chunk2Size = chunk2.getIntLength();
-				chunk2Display = chunk2Size + "";
+				chunk2CRC = chunk2.getIntCrc() & 0x00000000ffffffffL;
+				chunk2Display = chunk2Size + ":" + chunk2CRC;
 			}
 //			PNGFileChunk chunk2 = file2Chunks.get(i);
 //			int chunk1Size = chunk1.getIntLength();
 //			int chunk2Size = chunk2.getIntLength();
-			boolean sizeMatch = chunk1Size == chunk2Size;
+			boolean sizeMatch = chunk1Size == chunk2Size && chunk1CRC == chunk2CRC;
 			addCompareResult("Chunk " + (i+1) + " Size", chunk1Display, chunk2Display, sizeMatch);
 
 //			if (!sizeMatch)
